@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="1">
+    <TableRow> 
+		<TextView android:layout_width="100px" android:id="@+id/text01" 
+		android:layout_height="wrap_content" android:text="What would you like to translate?"
+		android:layout_span="2"></TextView>
+	
+
+</TableRow>
+	<TableRow>    
+	<EditText android:text="" 
+		android:id="@+id/translate" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content"
+		android:layout_span="2"></EditText>
+	
+</TableRow>
+	<TableRow>
+		<TextView android:text="Translating..."
+			android:id="@+id/Translation" 
+			android:layout_width="100px" 
+			android:layout_height="wrap_content"></TextView>
+		
+	<Button android:text="Camera" 
+		android:layout_width="100px" 
+		android:layout_height="50px" 
+		android:onClick="camera" android:id="@+id/camera"></Button>
+</TableRow>
+		
+	<TableRow>
+		<ImageView android:id="@+id/image" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content"></ImageView>
+	</TableRow>
+	<TableRow>
+	<Button android:text="Add Flash Card" 
+		android:id="@+id/addCard" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content"
+		android:layout_span="2"
+		></Button>
+	</TableRow>
+</TableLayout>
