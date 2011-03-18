@@ -38,6 +38,11 @@ public class Tabs extends TabActivity {
                       .setContent(intent);
         tabHost.addTab(spec);
 		
+        intent = new Intent().setClass(this, Personal.class);
+        spec = tabHost.newTabSpec("profile").setIndicator("Profile") 
+                      .setContent(intent);
+        tabHost.addTab(spec);
+        
         tabHost.setCurrentTab(0);
         
     }

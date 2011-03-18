@@ -86,7 +86,6 @@ public class Game extends Activity {
 			popup.setText("Incorrect!\n" + button.getText().toString() + " = " + translatedChoices[i]);
 			popup.setBackgroundColor(0xaaff0000);
 			popup.setVisibility(View.VISIBLE);
-			Toast.makeText(Game.this, button.getText(), Toast.LENGTH_SHORT).show();
 			vibrator.vibrate(500);
 		}
 	}

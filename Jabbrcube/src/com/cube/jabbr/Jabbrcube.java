@@ -19,8 +19,8 @@ public class Jabbrcube extends Activity {
     public void login(View view){
     	// log in and swap activities
     	
-    	Intent intent = new Intent().setClass(this, Tabs.class);
-    	startActivityForResult(intent, 0);
+    	Intent intent = new Intent().setClass(this, Startup.class);
+    	startActivity(intent);
     	// start acquiring location
     }
 }
