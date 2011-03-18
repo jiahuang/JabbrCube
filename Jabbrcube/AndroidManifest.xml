@@ -5,15 +5,18 @@
       android:versionName="1.0">
     <application android:icon="@drawable/icon" android:label="@string/app_name">
         <activity android:name=".Jabbrcube"
-                  android:label="@string/app_name">
+                  android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Tabs"/>
-        <activity android:name=".Game"/>
-        <activity android:name=".NewCard"/>
+        <activity android:name=".Game" android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity android:name=".NewCard" android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity android:name=".Startup" android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity android:name=".Personal" android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity android:name=".ChangeDeck" android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity android:name=".ChangeLoc" android:theme="@android:style/Theme.NoTitleBar"/>
 		<uses-feature android:name="android.hardware.camera"></uses-feature>>
     </application>
     <uses-sdk android:minSdkVersion="3" />
