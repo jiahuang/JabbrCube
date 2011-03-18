@@ -1,0 +1,3 @@
+INDEX VERSION 1.126+/home/paul/Documents/classes/dotcom/JabbrCube/.metadata/.plugins/org.eclipse.jdt.core
+3248240385.index
+3523710701.index
