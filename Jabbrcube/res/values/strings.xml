@@ -2,4 +2,8 @@
 <resources>
     <string name="hello">Hello World, Jabbrcube!</string>
     <string name="app_name">Jabbrcube</string>
+<string name="choice1">hola</string>
+<string name="choice2">hello</string>
+<string name="choice3">le hallo</string>
+<string name="choice4">ze holo</string>
 </resources>

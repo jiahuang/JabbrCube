@@ -1,12 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/hello"
-    />
-</LinearLayout>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/buttonLayout" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:background="@drawable/icon"
+	android:gravity="fill_horizontal">
+	<TextView android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:layout_marginBottom="20dip"
+		android:paddingTop="12dip" android:background="#AA000000"
+		android:textColor="#ffffffff" android:textSize="20dp" android:text="Golden Gate"
+		android:gravity="center" android:layout_gravity="center_horizontal|top"
+		android:id="@+id/Title" />
+	<Button android:layout_weight="10" android:layout_height="wrap_content"
+		android:layout_marginBottom="20dip" android:paddingTop="12dip"
+		android:background="#AA000000" android:textColor="#ffffffff"
+		android:textSize="20dp" android:text="Golden Gate"
+		android:layout_gravity="center_horizontal|top" android:id="@+id/Popup"
+		android:layout_width="match_parent" android:visibility="invisible"
+		android:onClick="onPopupClicked" android:gravity="center|center_horizontal" 
+		android:singleLine="false"/>
+	<TableRow>
+		<Button android:text="@string/choice1" android:id="@+id/Button0"
+			android:layout_width="wrap_content" android:background="@null"
+			android:textColor="#00ff00" android:textSize="20dp"
+			android:textStyle="bold" android:layout_height="wrap_content"
+			android:gravity="center" android:hapticFeedbackEnabled="true"
+			android:fadingEdge="vertical|horizontal" android:paddingBottom="10dip"
+			android:layout_weight="1" android:onClick="onChoiceClicked" />
+		<Button android:text="@string/choice2" android:id="@+id/Button1"
+			android:layout_width="wrap_content" android:background="@null"
+			android:textColor="#ff0000" android:textSize="20dp"
+			android:textStyle="bold" android:layout_height="wrap_content"
+			android:gravity="center" android:hapticFeedbackEnabled="true"
+			android:fadingEdge="vertical|horizontal" android:paddingBottom="10dip"
+			android:layout_weight="1" android:onClick="onChoiceClicked" />
+	</TableRow>
+	<TableRow>
+		<Button android:text="@string/choice3" android:id="@+id/Button2"
+			android:layout_width="wrap_content" android:background="@null"
+			android:textColor="#0000ff" android:textSize="20dp"
+			android:textStyle="bold" android:layout_height="wrap_content"
+			android:gravity="center" android:hapticFeedbackEnabled="true"
+			android:fadingEdge="vertical|horizontal" android:padding="5dip"
+			android:layout_weight="1" android:onClick="onChoiceClicked" />
+		<Button android:text="@string/choice4" android:id="@+id/Button3"
+			android:layout_width="wrap_content" android:background="@null"
+			android:textColor="#cc11cc" android:textSize="20dp"
+			android:textStyle="bold" android:layout_height="wrap_content"
+			android:gravity="center" android:hapticFeedbackEnabled="true"
+			android:fadingEdge="vertical|horizontal" android:padding="5dip"
+			android:layout_weight="1" android:onClick="onChoiceClicked" />
+	</TableRow>
+
+</TableLayout>
