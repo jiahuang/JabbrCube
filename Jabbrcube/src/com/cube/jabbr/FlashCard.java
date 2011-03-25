@@ -1,20 +1,22 @@
 package com.cube.jabbr;
 
-import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 
 public class FlashCard {
-	Bitmap bitmap;
+	Drawable drawable;
 	String title;
 	String[] choices, translatedChoices;
 	int correctChoice;
-	public FlashCard(Bitmap bitmap, String title, String[] choices, String[] translatedChoices,
-			int correctChoice) {
+	int flashcardID;
+	public FlashCard(Drawable drawable, String title, String[] choices, String[] translatedChoices,
+			int correctChoice, int flashcardID) {
 		super();
-		this.bitmap = bitmap;
+		this.drawable = drawable;
 		this.title = title;
 		this.choices = choices;
 		this.translatedChoices = translatedChoices;
 		this.correctChoice = correctChoice;
+		this.flashcardID = flashcardID;
 	}
 	
 }
