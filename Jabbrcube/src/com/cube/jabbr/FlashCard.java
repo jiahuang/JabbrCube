@@ -8,6 +8,8 @@ public class FlashCard {
 	String[] choices, translatedChoices;
 	int correctChoice;
 	int flashcardID;
+	int userGotCorrect = 0;
+	
 	public FlashCard(Drawable drawable, String title, String[] choices, String[] translatedChoices,
 			int correctChoice, int flashcardID) {
 		super();
@@ -17,6 +19,10 @@ public class FlashCard {
 		this.translatedChoices = translatedChoices;
 		this.correctChoice = correctChoice;
 		this.flashcardID = flashcardID;
+	}
+	
+	public void setCorrect(){
+		userGotCorrect = 1;
 	}
 	
 }

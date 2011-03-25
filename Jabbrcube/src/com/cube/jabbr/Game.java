@@ -34,7 +34,10 @@ public class Game extends Activity {
 	TextView title;
 	Button popup;
 	int correctChoice = 3;
-
+	
+	int correctPicks = 0;
+	boolean wrong = false;
+	
 	int currentFlashcardIndex = 0;
 	FlashCard[] flashcards;
 	boolean questionCorrect = false;
@@ -56,6 +59,8 @@ public class Game extends Activity {
 	}
 
 	public void initializeGame() {
+		// put this in a seperate thread
+		
 		try{
 			getCardsFromWebsite();
 		} catch(Exception e) {
@@ -150,27 +155,45 @@ public class Game extends Activity {
 			e.printStackTrace();
 		}
 		Drawable drawable = Drawable.createFromStream(inputStream, "src");
-		Toast.makeText(this.getApplicationContext(), ""+url.toString(), Toast.LENGTH_LONG).show();
+		Toast.makeText(this.getApplicationContext(), ""+url.toString(), Toast.LENGTH_SHORT).show();
 		//tableLayout.setBackgroundDrawable(drawable);
 		return drawable;
 	}
 
 	public void loadCurrentFlashCard() {
+		this.wrong = false;
 		FlashCard flashcard = this.flashcards[this.currentFlashcardIndex];
-		tableLayout.setBackgroundDrawable(flashcard.drawable);
-		for (int i = 0; i < 4; i++) {
-			choices[i].setText(flashcard.choices[i]);
+		if (flashcard != null){
+			tableLayout.setBackgroundDrawable(flashcard.drawable);
+			for (int i = 0; i < 4; i++) {
+				choices[i].setText(flashcard.choices[i]);
+			}
+			title.setText(flashcard.title);
+			this.correctChoice = flashcard.correctChoice;
+			popup.setVisibility(View.INVISIBLE);
 		}
-		title.setText(flashcard.title);
-		this.correctChoice = flashcard.correctChoice;
-		popup.setVisibility(View.INVISIBLE);
-		this.currentFlashcardIndex++;
+		else
+			Toast.makeText(this.getApplicationContext(), "NULL POINTER: index, length:"+this.currentFlashcardIndex+" "+  this.flashcards.length, Toast.LENGTH_LONG).show();
+		// reset all buttons to be visible
+		setAllVisible();
+		//this.currentFlashcardIndex++;
+	}
+	
+	private void setAllVisible(){
+		for(int i =0; i<choices.length; i++){
+			choices[i].setVisibility(View.VISIBLE);
+		}
 	}
 
 	public void onChoiceClicked(View view) {
 		Button button = (Button) view;
 		this.questionCorrect = (choices[correctChoice] == button);
 		if (this.questionCorrect) {
+			if (!this.wrong){
+				flashcards[currentFlashcardIndex].setCorrect();
+				correctPicks++;
+			}
+				
 			view.performHapticFeedback( HapticFeedbackConstants.VIRTUAL_KEY,
 					HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING );
 
@@ -195,6 +218,7 @@ public class Game extends Activity {
 			    long_gap
 			};
 			vibrator.vibrate(pattern, -1);*/
+			this.wrong = true;
 			button.setVisibility(View.INVISIBLE);
 			int i;
 			for ( i = 0; i < choices.length; i++) {
@@ -209,9 +233,13 @@ public class Game extends Activity {
 
 	public void onPopupClicked(View v) {
 		popup.setVisibility(View.INVISIBLE);
-		if (this.questionCorrect) {
+		if (this.questionCorrect && this.currentFlashcardIndex < (this.flashcards.length-1)) {
 			this.currentFlashcardIndex++;
 			loadCurrentFlashCard();
+			Toast.makeText(this.getApplicationContext(), "index, length: "+this.currentFlashcardIndex +" "+ this.flashcards.length, Toast.LENGTH_SHORT).show();
+		}
+		else if (this.questionCorrect && this.currentFlashcardIndex >= (this.flashcards.length-1)){
+			Toast.makeText(this.getApplicationContext(), "Picked "+correctPicks+" right on first try", Toast.LENGTH_SHORT).show();
 		}
 
 	}
