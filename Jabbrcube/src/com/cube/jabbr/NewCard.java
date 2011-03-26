@@ -151,7 +151,7 @@ public class NewCard extends Activity {
 	        	
 	        	System.out.println(res);
 
-	        	tv_Translation.setText(res);
+	        	//tv_Translation.setText(res);
 	        	
 	        	return null;
 	        } else {
@@ -166,6 +166,7 @@ public class NewCard extends Activity {
     			textUI.start();
     			DefaultHttpClient client = new DefaultHttpClient();
 		    	
+    			//TODO: swap this out with jabbrcube translation
 	        	HttpPost post=new HttpPost("http://jigimojo.heroku.com/attendees");
 	        	List<NameValuePair> form=new ArrayList<NameValuePair>();
 	        	form.add(new BasicNameValuePair("attendee[user_id]", "1"));
@@ -188,20 +189,21 @@ public class NewCard extends Activity {
 		public void run() {
 			try{
 				
-				
+				// Note: this doesn't currently work since we don't have OAuth working
 				HttpClient httpClient = new DefaultHttpClient();
 			    HttpContext localContext = new BasicHttpContext();
-			    HttpPost httpPost = new HttpPost("http://192.168.51.214:3000/images/");
+			    HttpPost httpPost = new HttpPost("http://jabbrcube.heroku.com/flashcards");
 				// Add your data
 				MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
 				
 				ByteArrayOutputStream bos = new ByteArrayOutputStream();
 				pic.compress(CompressFormat.JPEG, 100, bos);
 				byte[] data = bos.toByteArray();
-				entity.addPart("image[photo]", new ByteArrayBody(data,"myImage.jpg"));
-				entity.addPart("image[caption]", new StringBody(original));
-				entity.addPart("image[Latitude]", new StringBody(Double.toString(latitude)));
-				entity.addPart("image[Longitude]", new StringBody(Double.toString(longitude)));
+				entity.addPart("flashcard[photo]", new ByteArrayBody(data, original+".jpg"));
+				entity.addPart("flashcard[word_str]", new StringBody(original));
+				entity.addPart("flashcard[lat]", new StringBody(Double.toString(latitude)));
+				entity.addPart("flashcard[long]", new StringBody(Double.toString(longitude)));
+				entity.addPart("flashcard[category_id]", new StringBody("1"));
 				
 				httpPost.setEntity(entity);
 	

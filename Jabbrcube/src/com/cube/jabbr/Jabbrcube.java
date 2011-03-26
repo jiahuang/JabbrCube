@@ -17,10 +17,10 @@ public class Jabbrcube extends Activity {
     }
     
     public void login(View view){
-    	// log in and swap activities
+    	// TODO: Validate Login with OAuth
     	
     	Intent intent = new Intent().setClass(this, Startup.class);
     	startActivity(intent);
-    	// start acquiring location
+    	// TODO: start acquiring location
     }
 }
