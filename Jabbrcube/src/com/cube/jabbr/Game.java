@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
@@ -74,11 +77,20 @@ public class Game extends Activity {
 
 		BufferedReader in = null;
 		try {
-			HttpClient client = new DefaultHttpClient();
+			/*HttpClient client = new DefaultHttpClient();
 			HttpGet get = new HttpGet("http://jabbrcube.heroku.com/api/getdeck");
 			//request.setURI(new URI("url here"));
 			ResponseHandler<String> responseHandler = new BasicResponseHandler();
-			String response = client.execute(get, responseHandler);
+			String response = client.execute(get, responseHandler);*/
+			
+			HttpClient httpClient = new DefaultHttpClient();
+			HttpGet httpGet = new HttpGet("http://jabbrcube.heroku.com/api/getdeck");
+			httpGet.addHeader(BasicScheme.authenticate(
+			 new UsernamePasswordCredentials("boo", "booboo"),
+			 "UTF-8", false));
+			ResponseHandler<String> responseHandler = new BasicResponseHandler();
+			String response = httpClient.execute(httpGet, responseHandler);
+			Log.i("jabbr", "response: " +response);
 			/*
 			in = new BufferedReader
 			(new InputStreamReader(response.getEntity().getContent()));
@@ -92,7 +104,6 @@ public class Game extends Activity {
 			String page = sb.toString();
 			 */
 
-			Log.i("jabbr", response);
 			buildDeck(response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -114,6 +125,7 @@ public class Game extends Activity {
 		try {
 			JSONObject deck = new JSONObject(responseBody);
 			JSONArray flashcards = deck.getJSONArray("flashcards");
+			Log.i("jabbr", "got flashcards array");
 			this.flashcards = new FlashCard[flashcards.length()];
 			for( int i = 0; i < flashcards.length(); i++) {
 				JSONObject flashcard = flashcards.getJSONObject(i);

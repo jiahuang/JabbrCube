@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="19" version="2.0">
+<workbench progressCount="17" version="2.0">
 <workbenchAdvisor/>
 <window height="768" maximized="true" width="1024" x="0" y="24">
 <fastViewData fastViewLocation="1024">
@@ -38,6 +38,13 @@
 <part id="2"/>
 <part id="3"/>
 <part id="4"/>
+<part id="5"/>
+<part id="6"/>
+<part id="7"/>
+<part id="8"/>
+<part id="9"/>
+<part id="10"/>
+<part id="11"/>
 </presentation>
 </folder>
 </info>
@@ -45,13 +52,13 @@
 <editor id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" partName="Jabbrcube Manifest" path="/media/FC880A52880A0BB8_/Documents and Settings/pbooth/My Documents/classes/sophmore/dotcom/JabbrCube/Jabbrcube/AndroidManifest.xml" title="Jabbrcube Manifest" tooltip="Jabbrcube/AndroidManifest.xml" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Jabbrcube/AndroidManifest.xml"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Game.java" partName="Game.java" path="/media/FC880A52880A0BB8_/Documents and Settings/pbooth/My Documents/classes/sophmore/dotcom/JabbrCube/Jabbrcube/src/com/cube/jabbr/Game.java" title="Game.java" tooltip="Jabbrcube/src/com/cube/jabbr/Game.java" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Game.java" partName="Game.java" path="/media/FC880A52880A0BB8_/Documents and Settings/pbooth/My Documents/classes/sophmore/dotcom/JabbrCube/Jabbrcube/src/com/cube/jabbr/Game.java" title="Game.java" tooltip="Jabbrcube/src/com/cube/jabbr/Game.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Jabbrcube/src/com/cube/jabbr/Game.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5011" selectionTopPixel="2669"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="547" selectionTopPixel="64"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="NewCard.java" partName="NewCard.java" path="/media/FC880A52880A0BB8_/Documents and Settings/pbooth/My Documents/classes/sophmore/dotcom/JabbrCube/Jabbrcube/src/com/cube/jabbr/NewCard.java" title="NewCard.java" tooltip="Jabbrcube/src/com/cube/jabbr/NewCard.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Jabbrcube/src/com/cube/jabbr/NewCard.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2814" selectionTopPixel="867"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="253" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="FlashCard.java" partName="FlashCard.java" path="/media/FC880A52880A0BB8_/Documents and Settings/pbooth/My Documents/classes/sophmore/dotcom/JabbrCube/Jabbrcube/src/com/cube/jabbr/FlashCard.java" title="FlashCard.java" tooltip="Jabbrcube/src/com/cube/jabbr/FlashCard.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Jabbrcube/src/com/cube/jabbr/FlashCard.java"/>
@@ -60,6 +67,32 @@
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ChangeDeck.java" partName="ChangeDeck.java" path="/home/paul/Documents/classes/dotcom/JabbrCube/Jabbrcube/src/com/cube/jabbr/ChangeDeck.java" title="ChangeDeck.java" tooltip="Jabbrcube/src/com/cube/jabbr/ChangeDeck.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Jabbrcube/src/com/cube/jabbr/ChangeDeck.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="511" selectionTopPixel="34"/>
+</editor>
+<editor id="com.android.ide.eclipse.editors.layout.LayoutEditor" name="game.xml" partName="game.xml" path="/media/FC880A52880A0BB8_/Documents and Settings/pbooth/My Documents/classes/sophmore/dotcom/JabbrCube/Jabbrcube/res/layout/game.xml" title="game.xml" tooltip="Jabbrcube/res/layout/game.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Jabbrcube/res/layout/game.xml"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="JabbrDbAdapter.java" partName="JabbrDbAdapter.java" path="/media/FC880A52880A0BB8_/Documents and Settings/pbooth/My Documents/classes/sophmore/dotcom/JabbrCube/Jabbrcube/src/com/cube/jabbr/datastore/JabbrDbAdapter.java" title="JabbrDbAdapter.java" tooltip="Jabbrcube/src/com/cube/jabbr/datastore/JabbrDbAdapter.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Jabbrcube/src/com/cube/jabbr/datastore/JabbrDbAdapter.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1306" selectionTopPixel="319"/>
+</editor>
+<editor id="com.android.ide.eclipse.editors.layout.LayoutEditor" name="changeloc.xml" partName="changeloc.xml" path="/media/FC880A52880A0BB8_/Documents and Settings/pbooth/My Documents/classes/sophmore/dotcom/JabbrCube/Jabbrcube/res/layout/changeloc.xml" title="changeloc.xml" tooltip="Jabbrcube/res/layout/changeloc.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Jabbrcube/res/layout/changeloc.xml"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Jabbrcube.java" partName="Jabbrcube.java" path="/media/FC880A52880A0BB8_/Documents and Settings/pbooth/My Documents/classes/sophmore/dotcom/JabbrCube/Jabbrcube/src/com/cube/jabbr/Jabbrcube.java" title="Jabbrcube.java" tooltip="Jabbrcube/src/com/cube/jabbr/Jabbrcube.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Jabbrcube/src/com/cube/jabbr/Jabbrcube.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="442" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ChangeLoc.java" partName="ChangeLoc.java" path="/media/FC880A52880A0BB8_/Documents and Settings/pbooth/My Documents/classes/sophmore/dotcom/JabbrCube/Jabbrcube/src/com/cube/jabbr/ChangeLoc.java" title="ChangeLoc.java" tooltip="Jabbrcube/src/com/cube/jabbr/ChangeLoc.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Jabbrcube/src/com/cube/jabbr/ChangeLoc.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1943" selectionTopPixel="217"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LocationView.java" partName="LocationView.java" path="/media/FC880A52880A0BB8_/Documents and Settings/pbooth/My Documents/classes/sophmore/dotcom/JabbrCube/Jabbrcube/src/com/cube/jabbr/listView/LocationView.java" title="LocationView.java" tooltip="Jabbrcube/src/com/cube/jabbr/listView/LocationView.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Jabbrcube/src/com/cube/jabbr/listView/LocationView.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LocationAdapter.java" partName="LocationAdapter.java" path="/media/FC880A52880A0BB8_/Documents and Settings/pbooth/My Documents/classes/sophmore/dotcom/JabbrCube/Jabbrcube/src/com/cube/jabbr/listView/LocationAdapter.java" title="LocationAdapter.java" tooltip="Jabbrcube/src/com/cube/jabbr/listView/LocationAdapter.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Jabbrcube/src/com/cube/jabbr/listView/LocationAdapter.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="329" selectionTopPixel="85"/>
 </editor>
 </editors>
 <views>
@@ -95,8 +128,8 @@
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
-<category IMemento.internal.id="Errors"/>
 <category IMemento.internal.id="Warnings"/>
+<category IMemento.internal.id="Errors"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="73" org.eclipse.ui.ide.markerType="497" org.eclipse.ui.ide.pathField="143" org.eclipse.ui.ide.resourceField="108" org.eclipse.ui.ide.severityAndDescriptionField="350"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -209,7 +242,7 @@
 <view id="org.eclipse.search.ui.views.SearchView"/>
 <view id="org.eclipse.ui.views.ContentOutline"/>
 <fastViews>
-<view id="com.android.ide.eclipse.ddms.views.LogCatView" ratio="0.7157821"/>
+<view id="com.android.ide.eclipse.ddms.views.LogCatView" ratio="0.997905"/>
 </fastViews>
 <fastViewBars/>
 <layout>
@@ -314,66 +347,47 @@
 <view id="org.eclipse.debug.ui.ExpressionView"/>
 <view id="org.eclipse.ui.views.ContentOutline"/>
 <fastViewBars/>
-<layout>
-<mainWindow>
-<info folder="true" part="org.eclipse.debug.internal.ui.NavigatorFolderView">
-<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">
-<page content="org.eclipse.debug.ui.DebugView" label="Debug"/>
+<layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="org.eclipse.debug.internal.ui.NavigatorFolderView">&#x0A;<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.debug.ui.DebugView" label="Debug"/>
 <page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.PackageExplorer" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.TypeHierarchy" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="stickyFolderRight" ratio="0.75" ratioLeft="1074" ratioRight="358" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
-<folder appearance="2" expanded="2">
-<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<info folder="true" part="stickyFolderRight" ratio="0.75" ratioLeft="1074" ratioRight="358" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.debug.internal.ui.ConsoleFolderView" ratio="0.7488922" ratioLeft="507" ratioRight="170" relationship="4" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
-<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
-<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<info folder="true" part="org.eclipse.debug.internal.ui.ConsoleFolderView" ratio="0.7488922" ratioLeft="507" ratioRight="170" relationship="4" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">&#x0A;<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.ui.views.TaskList" label="Tasks"/>
 <page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.PropertySheet" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.debug.ui.DisplayView" label="LabelNotFound"/>
 <page content="org.eclipse.search.SearchResultView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 <part id="1"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@1c0975e" ratio="0.5" ratioLeft="716" ratioRight="716" relationship="2" relative="org.eclipse.debug.internal.ui.ConsoleFolderView">
-<folder activePageID="com.android.ide.eclipse.ddms.views.LogCatView" appearance="2" expanded="2">
-<page content="com.android.ide.eclipse.ddms.views.LogCatView" label="LogCat"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@1c0975e" ratio="0.5" ratioLeft="716" ratioRight="716" relationship="2" relative="org.eclipse.debug.internal.ui.ConsoleFolderView">&#x0A;<folder activePageID="com.android.ide.eclipse.ddms.views.LogCatView" appearance="2" expanded="2">&#x0A;<page content="com.android.ide.eclipse.ddms.views.LogCatView" label="LogCat"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 </presentation>
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.44970414" ratioLeft="228" ratioRight="279" relationship="4" relative="org.eclipse.debug.internal.ui.NavigatorFolderView"/>
-<info folder="true" part="org.eclipse.debug.internal.ui.OutlineFolderView" ratio="0.75" ratioLeft="1074" ratioRight="358" relationship="2" relative="org.eclipse.ui.editorss">
-<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
-<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
+<info folder="true" part="org.eclipse.debug.internal.ui.OutlineFolderView" ratio="0.75" ratioLeft="1074" ratioRight="358" relationship="2" relative="org.eclipse.ui.editorss">&#x0A;<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
 <page content="org.eclipse.ant.ui.views.AntView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.debug.internal.ui.ToolsFolderView" ratio="0.5" ratioLeft="716" ratioRight="716" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
-<folder activePageID="org.eclipse.debug.ui.BreakpointView" appearance="2" expanded="2">
-<page content="org.eclipse.debug.ui.VariableView" label="Variables"/>
+<info folder="true" part="org.eclipse.debug.internal.ui.ToolsFolderView" ratio="0.5" ratioLeft="716" ratioRight="716" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">&#x0A;<folder activePageID="org.eclipse.debug.ui.BreakpointView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.debug.ui.VariableView" label="Variables"/>
 <page content="org.eclipse.debug.ui.BreakpointView" label="Breakpoints"/>
 <page content="org.eclipse.debug.ui.ExpressionView" label="Expressions"/>
 <page content="org.eclipse.debug.ui.RegisterView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 <part id="1"/>
 <part id="2"/>
 </presentation>
@@ -387,113 +401,17 @@
 <navigationHistory>
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Jabbrcube/src/com/cube/jabbr/Game.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Jabbrcube/src/com/cube/jabbr/NewCard.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Spyopolips/src/com/opolips/spy/VirtualGame.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Jabbrcube/src/com/cube/jabbr/FlashCard.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" path="/Jabbrcube/AndroidManifest.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.layout.LayoutEditor" path="/Jabbrcube/res/layout/game.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Jabbrcube/src/com/cube/jabbr/NewCard.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" path="/Jabbrcube/AndroidManifest.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Jabbrcube/src/com/cube/jabbr/datastore/JabbrDbAdapter.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.layout.LayoutEditor" path="/Jabbrcube/res/layout/changeloc.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Jabbrcube/src/com/cube/jabbr/Jabbrcube.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Jabbrcube/src/com/cube/jabbr/ChangeLoc.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Jabbrcube/src/com/cube/jabbr/listView/LocationView.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Jabbrcube/src/com/cube/jabbr/listView/LocationAdapter.java"/>
 </editors>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="1980" y="0"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="1978" y="0"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="4141" y="0"/>
-</item>
-<item historyLabel="NewCard.java" index="1">
-<position info="not_deleted" x="2814" y="0"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position/>
-</item>
-<item historyLabel="VirtualGame.java" index="2">
-<position info="not_deleted" x="1237" y="650"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="3994" y="4"/>
-</item>
-<item historyLabel="VirtualGame.java" index="2">
-<position info="not_deleted" x="3086" y="199"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="3994" y="4"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="3095" y="0"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="2760" y="0"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="2736" y="0"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="2230" y="0"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="2062" y="0"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="2305" y="0"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="3213" y="0"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="3962" y="0"/>
-</item>
-<item historyLabel="VirtualGame.java" index="2">
-<position info="not_deleted" x="1520" y="0"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="3962" y="0"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="3423" y="0"/>
-</item>
-<item historyLabel="FlashCard.java" index="3">
-<position info="not_deleted" x="547" y="0"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="3962" y="0"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="3962" y="0"/>
-</item>
-<item historyLabel="FlashCard.java" index="3">
-<position info="not_deleted" x="547" y="0"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="3962" y="0"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="3517" y="0"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="3634" y="0"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="3665" y="0"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="3962" y="0"/>
-</item>
-<item historyLabel="FlashCard.java" index="3">
-<position info="not_deleted" x="547" y="0"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="3962" y="0"/>
-</item>
-<item historyLabel="FlashCard.java" index="3">
-<position info="not_deleted" x="213" y="127"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="3962" y="0"/>
-</item>
-<item historyLabel="Game.java" index="0">
-<position info="not_deleted" x="3802" y="0"/>
-</item>
 <item historyLabel="Game.java" index="0">
 <position info="not_deleted" x="3942" y="0"/>
 </item>
@@ -512,7 +430,7 @@
 <item historyLabel="Game.java" index="0">
 <position info="not_deleted" x="3728" y="0"/>
 </item>
-<item historyLabel="Jabbrcube Manifest" index="4"/>
+<item historyLabel="Jabbrcube Manifest" index="1"/>
 <item historyLabel="Game.java" index="0">
 <position info="not_deleted" x="3728" y="0"/>
 </item>
@@ -537,8 +455,104 @@
 <item historyLabel="Game.java" index="0">
 <position info="not_deleted" x="3994" y="0"/>
 </item>
-<item active="true" historyLabel="Game.java" index="0">
+<item historyLabel="Game.java" index="0">
 <position info="not_deleted" x="4718" y="0"/>
+</item>
+<item historyLabel="game.xml" index="2"/>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="5591" y="0"/>
+</item>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="3453" y="0"/>
+</item>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="3259" y="0"/>
+</item>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="5357" y="68"/>
+</item>
+<item historyLabel="NewCard.java" index="3">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="NewCard.java" index="3">
+<position info="not_deleted" x="253" y="0"/>
+</item>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="3380" y="0"/>
+</item>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="2795" y="0"/>
+</item>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="2851" y="1"/>
+</item>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="3010" y="0"/>
+</item>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="4243" y="0"/>
+</item>
+<item historyLabel="Jabbrcube Manifest" index="4"/>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="547" y="0"/>
+</item>
+<item historyLabel="JabbrDbAdapter.java" index="5">
+<position info="not_deleted" x="494" y="0"/>
+</item>
+<item historyLabel="changeloc.xml" index="6"/>
+<item historyLabel="Jabbrcube.java" index="7">
+<position info="not_deleted" x="442" y="0"/>
+</item>
+<item historyLabel="ChangeLoc.java" index="8">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="ChangeLoc.java" index="8">
+<position info="not_deleted" x="1694" y="0"/>
+</item>
+<item historyLabel="LocationView.java" index="9">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="JabbrDbAdapter.java" index="5">
+<position info="not_deleted" x="970" y="0"/>
+</item>
+<item historyLabel="LocationAdapter.java" index="10">
+<position info="not_deleted" x="329" y="0"/>
+</item>
+<item historyLabel="ChangeLoc.java" index="8">
+<position/>
+</item>
+<item historyLabel="LocationView.java" index="9">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="ChangeLoc.java" index="8">
+<position/>
+</item>
+<item historyLabel="LocationView.java" index="9">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="ChangeLoc.java" index="8">
+<position info="not_deleted" x="2363" y="0"/>
+</item>
+<item historyLabel="JabbrDbAdapter.java" index="5">
+<position info="not_deleted" x="970" y="0"/>
+</item>
+<item historyLabel="ChangeLoc.java" index="8">
+<position info="not_deleted" x="2291" y="0"/>
+</item>
+<item historyLabel="LocationAdapter.java" index="10">
+<position info="not_deleted" x="329" y="0"/>
+</item>
+<item historyLabel="ChangeLoc.java" index="8">
+<position info="not_deleted" x="2291" y="0"/>
+</item>
+<item historyLabel="JabbrDbAdapter.java" index="5">
+<position info="not_deleted" x="964" y="6"/>
+</item>
+<item historyLabel="ChangeLoc.java" index="8">
+<position info="not_deleted" x="1943" y="0"/>
+</item>
+<item active="true" historyLabel="JabbrDbAdapter.java" index="5">
+<position info="not_deleted" x="964" y="6"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -546,13 +560,6 @@
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
-<trimArea IMemento.internal.id="131072">
-<trimItem IMemento.internal.id="org.eclipse.ui.editorss"/>
-<trimItem IMemento.internal.id="org.eclipse.debug.internal.ui.ConsoleFolderView"/>
-<trimItem IMemento.internal.id="org.eclipse.debug.internal.ui.NavigatorFolderView"/>
-<trimItem IMemento.internal.id="org.eclipse.debug.internal.ui.ToolsFolderView"/>
-<trimItem IMemento.internal.id="org.eclipse.debug.internal.ui.OutlineFolderView"/>
-</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 </trimArea>
@@ -564,6 +571,27 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LocationAdapter.java" tooltip="Jabbrcube/src/com/cube/jabbr/listView/LocationAdapter.java">
+<persistable path="/Jabbrcube/src/com/cube/jabbr/listView/LocationAdapter.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LocationView.java" tooltip="Jabbrcube/src/com/cube/jabbr/listView/LocationView.java">
+<persistable path="/Jabbrcube/src/com/cube/jabbr/listView/LocationView.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ChangeLoc.java" tooltip="Jabbrcube/src/com/cube/jabbr/ChangeLoc.java">
+<persistable path="/Jabbrcube/src/com/cube/jabbr/ChangeLoc.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Jabbrcube.java" tooltip="Jabbrcube/src/com/cube/jabbr/Jabbrcube.java">
+<persistable path="/Jabbrcube/src/com/cube/jabbr/Jabbrcube.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.layout.LayoutEditor" name="changeloc.xml" tooltip="Jabbrcube/res/layout/changeloc.xml">
+<persistable path="/Jabbrcube/res/layout/changeloc.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="JabbrDbAdapter.java" tooltip="Jabbrcube/src/com/cube/jabbr/datastore/JabbrDbAdapter.java">
+<persistable path="/Jabbrcube/src/com/cube/jabbr/datastore/JabbrDbAdapter.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.layout.LayoutEditor" name="game.xml" tooltip="Jabbrcube/res/layout/game.xml">
+<persistable path="/Jabbrcube/res/layout/game.xml"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="VirtualGame.java" tooltip="Spyopolips/src/com/opolips/spy/VirtualGame.java">
 <persistable path="/Spyopolips/src/com/opolips/spy/VirtualGame.java"/>
 </file>

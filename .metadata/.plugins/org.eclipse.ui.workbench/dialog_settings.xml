@@ -14,6 +14,7 @@
 		<list key="ShowViewDialog.STORE_EXPANDED_CATEGORIES_ID">
 			<item value="org.eclipse.ui"/>
 			<item value="com.android.ide.eclipse.ddms.views.category"/>
+			<item value="TeXlipse"/>
 		</list>
 	</section>
 	<section name="ImportExportAction">

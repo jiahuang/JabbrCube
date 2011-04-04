@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry kind="lib" path="/home/jialiya/workspace/JabbrCube/Jabbrcube/lib/oauth-core-20090121.jar"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="lib" path="/media/FC880A52880A0BB8_/Documents and Settings/pbooth/My Documents/classes/sophmore/dotcom/JabbrCube/Jabbrcube/lib/oauth-core-20090121.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
