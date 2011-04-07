@@ -48,6 +48,7 @@ public class Game extends Activity {
 	Vibrator vibrator;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.game);
 		choices[0] = (Button) findViewById(R.id.Button0);
@@ -59,6 +60,7 @@ public class Game extends Activity {
 		popup = (Button) findViewById(R.id.Popup);
 		vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 		initializeGame();
+		
 	}
 
 	public void initializeGame() {
@@ -67,10 +69,17 @@ public class Game extends Activity {
 		try{
 			getCardsFromWebsite();
 		} catch(Exception e) {
-			Log.e("jabbr", e.toString());
+			Log.e("jabbr", "Problem getting cards from website:" +e.toString());
 		}
 		currentFlashcardIndex = 0;
-		loadCurrentFlashCard();
+		try{
+			Log.i("jabbr", "current: "+this.currentFlashcardIndex);
+			
+			loadCurrentFlashCard();
+			} catch (Exception e) {
+				Log.e("jabbr", e.toString());
+			}
+		
 	}
 
 	public void getCardsFromWebsite() {
@@ -140,9 +149,11 @@ public class Game extends Activity {
 				if (choices[3] == null)
 					choices[3] = "THE ANSWER";
 				int correctChoice = 3;
+				
 				Drawable drawable = loadDrawable(image_url);
 				FlashCard flashCardObject = new FlashCard(drawable, title, choices, choices,
 						correctChoice, flashcardID);
+				flashCardObject.randomizeChoices();
 				this.flashcards[i] = flashCardObject;
 			}
 
@@ -174,6 +185,8 @@ public class Game extends Activity {
 
 	public void loadCurrentFlashCard() {
 		this.wrong = false;
+		Log.i("jabbr", ""+this.currentFlashcardIndex +"/"+ this.flashcards.length);
+		Toast.makeText(this.getApplicationContext(), "BOOBOBOOBBO", Toast.LENGTH_LONG);
 		FlashCard flashcard = this.flashcards[this.currentFlashcardIndex];
 		if (flashcard != null){
 			tableLayout.setBackgroundDrawable(flashcard.drawable);
