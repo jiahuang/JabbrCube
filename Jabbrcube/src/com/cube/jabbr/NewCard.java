@@ -9,11 +9,13 @@ import java.util.List;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -21,6 +23,8 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import com.cube.jabbr.MIME.*;
 import com.cube.jabbr.content.ByteArrayBody;
@@ -34,6 +38,8 @@ import android.graphics.Bitmap.CompressFormat;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -49,8 +55,9 @@ public class NewCard extends Activity {
 	String translation = "";
 	TextView tv_Translation;
 	EditText et_Original;
-	boolean switchText = false;
-	boolean stillTranslating = false;
+	boolean textChanged = false;
+	
+	
 	
     /** Called when the activity is first created. */
     @Override
@@ -60,18 +67,87 @@ public class NewCard extends Activity {
         tv_Translation = (TextView) findViewById(R.id.translation);
         et_Original = (EditText) findViewById(R.id.translate);
         
+        et_Original.addTextChangedListener(new TextWatcher() {
+            
+            @Override
+			public void afterTextChanged(Editable s) {
+            	textChanged = true;
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+        });
+        
         et_Original.setOnFocusChangeListener(new View.OnFocusChangeListener()
     	{ 
     		@Override
-    	   public void onFocusChange(View v, boolean lostfocus)
+    	   public void onFocusChange(View v, boolean gainedfocus)
     	   {
-    	       if (lostfocus == true)
-    	       { 
-    	    	   translateText.start();
-    	       }
+    			if (gainedfocus == false && textChanged == true){
+    				textChanged = false;
+    			new Thread(new Runnable() {
+    				public void run(){
+    		    		try{
+    		    			//textUI.start();
+    		    			Message msg =  Message.obtain();
+    		    			Bundle bundle = new Bundle();
+
+    		    			bundle.putString("Text", "Translating...");
+    		    			msg.setData(bundle);
+    		    			translationHandler.sendMessage(msg);
+    		    			
+    		    			DefaultHttpClient client = new DefaultHttpClient();
+    				    	
+    			        	HttpPost post=new HttpPost("http://jabbrcube.heroku.com/api/words");
+    			        	post.addHeader(BasicScheme.authenticate(
+    			        			 new UsernamePasswordCredentials("jialiya", "password"),
+    			        			 "UTF-8", false));
+
+    			        	List<NameValuePair> form=new ArrayList<NameValuePair>();
+    			        	form.add(new BasicNameValuePair("word[word]", et_Original.getText().toString()));
+    			        	
+    			        	post.setEntity(new UrlEncodedFormEntity(form, HTTP.UTF_8));
+    			        	ResponseHandler<String> responseHandler=new BasicResponseHandler();
+    			        	
+    			        	String responseBody=client.execute(post, responseHandler);
+    			        	JSONObject word = new JSONObject(responseBody);
+    			        	String translated_word = word.getString("translation");
+    			        	
+    			        	Message msg_translated =  Message.obtain();
+    			        	bundle.putString("Text", translated_word);
+    			        	msg_translated.setData(bundle);
+    		    			translationHandler.sendMessage(msg_translated);
+    		    			
+    		    		}
+    		    		catch(Exception t){
+    		    			System.out.println(t.toString());
+    		    		}
+    		    	}
+    			  }).start();
+    			}
     	   }
     	});
     }
+    
+    Handler translationHandler=new Handler() {
+    	@Override
+    	public void handleMessage(Message msg) {
+    		Bundle bundle = msg.getData();
+
+    		tv_Translation.setText(bundle.getString("Text"));
+    	}
+    };
     
     public void camera(View view){
     	Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
@@ -86,145 +162,63 @@ public class NewCard extends Activity {
     	}
     }
     
-    ResponseHandler<String> handler = new ResponseHandler<String>() {
-	    public String handleResponse(
-	            HttpResponse response) throws ClientProtocolException, IOException {
-	        HttpEntity entity = response.getEntity();
-	        if (entity != null) {
-
-	        	String res = EntityUtils.toString(entity);
-	        	System.out.println(res);
-	        	// blank out proper fields
-	        	((EditText) findViewById(R.id.translate)).setText("");
-	        	tv_Translation.setText("");
-	        	
-	        	Context context = getApplicationContext();
-	        	CharSequence text = "Your Flashcard has been sucessfully added!";
-	        	int duration = Toast.LENGTH_SHORT;
-	        	Toast toast = Toast.makeText(context, text, duration);
-	        	toast.show();
-	        	return null;
-	        } else {
-	            return null;
-	        }
-	    }
-	};
-	
-	Handler progress=new Handler() {
+    Handler submissionHandler=new Handler() {
     	@Override
     	public void handleMessage(Message msg) {
-    		
-    		if (switchText){
-    			tv_Translation.setText("Translating...");
-    			switchText = false;
-    		}
-    		else {
-    			tv_Translation.setText("Translating......");
-    			switchText = true;
-    		}
+    		tv_Translation.setText("");
+        	
+        	CharSequence text = "Your Flashcard has been sucessfully added!";
+        	Toast toast = Toast.makeText(getApplicationContext(), text,  Toast.LENGTH_SHORT);
+        	toast.show();
     	}
     };
-    
-    Thread textUI = new Thread(new Runnable(){
-    	public void run(){
-    		try{
-    			while(stillTranslating){
-    				Thread.sleep(500);
-    				progress.sendMessage(progress.obtainMessage());
-    			}
-    		}
-    		catch(Exception t){
-        		
-        	}
-    	}
-    	
-    });
-    
-    ResponseHandler<String> finishTranslation = new ResponseHandler<String>() {
-	    public String handleResponse(
-	            HttpResponse response) throws ClientProtocolException, IOException {
-	        HttpEntity entity = response.getEntity();
-	        if (entity != null) {
-    			textUI.stop();
-
-    			String res = EntityUtils.toString(entity);
-	        	
-	        	System.out.println(res);
-
-	        	//tv_Translation.setText(res);
-	        	
-	        	return null;
-	        } else {
-	            return null;
-	        }
-	    }
-	};
-    
-    Thread translateText = new Thread(new Runnable(){
-    	public void run(){
-    		try{
-    			textUI.start();
-    			DefaultHttpClient client = new DefaultHttpClient();
-		    	
-    			//TODO: swap this out with jabbrcube translation
-	        	HttpPost post=new HttpPost("http://jigimojo.heroku.com/attendees");
-	        	List<NameValuePair> form=new ArrayList<NameValuePair>();
-	        	form.add(new BasicNameValuePair("attendee[user_id]", "1"));
-	        	form.add(new BasicNameValuePair("attendee[venue_id]", "1"));
-	        	
-	        	post.setEntity(new UrlEncodedFormEntity(form, HTTP.UTF_8));
-
-	        	String responseBody=client.execute(post, finishTranslation);
-	        	System.out.println(responseBody);
-
-    			
-    		}
-    		catch(Exception t){
-    		
-    		}
-    	}
-    });
-    
-    Thread submit=new Thread(new Runnable() {
-		public void run() {
-			try{
-				
-				// Note: this doesn't currently work since we don't have OAuth working
-				HttpClient httpClient = new DefaultHttpClient();
-			    HttpContext localContext = new BasicHttpContext();
-			    HttpPost httpPost = new HttpPost("http://jabbrcube.heroku.com/flashcards");
-				// Add your data
-				MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
-				
-				ByteArrayOutputStream bos = new ByteArrayOutputStream();
-				pic.compress(CompressFormat.JPEG, 100, bos);
-				byte[] data = bos.toByteArray();
-				entity.addPart("flashcard[photo]", new ByteArrayBody(data, original+".jpg"));
-				entity.addPart("flashcard[word_str]", new StringBody(original));
-				entity.addPart("flashcard[lat]", new StringBody(Double.toString(latitude)));
-				entity.addPart("flashcard[long]", new StringBody(Double.toString(longitude)));
-				entity.addPart("flashcard[category_id]", new StringBody("1"));
-				
-				httpPost.setEntity(entity);
-	
-		        HttpResponse response = httpClient.execute(httpPost, localContext);
-
-				String s_response = httpClient.execute(httpPost, handler);
-				System.out.println(s_response);
-			}
-			catch(Throwable t){
-			}
-			
-		}
-	});
     
     public void addCard(View view){
     	// set everything up and send to web
     	original = ((EditText) findViewById(R.id.translate)).getText().toString();
     	translation = ((TextView) findViewById(R.id.translation)).getText().toString();
     	
+    	Toast toast = Toast.makeText(getApplicationContext(), "added card",  Toast.LENGTH_SHORT);
+    	toast.show();
+    	
     	// new thread for posting
-    	submit.start();
+    	new Thread(new Runnable() {
+    		public void run() {
+    			try{
+    				
+    				HttpClient httpClient = new DefaultHttpClient();
+    			    HttpContext localContext = new BasicHttpContext();
+    			    HttpPost httpPost = new HttpPost("http://jabbrcube.heroku.com/api/flashcards");
+    			    httpPost.addHeader(BasicScheme.authenticate(
+    	        			 new UsernamePasswordCredentials("jialiya", "password"),
+    	        			 "UTF-8", false));
+    			    
+    				// Add your data
+    				MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+    				
+    				ByteArrayOutputStream bos = new ByteArrayOutputStream();
+    				pic.compress(CompressFormat.JPEG, 100, bos);
+    				byte[] data = bos.toByteArray();
+    				entity.addPart("flashcard[photo]", new ByteArrayBody(data, original+".jpg"));
+    				entity.addPart("flashcard[word_str]", new StringBody(original));
+    				entity.addPart("flashcard[lat]", new StringBody(Double.toString(latitude)));
+    				entity.addPart("flashcard[long]", new StringBody(Double.toString(longitude)));
+    				entity.addPart("flashcard[category_id]", new StringBody("1"));
+    				
+    				httpPost.setEntity(entity);
+    	
+    		        HttpResponse response = httpClient.execute(httpPost, localContext);
+    		        ResponseHandler<String> responseHandler=new BasicResponseHandler();
+    				String s_response = httpClient.execute(httpPost, responseHandler);
+    				submissionHandler.sendMessage(Message.obtain());
+    				System.out.println(s_response);
+    			}
+    			catch(Throwable t){
+    				System.out.println(t.toString());
+    			}
+    			
+    		}
+    	});
 
     }
 }

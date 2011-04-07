@@ -34,17 +34,19 @@
 
 </TableRow>
 		
-	<TableRow>
+	<TableRow layout_span="2">
 		<ImageView android:id="@+id/image" 
 			android:layout_width="wrap_content" 
-			android:layout_height="100px"></ImageView>
+			android:layout_height="wrap_content"
+			android:background="@drawable/icon"></ImageView>
 	</TableRow>
 	<TableRow>
 	<Button android:text="Add Flash Card" 
 		android:id="@+id/addCard" 
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content"
+		android:layout_width="50px" 
+		android:layout_height="50px"
 		android:layout_span="2"
+		android:onClick="addCard"
 		></Button>
 	</TableRow>
 </TableLayout>
