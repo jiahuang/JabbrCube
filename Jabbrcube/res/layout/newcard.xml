@@ -26,8 +26,8 @@
 			android:layout_height="wrap_content"
 			android:gravity="center_horizontal"></TextView>
 	<ImageButton android:id="@+id/Camera" 
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content"
+		android:layout_width="20px" 
+		android:layout_height="60px"
 		android:src="@drawable/camera"
 		android:onClick="camera">
 	</ImageButton>
@@ -38,7 +38,8 @@
 		<ImageView android:id="@+id/image" 
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content"
-			android:background="@drawable/icon"></ImageView>
+			android:background="@drawable/icon"
+			android:layout_gravity="center_horizontal"></ImageView>
 	</TableRow>
 	<TableRow>
 	<Button android:text="Add Flash Card" 
