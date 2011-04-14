@@ -16,10 +16,10 @@ import android.widget.TextView;
  public class LocationAdapter extends BaseAdapter
     {
 
-    	private List<LocationView> locations;
+    	private List<Place> locations;
     	private Context c;
     	
-    	public LocationAdapter(Context context, List<LocationView> locations) {
+    	public LocationAdapter(Context context, List<Place> locations) {
 			this.locations = locations;
 			this.c = context;
 		}
@@ -40,7 +40,7 @@ import android.widget.TextView;
 	    {
 
 	        LinearLayout rowLayout;
-	        LocationView t = locations.get(position);
+	        Place t = locations.get(position);
 	        TextView tv;
 	        TextView tv2;
 
@@ -49,12 +49,12 @@ import android.widget.TextView;
 	            rowLayout = (LinearLayout)LayoutInflater.from(this.c).inflate
 	                      (R.layout.location_row, parent, false);
 	           tv = (TextView)rowLayout.findViewById(R.id.context);
-	           tv.setText(t.context);
+	           tv.setText(t.name);
 	           
 	           //rowLayout = (LinearLayout)LayoutInflater.from(c).inflate
                //(R.layout.user_row, parent, false);
 	           tv2 = (TextView)rowLayout.findViewById(R.id.address);
-	           tv2.setText(t.address);
+	           //tv2.setText(t.address);
 	           
 	        } else {
 	            rowLayout = (LinearLayout)convertView;
