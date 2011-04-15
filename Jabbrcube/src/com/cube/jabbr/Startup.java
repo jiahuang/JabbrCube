@@ -12,27 +12,12 @@ import android.view.View;
 
 public class Startup extends Activity {
     /** Called when the activity is first created. */
-	MyLocationListener mlocListener = new MyLocationListener();
+	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.startup);
-        LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-       
-        mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,
-				mlocListener);
-		mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0,
-				mlocListener);
-		// persistant location store
-		SharedPreferences sharedPreferences = getSharedPreferences("jabbr_prefs", MODE_PRIVATE);
-		/*Boolean loginValid = sharedPreferences.getBoolean();
-		SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("loginValid", true);
-        editor.putString("username", username);
-        editor.putString("password", password);
-		*/
-
     }
     
     public void game(View view){

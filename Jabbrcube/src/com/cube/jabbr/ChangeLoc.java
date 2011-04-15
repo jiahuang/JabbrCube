@@ -13,6 +13,7 @@ import com.cube.jabbr.listView.Place;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -46,6 +47,15 @@ public class ChangeLoc extends Activity {
 	        	CharSequence text = "Your location has been changed to "+item.name;
 	        	int duration = Toast.LENGTH_SHORT;
 	        	Toast toast = Toast.makeText(context, text, duration);
+
+	    		// persistant location store
+	    		SharedPreferences sharedPreferences = getSharedPreferences("jabbr_prefs", MODE_PRIVATE);
+	    		
+	    		SharedPreferences.Editor editor = sharedPreferences.edit();
+	            editor.putString("place_id", contextId);
+	            editor.putLong("latitude", (long) item.lat);
+	            editor.putLong("longitude", (long) item.lon);
+	            
 	        	toast.show();
 	        	
 	        	// move to startup page
