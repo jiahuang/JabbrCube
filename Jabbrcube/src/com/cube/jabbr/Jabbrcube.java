@@ -48,9 +48,13 @@ public class Jabbrcube extends Activity {
         
         mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
 		mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, mlocListener);
-		editor.putLong("latitude", (long) mlocListener.latitude);
-        editor.putLong("longitude", (long) mlocListener.longitude);
-        Toast.makeText(this.getBaseContext(), "lat:"+mlocListener.latitude + " long:"+  mlocListener.longitude,
+		editor.putFloat("latitude", (float)mlocListener.latitude);
+        editor.putFloat("longitude", (float)mlocListener.longitude);
+        editor.commit();
+        float lat = sharedPreferences.getFloat("latitude", (float) 0.0);
+        float lon = sharedPreferences.getFloat("longitude",(float) 0.0);
+        
+        Toast.makeText(this.getBaseContext(), "lat:"+ lat + " long:"+  lon,
 				Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent().setClass(this, Startup.class);
     	startActivity(intent);

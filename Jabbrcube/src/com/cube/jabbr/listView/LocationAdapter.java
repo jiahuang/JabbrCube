@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -38,30 +39,36 @@ import android.widget.TextView;
 		
 		public View getView(int position, View convertView, ViewGroup parent)
 	    {
+			ViewHolder holder;
 
 	        LinearLayout rowLayout;
 	        Place t = locations.get(position);
+	        System.out.println("pos:"+position + " name:"+t.name);
 	        TextView tv;
 	        TextView tv2;
 
 	        if (convertView == null)
 	        {
-	            rowLayout = (LinearLayout)LayoutInflater.from(this.c).inflate
-	                      (R.layout.location_row, parent, false);
-	           tv = (TextView)rowLayout.findViewById(R.id.context);
-	           tv.setText(t.name);
-	           
-	           //rowLayout = (LinearLayout)LayoutInflater.from(c).inflate
-               //(R.layout.user_row, parent, false);
-	           tv2 = (TextView)rowLayout.findViewById(R.id.address);
-	           //tv2.setText(t.address);
+	           convertView = LayoutInflater.from(this.c).inflate(R.layout.location_row, parent, false);
+
+               // Creates a ViewHolder and store references to the two children views
+               // we want to bind data to.
+               holder = new ViewHolder();
+               holder.text = (TextView)convertView.findViewById(R.id.address);
+               //holder.icon = (ImageView) convertView.findViewById(R.id.icon);
+               convertView.setTag(holder);
 	           
 	        } else {
-	            rowLayout = (LinearLayout)convertView;
+	        	holder = (ViewHolder) convertView.getTag();
 	        }
-	        return rowLayout;
+	        holder.text.setText(locations.get(position).name);
+	        return convertView;
 	    }
 
+		static class ViewHolder {
+            TextView text;
+            //ImageView icon;
+        }
 
 		@Override
 		public int getCount() {
