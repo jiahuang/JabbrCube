@@ -3,6 +3,7 @@ package com.cube.jabbr;
 import java.util.Random;
 
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 public class FlashCard {
 	Drawable drawable;
@@ -29,19 +30,37 @@ public class FlashCard {
 	
 	public void randomizeChoices() {
 		Random random = new Random();
-		for(int i = 0; i < this.choices.length; i++) {
-			int j = random.nextInt(this.choices.length);
+		Log.i("jabbr", "before choices");
+		logChoices();
+		for(int i = 0; i < choices.length; i++) {
+			int j = random.nextInt(choices.length);
+			Log.i("jabbr","switching "+i+ " with "+j+":"+choices[i]+"<->"+choices[j]);
+			
 			String ctemp = choices[i];
 			choices[i] = choices[j];
 			choices[j] = ctemp;
-			String tctemp = translatedChoices[i];
+			
+			String tctemp = ""+translatedChoices[i];
 			translatedChoices[i] = translatedChoices[j];
 			translatedChoices[j] = tctemp;
 			if (i == correctChoice)
 				correctChoice = j;
-			if (j == correctChoice)
-				correctChoice = j;
+			else if (j == correctChoice)
+				correctChoice = i;
+			Log.i("jabbr", "i:"+choices[i] + " j:"+choices[j] + " temp:"+ctemp+ " repeat");
+			logChoices();
 		}
+		Log.i("jabbr", "after choices");
+		logChoices();
+	}
+	
+	public void logChoices() {
+		String s = "";
+		for (int i = 0; i < 4; i++) {
+			s+= i+":"+ choices[i]+"\t";
+		}
+		Log.i("jabbr", s);
+		Log.i("jabbr", "correct:"+correctChoice+":"+choices[correctChoice]);
 	}
 	
 }
