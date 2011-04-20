@@ -43,7 +43,6 @@ import android.widget.TextView;
 
 	        LinearLayout rowLayout;
 	        Place t = locations.get(position);
-	        System.out.println("pos:"+position + " name:"+t.name);
 	        TextView tv;
 	        TextView tv2;
 
