@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class Jabbrcube extends Activity {
-	MyLocationListener mlocListener = new MyLocationListener();
+	
 	EditText et_Username; 
 	EditText et_Password; 
     /** Called when the activity is first created. */
@@ -26,6 +26,8 @@ public class Jabbrcube extends Activity {
         setContentView(R.layout.main);
         et_Username = (EditText) findViewById(R.id.username);
         et_Password = (EditText) findViewById(R.id.password);
+
+        
     }
     
     public void login(View view){
@@ -44,14 +46,7 @@ public class Jabbrcube extends Activity {
 
 		editor.putString("username", et_Username.getText().toString());
         editor.putString("password", et_Password.getText().toString());
-    	LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        
-        mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
-		mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, mlocListener);
-		editor.putLong("latitude", (long) mlocListener.latitude);
-        editor.putLong("longitude", (long) mlocListener.longitude);
-        Toast.makeText(this.getBaseContext(), "lat:"+mlocListener.latitude + " long:"+  mlocListener.longitude,
-				Toast.LENGTH_SHORT).show();
+        editor.commit();
     	Intent intent = new Intent().setClass(this, Startup.class);
     	startActivity(intent);
     	

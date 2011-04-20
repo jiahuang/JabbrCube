@@ -29,11 +29,18 @@ public class ChangeLoc extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.changeloc);
         
-        //LocationView d1 = new LocationView("Olin", 1, 29.913131, 19.1934134, "1000 Olin Way");
-        //LocationView d2 = new LocationView("Babson", 1, 29.913131, 19.1934134, "1000 Babson Way");
-        //LocationView d3 = new LocationView("Nowhere", 1, 29.913131, 19.1934134, "USA");
-        
         final ListView listview = (ListView)findViewById(R.id.list);
+        
+        FoursquareWrapper f = new FoursquareWrapper();
+        
+        SharedPreferences sharedPreferences = getSharedPreferences("jabbr_prefs", MODE_PRIVATE);
+        float lat = sharedPreferences.getFloat("latitude", (float) 0.0);
+        float lon = sharedPreferences.getFloat("longitude",(float) 0.0);
+        Toast.makeText(this.getApplicationContext(), "lat "+lat+" lon:"+lon, Toast.LENGTH_SHORT).show();
+        List<Place> locations =  f.getVenues(lat, lon);
+        
+        listview.setAdapter(new LocationAdapter(this, locations));
+        
         listview.setOnItemClickListener(new OnItemClickListener() {
         	public void onItemClick(AdapterView<?> parent, View view,
                 int position, long id) {
@@ -53,9 +60,9 @@ public class ChangeLoc extends Activity {
 	    		
 	    		SharedPreferences.Editor editor = sharedPreferences.edit();
 	            editor.putString("place_id", contextId);
-	            editor.putLong("latitude", (long) item.lat);
-	            editor.putLong("longitude", (long) item.lon);
-	            
+	            editor.putFloat("latitude", (float) item.lat);
+	            editor.putFloat("longitude", (float) item.lon);
+	            editor.commit();
 	        	toast.show();
 	        	
 	        	// move to startup page
@@ -63,12 +70,7 @@ public class ChangeLoc extends Activity {
             }
           });
         
-        FoursquareWrapper f = new FoursquareWrapper();
-        //ArrayList<Place> places = f.getVenues(42.2916247554439, -71.26439720392227);
-        //places = f.getVenues(42.36057345238455, -71.09390258789062);
         
-        List<Place> locations =  f.getVenues(42.2916247554439, -71.26439720392227);
-        listview.setAdapter(new LocationAdapter(this, locations));
     }
     
     public void launchActivity()
