@@ -1,6 +1,10 @@
 package com.cube.jabbr;
 
-import com.cube.jabbr.location.MyLocationListener;
+import java.util.List;
+
+import com.cube.jabbr.listView.Thumbnail;
+import com.cube.jabbr.listView.ThumbnailAdapter;
+import com.cube.jabbr.listView.ThumbnailObtainer;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -12,7 +16,10 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class Startup extends Activity {
     /** Called when the activity is first created. */
@@ -33,6 +40,17 @@ public class Startup extends Activity {
         mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,onLocationChange);
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,onLocationChange);
+        
+        GridView gridview = (GridView) findViewById(R.id.currentCards);
+        List<Thumbnail> thumbnails = (new ThumbnailObtainer()).getThumbnails();
+        gridview.setAdapter(new ThumbnailAdapter(this, thumbnails));
+
+        gridview.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                Toast.makeText(Startup.this, "" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
 		
 	}
     
@@ -86,11 +104,6 @@ public class Startup extends Activity {
     public void newCard(View view){
     	Intent intent = new Intent().setClass(this, NewCard.class);
     	startActivity(intent);
-    }
-    
-    public void changeDeck(View view){
-    	Intent intent = new Intent().setClass(this, ChangeDeck.class);
-    	startActivityForResult(intent, 0);
     }
     
     public void profile(View view){

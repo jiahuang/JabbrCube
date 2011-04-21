@@ -1,13 +1,9 @@
 package com.cube.jabbr;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.cube.jabbr.listView.Deck;
-import com.cube.jabbr.listView.DeckAdapter;
 import com.cube.jabbr.listView.FoursquareWrapper;
 import com.cube.jabbr.listView.LocationAdapter;
-import com.cube.jabbr.listView.LocationView;
 import com.cube.jabbr.listView.Place;
 
 import android.app.Activity;

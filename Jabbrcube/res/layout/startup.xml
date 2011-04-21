@@ -5,7 +5,36 @@
     android:background="@android:color/white"
     android:stretchColumns="1">
 	<TableRow>
-		<Button android:text="Learn Words"
+		<TextView android:text="" 
+			android:id="@+id/name" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content">
+		</TextView>
+	</TableRow>
+	<TableRow>
+		<TextView android:text="Currently at " 
+			android:id="@+id/location" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content">
+		</TextView>
+		<Button android:text="Change Location"
+			android:id="@+id/changeLocation" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content"
+			android:onClick="changeLoc">
+		</Button>
+	
+</TableRow>
+	<TableRow>
+			
+			<GridView android:id="@+id/currentCards"
+				 android:layout_width="100px" 
+				 android:layout_height="100px"></GridView>
+	
+	</TableRow>	
+	
+	<TableRow>
+		<Button android:text="Test"
 			android:id="@+id/camera" 
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content"
@@ -18,32 +47,7 @@
 			android:onClick="newCard">
 		</Button>
 
+	
 	</TableRow>
 	
-	<TableRow>
-		<Button android:text="Change Flash Cards"
-			android:id="@+id/changeDeck" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"
-			android:onClick="changeDeck">
-		</Button>
-		<Button android:text="Profile"
-			android:id="@+id/profile" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"
-			android:onClick="profile">
-		</Button>
-
-	</TableRow>
-	
-	<TableRow>
-		<Button android:text="Change Location"
-			android:id="@+id/changeLocation" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"
-			android:onClick="changeLoc">
-		</Button>
-
-	</TableRow>
-		
 </TableLayout>
