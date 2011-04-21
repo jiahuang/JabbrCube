@@ -7,11 +7,15 @@ import android.util.Log;
 
 public class FlashCard {
 	Drawable drawable;
-	String title;
-	String[] choices, translatedChoices;
-	int correctChoice;
-	int flashcardID;
+	String title = "word title:"+Math.floor(Math.random()*1000);
+	String[] choices= {"choice","choice2","choice3","choice4"}, 
+		translatedChoices ={"translated choice1","translated choice2","translated choice3","translated choice4"};
+	int correctChoice = 3;
+	int flashcardID = -1;
 	int userGotCorrect = 0;
+	
+	public FlashCard() {
+	}
 	
 	public FlashCard(Drawable drawable, String title, String[] choices, String[] translatedChoices,
 			int correctChoice, int flashcardID) {

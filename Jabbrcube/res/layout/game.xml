@@ -9,9 +9,9 @@
 		<TextView android:gravity="center" android:background="#6600FF00"
 	android:layout_width="wrap_content" 
 	android:layout_marginTop="20dip" android:layout_height="wrap_content"
-	android:id="@+id/Timer" android:text="10" android:textColor="#ffffffff"
+	android:id="@+id/Timer" android:text='Time:\n30' android:textColor="#ffffffff"
 	android:layout_gravity="left|center_vertical"
-	android:layout_marginRight="-60dip"
+	android:layout_marginRight="-23dip"
 	android:layout_marginBottom="20dip" android:textSize="20dp" android:layout_weight="0" android:minLines ="2"></TextView>
 		
 	<TextView android:gravity="center" android:background="#AA000000"
@@ -24,7 +24,7 @@
 	<TextView android:gravity="center" android:background="#6600FF00"
 	android:layout_width="fill_parent" 
 	android:layout_marginTop="20dip" android:layout_height="wrap_content"
-	android:id="@+id/CardsLeft" android:text="10" android:textColor="#ffffffff"
+	android:id="@+id/CardsLeft" android:text="Cards:\n10" android:textColor="#ffffffff"
 	android:layout_marginBottom="20dip" android:textSize="20dp" android:layout_weight="0" android:minLines ="2"></TextView>
 
 </TableRow>
