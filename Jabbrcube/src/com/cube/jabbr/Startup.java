@@ -1,6 +1,10 @@
 package com.cube.jabbr;
 
-import com.cube.jabbr.location.MyLocationListener;
+import java.util.List;
+
+import com.cube.jabbr.listView.Thumbnail;
+import com.cube.jabbr.listView.ThumbnailAdapter;
+import com.cube.jabbr.listView.ThumbnailObtainer;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -12,7 +16,11 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class Startup extends Activity {
     /** Called when the activity is first created. */
@@ -20,19 +28,42 @@ public class Startup extends Activity {
 	ProgressDialog mDialog = null;
 	float lon = 0;
 	float lat = 0;
+	boolean dialog = false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.startup);
         
-        mDialog = new ProgressDialog(Startup.this);
-        mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mDialog.setMessage("Aquiring Location. Please wait...");
-        mDialog.show();
+        TextView tv_location = (TextView) findViewById(R.id.location);
+        
+        SharedPreferences sharedPreferences = getSharedPreferences("jabbr_prefs", MODE_PRIVATE);
+        lon = sharedPreferences.getFloat("latitude", 0);
+        lat = sharedPreferences.getFloat("longitude", 0);
+        String placeId = sharedPreferences.getString("placeId", "");
+        tv_location.setText(sharedPreferences.getString("placeName", "Could not acquire location"));
+        if (lon == 0 && lat == 0 && placeId == ""){
+        	dialog = true;
+        	System.out.println("displaying... id:"+placeId + " lon:"+lon + " lat:"+lat);
+	        mDialog = new ProgressDialog(Startup.this);
+	        mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+	        mDialog.setMessage("Aquiring Location. Please wait...");
+	        mDialog.show();
+        }
 
         mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,onLocationChange);
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,onLocationChange);
+        
+        /*GridView gridview = (GridView) findViewById(R.id.currentCards);
+        List<Thumbnail> thumbnails = (new ThumbnailObtainer()).getThumbnails();
+        gridview.setAdapter(new ThumbnailAdapter(this, thumbnails));
+
+        gridview.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                Toast.makeText(Startup.this, "" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+		*/
 		
 	}
     
@@ -52,15 +83,19 @@ public class Startup extends Activity {
 
 		@Override
 		public void onLocationChanged(Location location) {
-			 SharedPreferences sharedPreferences = getSharedPreferences("jabbr_prefs", MODE_PRIVATE);
-		    	SharedPreferences.Editor editor = sharedPreferences.edit();
-		    	editor.putFloat("latitude", (float)location.getLatitude());
-		        editor.putFloat("longitude", (float)location.getLongitude());
-		        editor.commit();
-		        lat = sharedPreferences.getFloat("latitude", (float) 0.0);
-		        lon = sharedPreferences.getFloat("longitude",(float) 0.0);
-		        System.out.println("location changed to:"+ location.getLatitude()+ " "+location.getLongitude());
-		        mDialog.dismiss();
+			SharedPreferences sharedPreferences = getSharedPreferences("jabbr_prefs", MODE_PRIVATE);
+	    	SharedPreferences.Editor editor = sharedPreferences.edit();
+	    	editor.putFloat("latitude", (float)location.getLatitude());
+	        editor.putFloat("longitude", (float)location.getLongitude());
+	        editor.commit();
+	        lat = sharedPreferences.getFloat("latitude", (float) 0.0);
+	        lon = sharedPreferences.getFloat("longitude",(float) 0.0);
+	        System.out.println("location changed to:"+ location.getLatitude()+ " "+location.getLongitude());
+	        if (dialog) {
+	        	mDialog.dismiss();
+	        	changeLoc();
+	        }
+	        
 		}
     };
 
@@ -88,19 +123,18 @@ public class Startup extends Activity {
     	startActivity(intent);
     }
     
-    public void changeDeck(View view){
-    	Intent intent = new Intent().setClass(this, ChangeDeck.class);
-    	startActivityForResult(intent, 0);
-    }
-    
     public void profile(View view){
     	Intent intent = new Intent().setClass(this, Personal.class);
     	startActivity(intent);
     }
     
-    public void changeLoc(View view){
+    public void changeLoc(){
     	Intent intent = new Intent().setClass(this, ChangeLoc.class);
     	startActivityForResult(intent, 0);
-    	
+    }
+    
+    public void changeLoc(View view){
+    	changeLoc();
+    	System.out.println("change location popup");
     }
 }
