@@ -1,53 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@android:color/white"
-    android:stretchColumns="1">
-	<TableRow>
-		<TextView android:text="" 
-			android:id="@+id/name" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content">
-		</TextView>
-	</TableRow>
-	<TableRow>
-		<TextView android:text="Currently at " 
-			android:id="@+id/location" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content">
-		</TextView>
-		<Button android:text="Change Location"
-			android:id="@+id/changeLocation" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"
-			android:onClick="changeLoc">
-		</Button>
-	
-</TableRow>
-	<TableRow>
-			
-			<GridView android:id="@+id/currentCards"
-				 android:layout_width="100px" 
-				 android:layout_height="100px"></GridView>
-	
-	</TableRow>	
-	
-	<TableRow>
-		<Button android:text="Test"
-			android:id="@+id/camera" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"
-			android:onClick="game">
-		</Button>
-		<Button android:text="Add Flash Cards"
-			android:id="@+id/camera" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"
-			android:onClick="newCard">
-		</Button>
+    android:background="@android:color/white">
+	<TextView android:text="" 
+		android:id="@+id/name" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content"
+		android:textSize="20px"
+		android:textStyle="bold"
+		android:layout_marginLeft="5dip"
+		android:layout_marginRight="5dip"
+	>
+	</TextView>
+	<LinearLayout
+	      android:orientation="horizontal"
+	      android:layout_width="wrap_content"
+	      android:layout_height="fill_parent"
+	      android:layout_weight="1"
+	      android:id="@+id/locationLayout"
+	      android:layout_below="@+id/name"
+	      android:layout_marginLeft="5dip"
+	      android:layout_marginRight="5dip">
+	      <TextView android:text="Currently at " 
+		      	android:textSize="16px"
+				android:textStyle="bold"
+				android:id="@+id/text" 
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content">
+			</TextView>
+			<TextView android:text="" 
+				android:textSize="16px"
+				android:textStyle="bold"
+				android:id="@+id/location" 
+				android:layout_width="fill_parent"
+				android:textColor="#0F92D6"
+				android:clickable="true"
+				android:onClick="changeLoc" 
+				android:layout_height="wrap_content">
+			</TextView>
+		</LinearLayout>
+		<GridView android:id="@+id/currentCards"
+		android:layout_below="@+id/locationLayout"
+					 android:layout_width="fill_parent" 
+					 android:layout_height="fill_parent"
+					 ></GridView>
+		<LinearLayout
+		      android:orientation="horizontal"
+		      android:layout_width="fill_parent"
+		      android:layout_height="wrap_content"
+		      android:layout_weight="1"
+		      android:layout_alignParentBottom="true"
+		      
+		      >
+			<Button android:text="Test Your Knowledge!"
+				android:id="@+id/camera" 
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content"
+				android:onClick="game"
+				android:layout_weight="1">
+			</Button>
+			<Button android:text="Add Flash Cards"
+				android:id="@+id/camera" 
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content"
+				android:onClick="newCard"
+				android:layout_weight="1">
+			</Button>
 
-	
-	</TableRow>
-	
-</TableLayout>
+		</LinearLayout>		 
+</RelativeLayout>

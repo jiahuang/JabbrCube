@@ -74,77 +74,50 @@ public class NewCard extends Activity {
         et_Original = (EditText) findViewById(R.id.translate);
         ib_Camera = (ImageButton) findViewById(R.id.Camera);
         iv_Image = (ImageView) findViewById(R.id.image);
-        et_Original.addTextChangedListener(new TextWatcher() {
-            
-            @Override
-			public void afterTextChanged(Editable s) {
-            	textChanged = true;
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-				
-			}
-        });
         
-        et_Original.setOnFocusChangeListener(new View.OnFocusChangeListener()
-    	{ 
-    		@Override
-    	   public void onFocusChange(View v, boolean gainedfocus)
-    	   {
-    			if (gainedfocus == false && textChanged == true){
-    				textChanged = false;
-    			new Thread(new Runnable() {
-    				public void run(){
-    		    		try{
-    		    			//textUI.start();
-    		    			Message msg =  Message.obtain();
-    		    			Bundle bundle = new Bundle();
+    }
+    
+    // TODO: override on switch from vertical to horizontal
+    
+    public void translateWord(View view){
+    	new Thread(new Runnable() {
+			public void run(){
+	    		try{
+	    			Message msg =  Message.obtain();
+	    			Bundle bundle = new Bundle();
 
-    		    			bundle.putString("Text", "Translating...");
-    		    			msg.setData(bundle);
-    		    			translationHandler.sendMessage(msg);
-    		    			
-    		    			DefaultHttpClient client = new DefaultHttpClient();
-    				    	
-    			        	HttpPost post=new HttpPost("http://jabbrcube.heroku.com/api/words");
-    			        	post.addHeader(BasicScheme.authenticate(
-    			        			 new UsernamePasswordCredentials("poorva", "password"),
-    			        			 "UTF-8", false));
+	    			bundle.putString("Text", "Translating...");
+	    			msg.setData(bundle);
+	    			translationHandler.sendMessage(msg);
+	    			
+	    			DefaultHttpClient client = new DefaultHttpClient();
+			    	
+		        	HttpPost post=new HttpPost("http://jabbrcube.heroku.com/api/words");
+		        	post.addHeader(BasicScheme.authenticate(
+		        			 new UsernamePasswordCredentials("poorva", "password"),
+		        			 "UTF-8", false));
 
-    			        	List<NameValuePair> form=new ArrayList<NameValuePair>();
-    			        	form.add(new BasicNameValuePair("word[word]", et_Original.getText().toString()));
-    			        	
-    			        	post.setEntity(new UrlEncodedFormEntity(form, HTTP.UTF_8));
-    			        	ResponseHandler<String> responseHandler=new BasicResponseHandler();
-    			        	
-    			        	String responseBody=client.execute(post, responseHandler);
-    			        	JSONObject word = new JSONObject(responseBody);
-    			        	String translated_word = word.getString("translation");
-    			        	
-    			        	Message msg_translated =  Message.obtain();
-    			        	bundle.putString("Text", translated_word);
-    			        	msg_translated.setData(bundle);
-    		    			translationHandler.sendMessage(msg_translated);
-    		    			
-    		    		}
-    		    		catch(Exception t){
-    		    			System.out.println(t.toString());
-    		    		}
-    		    	}
-    			  }).start();
-    			}
-    	   }
-    	});
+		        	List<NameValuePair> form=new ArrayList<NameValuePair>();
+		        	form.add(new BasicNameValuePair("word[word]", et_Original.getText().toString()));
+		        	
+		        	post.setEntity(new UrlEncodedFormEntity(form, HTTP.UTF_8));
+		        	ResponseHandler<String> responseHandler=new BasicResponseHandler();
+		        	
+		        	String responseBody=client.execute(post, responseHandler);
+		        	JSONObject word = new JSONObject(responseBody);
+		        	String translated_word = word.getString("translation");
+		        	
+		        	Message msg_translated =  Message.obtain();
+		        	bundle.putString("Text", translated_word);
+		        	msg_translated.setData(bundle);
+	    			translationHandler.sendMessage(msg_translated);
+	    			
+	    		}
+	    		catch(Exception t){
+	    			System.out.println(t.toString());
+	    		}
+	    	}
+		  }).start();
     }
     
     Handler translationHandler=new Handler() {

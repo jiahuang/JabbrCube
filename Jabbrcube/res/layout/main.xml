@@ -9,7 +9,7 @@
 	android:layout_width="wrap_content" 
 	android:layout_height="wrap_content"
 	android:src="@drawable/logo_100"></ImageView>
-<TextView android:text="Username" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+<TextView android:text="Username" android:textColor="#7A0000" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 <EditText android:text="" 
 	android:id="@+id/username" 
 	android:width="300px"
@@ -17,7 +17,7 @@
 	android:layout_gravity="center_horizontal|bottom"
 	android:layout_height="wrap_content">
 </EditText>
-<TextView android:text="Password" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+<TextView android:text="Password" android:textColor="#7A0000" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 <EditText android:text="" 
 	android:id="@+id/password" 
 	android:width="300px"

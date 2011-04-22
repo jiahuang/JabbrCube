@@ -16,7 +16,7 @@
         <activity android:name=".Startup" android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".Personal" android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".ViewCard" android:theme="@android:style/Theme.NoTitleBar"/>
-        <activity android:name=".ChangeLoc" android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".ChangeLoc" android:theme="@android:style/Theme.Dialog" android:label="Select your location"/>
 		<uses-feature android:name="android.hardware.camera"></uses-feature>>
     </application>
     <uses-sdk android:minSdkVersion="3" />

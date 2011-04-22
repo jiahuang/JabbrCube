@@ -3,20 +3,39 @@
 	android:id="@+id/buttonLayout" android:layout_width="fill_parent"
 	android:layout_height="fill_parent" android:background="@drawable/icon"
 	android:gravity="fill_horizontal">
-	<TextView android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:layout_marginBottom="20dip"
-		android:paddingTop="12dip" android:background="#AA000000"
-		android:textColor="#ffffffff" android:textSize="20dp" android:text="Golden Gate"
-		android:gravity="center" android:layout_gravity="center_horizontal|top"
-		android:id="@+id/Title" />
+	<TableRow android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:background="#66005500">
+		
+		<TextView android:gravity="center" android:background="#6600FF00"
+	android:layout_width="wrap_content" 
+	android:layout_marginTop="20dip" android:layout_height="wrap_content"
+	android:id="@+id/Timer" android:text="10" android:textColor="#ffffffff"
+	android:layout_gravity="left|center_vertical"
+	android:layout_marginRight="-60dip"
+	android:layout_marginBottom="20dip" android:textSize="20dp" android:layout_weight="0" android:minLines ="2"></TextView>
+		
+	<TextView android:gravity="center" android:background="#AA000000"
+	android:layout_width="wrap_content" 
+	android:layout_gravity="center|center_vertical"
+	android:layout_marginTop="20dip" android:layout_height="wrap_content"
+	android:id="@+id/Title" android:text="Word Title" android:textColor="#ffffffff"
+	android:layout_marginBottom="20dip" android:textSize="20dp" android:layout_weight="1"></TextView>
+	
+	<TextView android:gravity="center" android:background="#6600FF00"
+	android:layout_width="fill_parent" 
+	android:layout_marginTop="20dip" android:layout_height="wrap_content"
+	android:id="@+id/CardsLeft" android:text="10" android:textColor="#ffffffff"
+	android:layout_marginBottom="20dip" android:textSize="20dp" android:layout_weight="0" android:minLines ="2"></TextView>
+
+</TableRow>
 	<Button android:layout_weight="10" android:layout_height="wrap_content"
 		android:layout_marginBottom="20dip" android:paddingTop="12dip"
 		android:background="#AA000000" android:textColor="#ffffffff"
 		android:textSize="20dp" android:text="Golden Gate"
 		android:layout_gravity="center_horizontal|top" android:id="@+id/Popup"
 		android:layout_width="match_parent" android:visibility="invisible"
-		android:onClick="onPopupClicked" android:gravity="center|center_horizontal" 
-		android:singleLine="false"/>
+		android:onClick="onPopupClicked" android:gravity="center|center_horizontal"
+		android:singleLine="false" />
 	<TableRow>
 		<Button android:text="@string/choice1" android:id="@+id/Button0"
 			android:layout_width="wrap_content" android:background="@null"
@@ -49,5 +68,6 @@
 			android:fadingEdge="vertical|horizontal" android:padding="5dip"
 			android:layout_weight="1" android:onClick="onChoiceClicked" />
 	</TableRow>
+
 
 </TableLayout>

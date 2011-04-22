@@ -55,7 +55,8 @@ public class ChangeLoc extends Activity {
 	    		SharedPreferences sharedPreferences = getSharedPreferences("jabbr_prefs", MODE_PRIVATE);
 	    		
 	    		SharedPreferences.Editor editor = sharedPreferences.edit();
-	            editor.putString("place_id", contextId);
+	            editor.putString("placeId", contextId);
+	            editor.putString("placeName", item.name);
 	            editor.putFloat("latitude", (float) item.lat);
 	            editor.putFloat("longitude", (float) item.lon);
 	            editor.commit();

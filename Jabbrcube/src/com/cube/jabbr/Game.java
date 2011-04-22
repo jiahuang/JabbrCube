@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
@@ -25,6 +24,7 @@ import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,12 +38,14 @@ public class Game extends Activity {
 	Button popup;
 	int correctChoice = 3;
 	
-	int correctPicks = 0;
+	int correctPicks = 0, numFlashcardsLeft = 0;
 	boolean wrong = false;
 	
 	int currentFlashcardIndex = 0;
 	FlashCard[] flashcards;
 	boolean questionCorrect = false;
+	
+	TextView timerText, cardsText;
 
 	Vibrator vibrator;
 	@Override
@@ -59,8 +61,9 @@ public class Game extends Activity {
 		title = (TextView) findViewById(R.id.Title);
 		popup = (Button) findViewById(R.id.Popup);
 		vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-		initializeGame();
-		
+		timerText = (TextView) findViewById(R.id.Timer);
+		cardsText = (TextView) findViewById(R.id.CardsLeft);
+ 		initializeGame();
 	}
 
 	public void initializeGame() {
@@ -77,7 +80,7 @@ public class Game extends Activity {
 			
 			loadCurrentFlashCard();
 			} catch (Exception e) {
-				Log.e("jabbr", e.toString());
+				Log.e("jabbr", "load current flashcard error:"+e.toString());
 			}
 		
 	}
@@ -87,15 +90,18 @@ public class Game extends Activity {
 		BufferedReader in = null;
 		try {
 			/*HttpClient client = new DefaultHttpClient();
-			HttpGet get = new HttpGet("http://jabbrcube.heroku.com/api/getdeck");
-			//request.setURI(new URI("url here"));
+			HttpGet get = new HttpGet("http://jabbrcube.heroku.com/api/getdeck/1");
+			//request.setURI(new URI("url here"));} catch (Exception e) {
+//			Log.e("ErROR", "Problem loading deck:" + e.toString());
+//			return false;
+//		}
 			ResponseHandler<String> responseHandler = new BasicResponseHandler();
 			String response = client.execute(get, responseHandler);*/
 			
 			HttpClient httpClient = new DefaultHttpClient();
-			HttpGet httpGet = new HttpGet("http://jabbrcube.heroku.com/api/getdeck");
+			HttpGet httpGet = new HttpGet("http://jabbrcube.heroku.com/api/getdeck/1");
 			httpGet.addHeader(BasicScheme.authenticate(
-			 new UsernamePasswordCredentials("boo", "booboo"),
+			 new UsernamePasswordCredentials("jialiya", "password"),
 			 "UTF-8", false));
 			ResponseHandler<String> responseHandler = new BasicResponseHandler();
 			String response = httpClient.execute(httpGet, responseHandler);
@@ -138,29 +144,52 @@ public class Game extends Activity {
 			this.flashcards = new FlashCard[flashcards.length()];
 			for( int i = 0; i < flashcards.length(); i++) {
 				JSONObject flashcard = flashcards.getJSONObject(i);
+//				Log.i("jabbr", "got flashcard object");
 				String image_url = flashcard.getString("image_url");
+				//until the stuff goes to amazon s3, every link is broken. Get the last url
+				image_url = image_url.substring(image_url.lastIndexOf("http"));
+				Log.i("jabbr", "got flashcard image_url:"+image_url);
 				String title = flashcard.getString("word");
+				Log.i("jabbr", "got flashcard word: "+title);
 				int flashcardID = flashcard.getInt("flashcard_id");
+				Log.i("jabbr", "got flashcard id:"+flashcardID);
 				String[] choices = new String[4];
+				String[] translatedChoices = new String[4];
 				for ( int si = 0; si < 3 ; si++) {
 					choices[si] = flashcard.getString("wrong"+(si+1));
+					translatedChoices[si] = flashcard.getString("wrong"+(si+1)+"_native");
+					Log.i("jabbr", "got flashcard wrong"+(si+1)+":"+choices[si]);
 				}
 				choices[3] = flashcard.getString("answer");
+				Log.i("jabbr", "got flashcard answer");
 				if (choices[3] == null)
 					choices[3] = "THE ANSWER";
 				int correctChoice = 3;
+				Log.i("jabbr","now to load: "+image_url);
 				
-				Drawable drawable = loadDrawable(image_url);
-				FlashCard flashCardObject = new FlashCard(drawable, title, choices, choices,
+				Drawable drawable;
+				try {
+					drawable= loadDrawable(image_url);
+					Log.i("jabbr", "got flashcard drawable by loading:"+image_url);
+				} catch (Exception e) {
+					//drawable = getResources().getDrawable(R.drawable.no_image);
+					drawable = loadDrawable("http://catsinsinks.com/images/cats/rotator.php");
+					Log.i("jabbr", "CATS!!!! IN F*CKING SINKS Y'ALL.");
+				}
+				FlashCard flashCardObject = new FlashCard(drawable, title, choices, translatedChoices,
 						correctChoice, flashcardID);
 				flashCardObject.randomizeChoices();
 				this.flashcards[i] = flashCardObject;
+				Log.i("jabbr", "Got card #"+i);
 			}
+			numFlashcardsLeft = flashcards.length();
+			updateCardText();
 
 		} catch (Exception e) {
-			Log.e("ErROR", "Problem loading deck:" + e.toString());
+			Log.e("jabbr", "Problem loading deck:" + e.toString());
 			return false;
 		}
+		
 
 		return true;
 	}
@@ -178,7 +207,7 @@ public class Game extends Activity {
 			e.printStackTrace();
 		}
 		Drawable drawable = Drawable.createFromStream(inputStream, "src");
-		Toast.makeText(this.getApplicationContext(), ""+url.toString(), Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this.getApplicationContext(), "url:"+url.toString(), Toast.LENGTH_SHORT).show();
 		//tableLayout.setBackgroundDrawable(drawable);
 		return drawable;
 	}
@@ -186,15 +215,18 @@ public class Game extends Activity {
 	public void loadCurrentFlashCard() {
 		this.wrong = false;
 		Log.i("jabbr", ""+this.currentFlashcardIndex +"/"+ this.flashcards.length);
-		Toast.makeText(this.getApplicationContext(), "BOOBOBOOBBO", Toast.LENGTH_LONG);
+		//Toast.makeText(this.getApplicationContext(), "loading current flash:"+this.currentFlashcardIndex, Toast.LENGTH_SHORT).show();
 		FlashCard flashcard = this.flashcards[this.currentFlashcardIndex];
 		if (flashcard != null){
 			tableLayout.setBackgroundDrawable(flashcard.drawable);
 			for (int i = 0; i < 4; i++) {
 				choices[i].setText(flashcard.choices[i]);
+				Log.i("jabbr", "setting text for choice "+i+" to "+flashcard.choices[i]);
 			}
+			
 			title.setText(flashcard.title);
 			this.correctChoice = flashcard.correctChoice;
+			Log.i("jabbr", "setting correct choice to " + flashcard.correctChoice);
 			popup.setVisibility(View.INVISIBLE);
 		}
 		else
@@ -213,12 +245,14 @@ public class Game extends Activity {
 	public void onChoiceClicked(View view) {
 		Button button = (Button) view;
 		this.questionCorrect = (choices[correctChoice] == button);
+		
 		if (this.questionCorrect) {
 			if (!this.wrong){
 				flashcards[currentFlashcardIndex].setCorrect();
 				correctPicks++;
 			}
-				
+			numFlashcardsLeft--;
+			updateCardText();
 			view.performHapticFeedback( HapticFeedbackConstants.VIRTUAL_KEY,
 					HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING );
 
@@ -265,7 +299,11 @@ public class Game extends Activity {
 		}
 		else if (this.questionCorrect && this.currentFlashcardIndex >= (this.flashcards.length-1)){
 			Toast.makeText(this.getApplicationContext(), "Picked "+correctPicks+" right on first try", Toast.LENGTH_SHORT).show();
+		//TODO: go to stat page
 		}
 
+	}
+	public void updateCardText() {
+		cardsText.setText("Cards Left:\n"+numFlashcardsLeft);
 	}
 }

@@ -53,7 +53,7 @@ import android.widget.TextView;
                // Creates a ViewHolder and store references to the two children views
                // we want to bind data to.
                holder = new ViewHolder();
-               holder.text = (TextView)convertView.findViewById(R.id.address);
+               holder.text = (TextView)convertView.findViewById(R.id.context);
                //holder.icon = (ImageView) convertView.findViewById(R.id.icon);
                convertView.setTag(holder);
 	           
