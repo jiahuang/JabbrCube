@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@android:color/white">
-	<TextView android:text="" 
+	 <TextView android:text="" 
 		android:id="@+id/name" 
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content"
@@ -13,10 +13,11 @@
 		android:layout_marginRight="5dip"
 	>
 	</TextView>
+	
 	<LinearLayout
 	      android:orientation="horizontal"
 	      android:layout_width="wrap_content"
-	      android:layout_height="fill_parent"
+	      android:layout_height="wrap_content"
 	      android:layout_weight="1"
 	      android:id="@+id/locationLayout"
 	      android:layout_below="@+id/name"
@@ -40,11 +41,20 @@
 				android:layout_height="wrap_content">
 			</TextView>
 		</LinearLayout>
-		<GridView android:id="@+id/currentCards"
-		android:layout_below="@+id/locationLayout"
-					 android:layout_width="fill_parent" 
-					 android:layout_height="fill_parent"
-					 ></GridView>
+		 			 
+		<GridView xmlns:android="http://schemas.android.com/apk/res/android" 
+		    android:id="@+id/currentCards"
+			android:layout_below="@+id/locationLayout"
+		    android:layout_width="fill_parent" 
+		    android:layout_height="fill_parent"
+		    android:columnWidth="90dp"
+		    android:numColumns="auto_fit"
+		    android:verticalSpacing="10dp"
+		    android:horizontalSpacing="10dp"
+		    android:stretchMode="columnWidth"
+		    android:gravity="center"
+		/>	
+				 
 		<LinearLayout
 		      android:orientation="horizontal"
 		      android:layout_width="fill_parent"
@@ -68,5 +78,6 @@
 				android:layout_weight="1">
 			</Button>
 
-		</LinearLayout>		 
+		</LinearLayout>
+				 
 </RelativeLayout>

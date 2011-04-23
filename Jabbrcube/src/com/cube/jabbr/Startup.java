@@ -54,7 +54,7 @@ public class Startup extends Activity {
         mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,onLocationChange);
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,onLocationChange);
         
-        /*GridView gridview = (GridView) findViewById(R.id.currentCards);
+        GridView gridview = (GridView) findViewById(R.id.currentCards);
         List<Thumbnail> thumbnails = (new ThumbnailObtainer()).getThumbnails();
         gridview.setAdapter(new ThumbnailAdapter(this, thumbnails));
 
@@ -63,7 +63,7 @@ public class Startup extends Activity {
                 Toast.makeText(Startup.this, "" + position, Toast.LENGTH_SHORT).show();
             }
         });
-		*/
+		
 		
 	}
     
