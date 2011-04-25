@@ -28,6 +28,7 @@ public final class R {
         public static final int Timer=0x7f060003;
         public static final int Title=0x7f060004;
         public static final int addCard=0x7f060017;
+        public static final int background=0x7f06001e;
         public static final int buttonLayout=0x7f060002;
         public static final int camera=0x7f06001d;
         public static final int context=0x7f06000c;

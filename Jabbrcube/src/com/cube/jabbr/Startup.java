@@ -2,6 +2,7 @@ package com.cube.jabbr;
 
 import java.util.List;
 
+import com.cube.jabbr.listView.Place;
 import com.cube.jabbr.listView.Thumbnail;
 import com.cube.jabbr.listView.ThumbnailAdapter;
 import com.cube.jabbr.listView.ThumbnailObtainer;
@@ -54,16 +55,24 @@ public class Startup extends Activity {
         mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,onLocationChange);
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,onLocationChange);
         
-        /*GridView gridview = (GridView) findViewById(R.id.currentCards);
+        final GridView gridview = (GridView) findViewById(R.id.currentCards);
         List<Thumbnail> thumbnails = (new ThumbnailObtainer()).getThumbnails();
         gridview.setAdapter(new ThumbnailAdapter(this, thumbnails));
 
         gridview.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Toast.makeText(Startup.this, "" + position, Toast.LENGTH_SHORT).show();
+                // pass bundle
+                Thumbnail item = (Thumbnail)gridview.getItemAtPosition(position);
+                Intent myIntent = new Intent(Startup.this, ViewCard.class);
+                // TODO: swap this out with real image url
+        		myIntent.putExtra("image_url", "http://imagemacros.files.wordpress.com/2009/06/dunnololdog.jpg");
+        		myIntent.putExtra("word", item.word);
+        		myIntent.putExtra("foreign", item.foreign);
+                startActivityForResult(myIntent, 0);
             }
         });
-		*/
+		
 		
 	}
     
