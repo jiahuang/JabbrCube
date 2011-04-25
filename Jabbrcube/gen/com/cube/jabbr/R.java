@@ -15,6 +15,7 @@ public final class R {
         public static final int icon=0x7f020001;
         public static final int loadinfo=0x7f020002;
         public static final int logo_100=0x7f020003;
+        public static final int no_image=0x7f020004;
     }
     public static final class id {
         public static final int Button0=0x7f060007;
@@ -24,7 +25,6 @@ public final class R {
         public static final int Camera=0x7f060016;
         public static final int CardsLeft=0x7f060005;
         public static final int Popup=0x7f060006;
-        public static final int TableLayout01=0x7f06001e;
         public static final int Timer=0x7f060003;
         public static final int Title=0x7f060004;
         public static final int addCard=0x7f060017;
@@ -32,9 +32,8 @@ public final class R {
         public static final int camera=0x7f06001d;
         public static final int context=0x7f06000c;
         public static final int currentCards=0x7f06001c;
-        public static final int foreign=0x7f060020;
-        public static final int icon=0x7f060021;
-        public static final int icontext=0x7f060022;
+        public static final int icon=0x7f06001e;
+        public static final int icontext=0x7f06001f;
         public static final int image=0x7f06000d;
         public static final int list=0x7f060001;
         public static final int location=0x7f06001b;
@@ -51,7 +50,6 @@ public final class R {
         public static final int translationLayout=0x7f060014;
         public static final int username=0x7f06000e;
         public static final int widget32=0x7f06000b;
-        public static final int word=0x7f06001f;
     }
     public static final class layout {
         public static final int changeloc=0x7f030000;
@@ -62,7 +60,6 @@ public final class R {
         public static final int personal=0x7f030005;
         public static final int startup=0x7f030006;
         public static final int tabs=0x7f030007;
-        public static final int viewcard=0x7f030008;
     }
     public static final class menu {
         public static final int menu=0x7f050000;
