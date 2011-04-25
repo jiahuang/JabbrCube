@@ -11,7 +11,7 @@ public class FlashCard {
 	String[] choices= {"choice","choice2","choice3","choice4"}, 
 		translatedChoices ={"translated choice1","translated choice2","translated choice3","translated choice4"};
 	int correctChoice = 3;
-	int flashcardID = -1;
+	int flashcardID = 1;
 	int userGotCorrect = 0;
 	
 	public FlashCard() {

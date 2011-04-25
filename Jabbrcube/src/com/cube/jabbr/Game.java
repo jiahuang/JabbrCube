@@ -4,14 +4,22 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.http.NameValuePair;
 import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -20,6 +28,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.os.SystemClock;
 import android.os.Vibrator;
 import android.util.Log;
@@ -249,7 +258,7 @@ public class Game extends Activity {
 			Toast.makeText(getApplicationContext(), "Uh oh. we didn't load the flashcards.", Toast.LENGTH_SHORT).show();
 			flashcard = new FlashCard();
 			flashcard.drawable = getResources().getDrawable(R.drawable.no_image);
-		} else {
+		} else {http://jabbrcube.heroku.com/api/results
 		Log.i("jabbr", ""+this.currentFlashcardIndex +"/"+ this.flashcards.length);
 		//Toast.makeText(this.getApplicationContext(), "loading current flash:"+this.currentFlashcardIndex, Toast.LENGTH_SHORT).show();
 		flashcard = this.flashcards[this.currentFlashcardIndex];
@@ -345,7 +354,7 @@ public class Game extends Activity {
 		}
 		else {
 			Toast.makeText(this.getApplicationContext(), "Picked "+correctPicks+" right on first try", Toast.LENGTH_SHORT).show();
-			//TODO: go to stat page
+			gameOver();
 		}
 
 	}
@@ -353,14 +362,56 @@ public class Game extends Activity {
 		cardsText.setText("Cards:\n"+numFlashcardsLeft);
 	}
 	public void gameOver() {
-		
+		postResults();
+		//TODO: go to stat page
 	}
 	
+	//Send results to website
+	public void postResults() {
+    	new Thread(new Runnable() {
+			public void run(){
+				String urlstring = "http://jabbrcube.heroku.com/api/results";
+				HttpClient httpClient = new DefaultHttpClient();
+				
+				List<NameValuePair> form=new ArrayList<NameValuePair>();
+				for (int i =0; i< flashcards.length; i++) {
+					HttpPost httpPost = new HttpPost(urlstring);
+					httpPost.addHeader(BasicScheme.authenticate(
+							new UsernamePasswordCredentials(getUser(), getPassword()),
+							"UTF-8", false));
+					form.add(new BasicNameValuePair("result[flashcard_id]", ""+flashcards[i].flashcardID));
+					form.add(new BasicNameValuePair("result[right]", ""+flashcards[i].userGotCorrect));
+					try {
+						httpPost.setEntity(new UrlEncodedFormEntity(form, HTTP.UTF_8));
+						httpClient.execute(httpPost);
+					} catch (ClientProtocolException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+	    			
+	    	}
+		  }).start();	
+	}
+	public String getUser() {
+		return "jialiya";
+	}
+	public String getPassword() {
+		return "password";
+	}
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 	    if (keyCode == KeyEvent.KEYCODE_BACK) {
 	        timerHandler.removeCallbacks(timerUpdateRunnable);
 	    }
 	    return super.onKeyDown(keyCode, event);
+	}
+	@Override
+	public void onPause() {
+		timerHandler.removeCallbacks(timerUpdateRunnable);
+		super.onPause();
 	}
 }
