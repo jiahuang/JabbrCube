@@ -56,9 +56,14 @@ public class Startup extends Activity {
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,onLocationChange);
         
         final GridView gridview = (GridView) findViewById(R.id.currentCards);
-        List<Thumbnail> thumbnails = (new ThumbnailObtainer()).getThumbnails();
+        ThumbnailObtainer tbo = new ThumbnailObtainer();
+        List<Thumbnail> thumbnails = tbo.getThumbnails();
         gridview.setAdapter(new ThumbnailAdapter(this, thumbnails));
-
+        final int numOfCards = tbo.numOfCards;
+        final String[] listOfWords = tbo.listOfWords;
+        final String[] listOfForeign = tbo.listOfForeign;
+        final String[] listOfImageUrls = tbo.listOfImageUrls;
+        
         gridview.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Toast.makeText(Startup.this, "" + position, Toast.LENGTH_SHORT).show();
@@ -66,9 +71,16 @@ public class Startup extends Activity {
                 Thumbnail item = (Thumbnail)gridview.getItemAtPosition(position);
                 Intent myIntent = new Intent(Startup.this, ViewCard.class);
                 // TODO: swap this out with real image url
-        		myIntent.putExtra("image_url", "http://imagemacros.files.wordpress.com/2009/06/dunnololdog.jpg");
-        		myIntent.putExtra("word", item.word);
-        		myIntent.putExtra("foreign", item.foreign);
+                myIntent.putExtra("pos_start", position);
+                myIntent.putExtra("num", numOfCards);
+                for(int i=0; i<numOfCards; i++){
+                	myIntent.putExtra("words"+i, listOfWords[i]);
+                	myIntent.putExtra("foreign"+i, listOfForeign[i]);
+                	myIntent.putExtra("image_urls"+i, listOfImageUrls[i]);
+                }
+                //myIntent.putExtra("image_url", "http://imagemacros.files.wordpress.com/2009/06/dunnololdog.jpg");
+        		//myIntent.putExtra("word", item.word);
+        		//myIntent.putExtra("foreign", item.foreign);
                 startActivityForResult(myIntent, 0);
             }
         });

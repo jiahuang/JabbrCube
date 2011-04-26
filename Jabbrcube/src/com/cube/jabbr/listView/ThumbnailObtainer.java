@@ -20,6 +20,11 @@ import android.util.Log;
 
 public class ThumbnailObtainer {
 	List<Thumbnail> thumbnails = new ArrayList<Thumbnail>();
+	public String[] listOfWords;
+	public String[] listOfForeign;
+	public String[] listOfImageUrls;
+	public int numOfCards = 0;
+	
 	public List<Thumbnail> getThumbnails(){
 		// TODO: call server, create thumbnail objects
 		HttpGet get = new HttpGet("http://jabbrcube.heroku.com/api/getthumbnails/1");
@@ -33,22 +38,29 @@ public class ThumbnailObtainer {
 			System.out.println(responseBody);
 			JSONObject jObject = new JSONObject(responseBody);
 			JSONArray items = jObject.getJSONArray("flashcards");
+			listOfWords = new String[items.length()+1];
+			listOfForeign = new String[items.length()+1];
+			listOfImageUrls = new String[items.length()+1];
 			//JSONArray items = ((JSONObject) groups.get(0)).getJSONArray("items");
 			for (int i = 0; i < items.length(); i++)
 			{
+				numOfCards++;
 				JSONObject item = items.getJSONObject(i);
 				String image_url = item.getString("image_url");
 				String word = item.getString("word");
 				String answer = item.getString("answer");
 				String flashcard_id = item.getString("flashcard_id");
-				//thumbnails.add(new Thumbnail(name, id, item_lat, item_lon, categories));
+				listOfWords[i] = word;
+				listOfForeign[i] = answer;
+				listOfImageUrls[i] = "http://www.nullamatix.com/images/I-dunno-lol.jpg"; //TODO: real image urls
+				
 				Drawable drawable;
 				try {
 					drawable= loadDrawable("http://www.nullamatix.com/images/I-dunno-lol.jpg");// TODO: replace with image_url
 					Log.i("jabbr", "got flashcard drawable by loading:"+image_url);
 				} catch (Exception e) {
 					//drawable = getResources().getDrawable(R.drawable.no_image);
-					drawable = loadDrawable("http://catsinsinks.com/images/cats/rotator.php");
+					drawable = loadDrawable("http://www.nullamatix.com/images/I-dunno-lol.jpg");
 					Log.i("jabbr", "CATS!!!! IN F*CKING SINKS Y'ALL.");
 				}
 				Thumbnail t = new Thumbnail(drawable, word, answer, flashcard_id);
