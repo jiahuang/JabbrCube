@@ -3,6 +3,8 @@ package com.cube.jabbr;
 import java.io.InputStream;
 import java.net.URL;
 
+import com.cube.jabbr.listView.AnimationUtils;
+
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -20,8 +22,8 @@ import android.widget.ViewFlipper;
 
 public class ViewCard extends Activity {
 
-    private static final int SWIPE_MIN_DISTANCE = 120;
-    private static final int SWIPE_THRESHOLD_VELOCITY = 200;
+    private static final int SWIPE_MIN_DISTANCE = 100;
+    private static final int SWIPE_THRESHOLD_VELOCITY = 150;
     private GestureDetector gestureDetector;
     View.OnTouchListener gestureListener;
 
@@ -51,6 +53,7 @@ public class ViewCard extends Activity {
         Bundle extras = getIntent().getExtras();
         pos = (Integer) extras.get("pos_start");
         num = (Integer) extras.get("num");
+        
         listOfWords = new String[num+1];
         listOfForeign = new String[num+1];
         listOfImageUrls = new String[num+1];
@@ -64,6 +67,7 @@ public class ViewCard extends Activity {
         String image_url = listOfImageUrls[pos];
         String foreign = listOfForeign[pos];
         String word = listOfWords[pos];
+        Toast.makeText(ViewCard.this, "pos:"+((Integer) pos).toString()+" num:"+((Integer) num).toString(), Toast.LENGTH_SHORT).show();
         
         tv_wordZero = (TextView) findViewById(R.id.wordZero);
         tv_foreignZero = (TextView) findViewById(R.id.foreignZero);
@@ -103,17 +107,49 @@ public class ViewCard extends Activity {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             try {
-                System.out.println("on fling");
                 // right to left swipe
+                //System.out.println("e1 to e2:"+((Float)(e1.getX() - e2.getX())).toString());
                 if(e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                	System.out.println("left");
-                    Toast.makeText(ViewCard.this, "Left Swipe", Toast.LENGTH_SHORT).show();
-                    // show prev
-                    // TODO: view flipper animation
-                    //vf_flipper.setInAnimation(slideRightIn);
-                    //vf_flipper.setOutAnimation(slideRightOut);
+                	
+                    //Toast.makeText(ViewCard.this, ((Integer) pos).toString(), Toast.LENGTH_SHORT).show();
+
+                    vf_flipper.setInAnimation(AnimationUtils.inFromRightAnimation());
+                    vf_flipper.setOutAnimation(AnimationUtils.outToLeftAnimation());
+                    if (pos == (num-1))
+                    	pos = 0;
+					else 
+						pos++;
+                    if (currentView == 0) {
+						currentView = 1;
+						tv_wordOne.setText(listOfWords[pos]);
+				        tv_foreignOne.setText(listOfForeign[pos]);
+				        Drawable pic = loadDrawable(listOfImageUrls[pos]);
+				        iv_imageOne.setBackgroundDrawable(pic);
+				    } else if (currentView == 1) {
+						currentView = 2;
+						tv_wordTwo.setText(listOfWords[pos]);
+				        tv_foreignTwo.setText(listOfForeign[pos]);
+				        Drawable pic = loadDrawable(listOfImageUrls[pos]);
+				        iv_imageTwo.setBackgroundDrawable(pic);
+					} else {
+						currentView = 0;
+						tv_wordZero.setText(listOfWords[pos]);
+				        tv_foreignZero.setText(listOfForeign[pos]);
+				        Drawable pic = loadDrawable(listOfImageUrls[pos]);
+				        iv_imageZero.setBackgroundDrawable(pic);
+					}
+                    
+                    vf_flipper.showNext();
+                    
+                }  else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                	//System.out.println("left");
+                    //Toast.makeText(ViewCard.this, ((Integer) pos).toString(), Toast.LENGTH_SHORT).show();
+                	// show prev
+                    vf_flipper.setInAnimation(AnimationUtils.inFromLeftAnimation());
+                    vf_flipper.setOutAnimation(AnimationUtils.outToRightAnimation());
+
                     if (pos == 0)
-                    	pos = num;
+                    	pos = (num-1);
 					else 
 						pos--;
                     if (currentView == 0) {
@@ -137,36 +173,6 @@ public class ViewCard extends Activity {
 					}
                     
                     vf_flipper.showPrevious();
-                    
-                }  else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                	System.out.println("right");
-                    Toast.makeText(ViewCard.this, "Right Swipe", Toast.LENGTH_SHORT).show();
-                    //vf_flipper.setInAnimation(slideLeftIn);
-                    //vf_flipper.setOutAnimation(slideLeftOut);
-                    if (pos == num)
-                    	pos = 0;
-					else 
-						pos++;
-                    if (currentView == 0) {
-						currentView = 1;
-						tv_wordOne.setText(listOfWords[pos]);
-				        tv_foreignOne.setText(listOfForeign[pos]);
-				        Drawable pic = loadDrawable(listOfImageUrls[pos]);
-				        iv_imageOne.setBackgroundDrawable(pic);
-				    } else if (currentView == 1) {
-						currentView = 2;
-						tv_wordTwo.setText(listOfWords[pos]);
-				        tv_foreignTwo.setText(listOfForeign[pos]);
-				        Drawable pic = loadDrawable(listOfImageUrls[pos]);
-				        iv_imageTwo.setBackgroundDrawable(pic);
-					} else {
-						currentView = 0;
-						tv_wordZero.setText(listOfWords[pos]);
-				        tv_foreignZero.setText(listOfForeign[pos]);
-				        Drawable pic = loadDrawable(listOfImageUrls[pos]);
-				        iv_imageZero.setBackgroundDrawable(pic);
-					}
-                    vf_flipper.showNext();
                 }
             } catch (Exception e) {
                 System.out.println(e.toString());
