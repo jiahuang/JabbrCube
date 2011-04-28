@@ -1,19 +1,14 @@
 package com.cube.jabbr;
 
 import com.cube.jabbr.R;
-import com.cube.jabbr.R.layout;
-import com.cube.jabbr.location.MyLocationListener;
+import com.cube.jabbr.utils.Utils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 public class Jabbrcube extends Activity {
 	
@@ -31,9 +26,9 @@ public class Jabbrcube extends Activity {
     }
     
     public void login(View view){
-    	SharedPreferences sharedPreferences = getSharedPreferences("jabbr_prefs", MODE_PRIVATE);
+    	SharedPreferences sharedPreferences = getSharedPreferences(Utils.PREF, MODE_PRIVATE);
     	SharedPreferences.Editor editor = sharedPreferences.edit();
-    	Boolean loginValid = sharedPreferences.getBoolean("loginValid", false);
+    	Boolean loginValid = sharedPreferences.getBoolean(Utils.PREF_VALIDLOGIN, false);
     	/*if (!loginValid){
     		// auth stuff
     		
@@ -44,8 +39,8 @@ public class Jabbrcube extends Activity {
 	    	startActivity(intent);
     	}*/
 
-		editor.putString("username", et_Username.getText().toString());
-        editor.putString("password", et_Password.getText().toString());
+		editor.putString(Utils.PREF_NAME, et_Username.getText().toString());
+        editor.putString(Utils.PREF_PASSWORD, et_Password.getText().toString());
         editor.commit();
     	Intent intent = new Intent().setClass(this, Startup.class);
     	startActivity(intent);

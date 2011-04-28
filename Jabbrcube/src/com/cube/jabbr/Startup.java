@@ -6,6 +6,8 @@ import com.cube.jabbr.listView.Place;
 import com.cube.jabbr.listView.Thumbnail;
 import com.cube.jabbr.listView.ThumbnailAdapter;
 import com.cube.jabbr.listView.ThumbnailObtainer;
+import com.cube.jabbr.utils.NoBackgroundDialog;
+import com.cube.jabbr.utils.Utils;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -16,7 +18,10 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -27,6 +32,7 @@ public class Startup extends Activity {
     /** Called when the activity is first created. */
 	LocationManager mlocManager = null;
 	ProgressDialog mDialog = null;
+	NoBackgroundDialog mNoBgDialog = null;
 	float lon = 0;
 	float lat = 0;
 	boolean dialog = false;
@@ -37,12 +43,12 @@ public class Startup extends Activity {
         
         TextView tv_location = (TextView) findViewById(R.id.location);
         
-        SharedPreferences sharedPreferences = getSharedPreferences("jabbr_prefs", MODE_PRIVATE);
-        lon = sharedPreferences.getFloat("latitude", 0);
-        lat = sharedPreferences.getFloat("longitude", 0);
-        String placeId = sharedPreferences.getString("placeId", "");
-        tv_location.setText(sharedPreferences.getString("placeName", "Could not acquire location"));
-        if (lon == 0 && lat == 0 && placeId == ""){
+        SharedPreferences sharedPreferences = getSharedPreferences(Utils.PREF, MODE_PRIVATE);
+        lon = sharedPreferences.getFloat(Utils.PREF_LONGITUDE, 0);
+        lat = sharedPreferences.getFloat(Utils.PREF_LATITUDE, 0);
+        String placeId = sharedPreferences.getString(Utils.PREF_PLACEID, "");
+        tv_location.setText(sharedPreferences.getString(Utils.PREF_PLACENAME, "Could not acquire location"));
+        if (lon == 0 && lat == 0 && placeId == "" ){ 
         	dialog = true;
         	System.out.println("displaying... id:"+placeId + " lon:"+lon + " lat:"+lat);
 	        mDialog = new ProgressDialog(Startup.this);
@@ -55,38 +61,57 @@ public class Startup extends Activity {
         mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,onLocationChange);
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,onLocationChange);
         
-        final GridView gridview = (GridView) findViewById(R.id.currentCards);
-        ThumbnailObtainer tbo = new ThumbnailObtainer();
-        List<Thumbnail> thumbnails = tbo.getThumbnails();
-        gridview.setAdapter(new ThumbnailAdapter(this, thumbnails));
-        final int numOfCards = tbo.numOfCards;
-        final String[] listOfWords = tbo.listOfWords;
-        final String[] listOfForeign = tbo.listOfForeign;
-        final String[] listOfImageUrls = tbo.listOfImageUrls;
         
-        gridview.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Toast.makeText(Startup.this, "" + position, Toast.LENGTH_SHORT).show();
-                // pass bundle
-                Thumbnail item = (Thumbnail)gridview.getItemAtPosition(position);
-                Intent myIntent = new Intent(Startup.this, ViewCard.class);
-                // TODO: swap this out with real image url
-                myIntent.putExtra("pos_start", position);
-                myIntent.putExtra("num", numOfCards);
-                for(int i=0; i<numOfCards; i++){
-                	myIntent.putExtra("words"+i, listOfWords[i]);
-                	myIntent.putExtra("foreign"+i, listOfForeign[i]);
-                	myIntent.putExtra("image_urls"+i, listOfImageUrls[i]);
-                }
-                //myIntent.putExtra("image_url", "http://imagemacros.files.wordpress.com/2009/06/dunnololdog.jpg");
-        		//myIntent.putExtra("word", item.word);
-        		//myIntent.putExtra("foreign", item.foreign);
-                startActivityForResult(myIntent, 0);
-            }
-        });
-		
-		
+        new Thread(new Runnable() {
+			public void run(){
+				ThumbnailObtainer tbo = new ThumbnailObtainer();
+				Message msg =  Message.obtain();
+    			Bundle bundle = new Bundle();
+    			bundle.putStringArray("words", tbo.listOfWords);
+    			bundle.putStringArray("foreign", tbo.listOfForeign);
+    			bundle.putStringArray("images", tbo.listOfImageUrls);
+    			bundle.putInt("numOfCards", tbo.numOfCards);
+    			//bundle.putString("Text", "Translating...");
+    			msg.setData(bundle);
+    			thumbnailHandler.sendMessage(msg);
+			}
+        }).start();
+        
+        
 	}
+    
+    Handler thumbnailHandler=new Handler() {
+    	@Override
+    	public void handleMessage(Message msg) {
+    		Bundle bundle = msg.getData();
+    		final int numOfCards = bundle.getInt("numOfCards");
+            final String[] listOfWords = bundle.getStringArray("words");
+            final String[] listOfForeign = bundle.getStringArray("foreign");
+            final String[] listOfImageUrls = bundle.getStringArray("images");
+
+            final GridView gridview = (GridView) findViewById(R.id.currentCards);
+            
+            ThumbnailAdapter gridAdapter = new ThumbnailAdapter(Startup.this.getApplicationContext(),
+    				listOfImageUrls, listOfWords, listOfForeign, numOfCards);
+            gridview.setAdapter(gridAdapter);
+            
+            gridview.setOnItemClickListener(new OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                    Toast.makeText(Startup.this, "" + position, Toast.LENGTH_SHORT).show();
+                    // pass bundle
+                    Intent myIntent = new Intent(Startup.this, ViewCard.class);
+                    myIntent.putExtra("pos_start", position);
+                    myIntent.putExtra("num", numOfCards);
+                    for(int i=0; i<numOfCards; i++){
+                    	myIntent.putExtra("words"+i, listOfWords[i]);
+                    	myIntent.putExtra("foreign"+i, listOfForeign[i]);
+                    	myIntent.putExtra("image_urls"+i, listOfImageUrls[i]);
+                    }
+                    startActivityForResult(myIntent, 0);
+                }
+            });
+    	}
+    };
     
     LocationListener onLocationChange=new LocationListener() {
         public void onProviderDisabled(String provider) {
@@ -104,13 +129,13 @@ public class Startup extends Activity {
 
 		@Override
 		public void onLocationChanged(Location location) {
-			SharedPreferences sharedPreferences = getSharedPreferences("jabbr_prefs", MODE_PRIVATE);
+			SharedPreferences sharedPreferences = getSharedPreferences(Utils.PREF, MODE_PRIVATE);
 	    	SharedPreferences.Editor editor = sharedPreferences.edit();
-	    	editor.putFloat("latitude", (float)location.getLatitude());
-	        editor.putFloat("longitude", (float)location.getLongitude());
+	    	editor.putFloat(Utils.PREF_LATITUDE, (float)location.getLatitude());
+	        editor.putFloat(Utils.PREF_LONGITUDE, (float)location.getLongitude());
 	        editor.commit();
-	        lat = sharedPreferences.getFloat("latitude", (float) 0.0);
-	        lon = sharedPreferences.getFloat("longitude",(float) 0.0);
+	        lat = sharedPreferences.getFloat(Utils.PREF_LATITUDE, (float) 0.0);
+	        lon = sharedPreferences.getFloat(Utils.PREF_LONGITUDE,(float) 0.0);
 	        System.out.println("location changed to:"+ location.getLatitude()+ " "+location.getLongitude());
 	        if (dialog) {
 	        	mDialog.dismiss();
@@ -158,4 +183,5 @@ public class Startup extends Activity {
     	changeLoc();
     	System.out.println("change location popup");
     }
+
 }

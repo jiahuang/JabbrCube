@@ -3,7 +3,8 @@ package com.cube.jabbr;
 import java.io.InputStream;
 import java.net.URL;
 
-import com.cube.jabbr.listView.AnimationUtils;
+import com.cube.jabbr.utils.AnimationUtils;
+import com.cube.jabbr.utils.Utils;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -64,7 +65,6 @@ public class ViewCard extends Activity {
         	listOfForeign[i] = extras.getString("foreign"+i);
         	listOfImageUrls[i] = extras.getString("image_urls"+i);
         }
-        String image_url = listOfImageUrls[pos];
         String foreign = listOfForeign[pos];
         String word = listOfWords[pos];
         Toast.makeText(ViewCard.this, "pos:"+((Integer) pos).toString()+" num:"+((Integer) num).toString(), Toast.LENGTH_SHORT).show();
@@ -82,7 +82,7 @@ public class ViewCard extends Activity {
         
         tv_wordZero.setText(word);
         tv_foreignZero.setText(foreign);
-        Drawable pic = loadDrawable(image_url);
+        Drawable pic = Utils.loadDrawable(listOfImageUrls[pos]);
         
         iv_imageZero.setBackgroundDrawable(pic);
        
@@ -119,23 +119,21 @@ public class ViewCard extends Activity {
                     	pos = 0;
 					else 
 						pos++;
+                    Drawable pic = Utils.loadDrawable(listOfImageUrls[pos]);
                     if (currentView == 0) {
 						currentView = 1;
 						tv_wordOne.setText(listOfWords[pos]);
 				        tv_foreignOne.setText(listOfForeign[pos]);
-				        Drawable pic = loadDrawable(listOfImageUrls[pos]);
 				        iv_imageOne.setBackgroundDrawable(pic);
 				    } else if (currentView == 1) {
 						currentView = 2;
 						tv_wordTwo.setText(listOfWords[pos]);
 				        tv_foreignTwo.setText(listOfForeign[pos]);
-				        Drawable pic = loadDrawable(listOfImageUrls[pos]);
 				        iv_imageTwo.setBackgroundDrawable(pic);
 					} else {
 						currentView = 0;
 						tv_wordZero.setText(listOfWords[pos]);
 				        tv_foreignZero.setText(listOfForeign[pos]);
-				        Drawable pic = loadDrawable(listOfImageUrls[pos]);
 				        iv_imageZero.setBackgroundDrawable(pic);
 					}
                     
@@ -152,23 +150,21 @@ public class ViewCard extends Activity {
                     	pos = (num-1);
 					else 
 						pos--;
+                    Drawable pic = Utils.loadDrawable(listOfImageUrls[pos]);
                     if (currentView == 0) {
 						currentView = 2;
 						tv_wordTwo.setText(listOfWords[pos]);
 				        tv_foreignTwo.setText(listOfForeign[pos]);
-				        Drawable pic = loadDrawable(listOfImageUrls[pos]);
 				        iv_imageTwo.setBackgroundDrawable(pic);
 				    } else if (currentView == 2) {
 						currentView = 1;
 						tv_wordOne.setText(listOfWords[pos]);
 				        tv_foreignOne.setText(listOfForeign[pos]);
-				        Drawable pic = loadDrawable(listOfImageUrls[pos]);
 				        iv_imageOne.setBackgroundDrawable(pic);
 					} else {
 						currentView = 0;
 						tv_wordZero.setText(listOfWords[pos]);
 				        tv_foreignZero.setText(listOfForeign[pos]);
-				        Drawable pic = loadDrawable(listOfImageUrls[pos]);
 				        iv_imageZero.setBackgroundDrawable(pic);
 					}
                     
@@ -207,21 +203,5 @@ public class ViewCard extends Activity {
         }
 
     }
-
-    // TODO: move this shit out into a utils
-    public Drawable loadDrawable(String image_url) {
-
-
-		URL url = null;
-		InputStream inputStream = null;
-		try {
-			url = new URL(image_url);
-			inputStream = (InputStream) url.getContent();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Drawable drawable = Drawable.createFromStream(inputStream, "src");
-		return drawable;
-	}
+    
 }

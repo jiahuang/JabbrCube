@@ -15,6 +15,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cube.jabbr.utils.Utils;
+
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
@@ -25,7 +27,7 @@ public class ThumbnailObtainer {
 	public String[] listOfImageUrls;
 	public int numOfCards = 0;
 	
-	public List<Thumbnail> getThumbnails(){
+	public ThumbnailObtainer(){
 		// TODO: call server, create thumbnail objects
 		HttpGet get = new HttpGet("http://jabbrcube.heroku.com/api/getthumbnails/1");
 		ResponseHandler<String> responseHandler = new BasicResponseHandler();
@@ -53,18 +55,6 @@ public class ThumbnailObtainer {
 				listOfWords[i] = word;
 				listOfForeign[i] = answer;
 				listOfImageUrls[i] = "http://www.nullamatix.com/images/I-dunno-lol.jpg"; //TODO: real image urls
-				
-				Drawable drawable;
-				try {
-					drawable= loadDrawable("http://www.nullamatix.com/images/I-dunno-lol.jpg");// TODO: replace with image_url
-					Log.i("jabbr", "got flashcard drawable by loading:"+image_url);
-				} catch (Exception e) {
-					//drawable = getResources().getDrawable(R.drawable.no_image);
-					drawable = loadDrawable("http://www.nullamatix.com/images/I-dunno-lol.jpg");
-					Log.i("jabbr", "CATS!!!! IN F*CKING SINKS Y'ALL.");
-				}
-				Thumbnail t = new Thumbnail(drawable, word, answer, flashcard_id);
-				thumbnails.add(t);
 			}
 		}
 
@@ -72,25 +62,6 @@ public class ThumbnailObtainer {
 			Log.e("MashUp", "Exception in getThumbnails()", t);
 		}
 		
-		return thumbnails;
-	}
-	
-	public Drawable loadDrawable(String image_url) {
-
-
-		URL url = null;
-		InputStream inputStream = null;
-		try {
-			url = new URL(image_url);
-			inputStream = (InputStream) url.getContent();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Drawable drawable = Drawable.createFromStream(inputStream, "src");
-		//Toast.makeText(this.getApplicationContext(), "url:"+url.toString(), Toast.LENGTH_SHORT).show();
-		//tableLayout.setBackgroundDrawable(drawable);
-		return drawable;
 	}
 	
 }

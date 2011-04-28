@@ -1,6 +1,5 @@
 package com.cube.jabbr;
 
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,6 +24,7 @@ import org.apache.http.protocol.HttpContext;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -36,9 +36,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -58,13 +57,16 @@ public class NewCard extends Activity {
 	String original = "";
 	String translation = "";
 	TextView tv_Translation;
+	TextView tv_TakeAPic;
 	EditText et_Original;
 	ImageButton ib_Camera;
 	ImageView iv_Image;
-	boolean textChanged = false;
-    Bitmap resizedBitmap;
+	Bitmap resizedBitmap;
+	Button b_AddCard;
+    boolean dialog = false;
+    boolean tookPic = false;
 	
-	
+    ProgressDialog mDialog = null;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,18 +76,32 @@ public class NewCard extends Activity {
         et_Original = (EditText) findViewById(R.id.translate);
         ib_Camera = (ImageButton) findViewById(R.id.Camera);
         iv_Image = (ImageView) findViewById(R.id.image);
+        b_AddCard = (Button) findViewById(R.id.addCard);
+        tv_TakeAPic = (TextView) findViewById(R.id.takePicText);
+        mDialog =  new ProgressDialog(NewCard.this);
+        mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         
+        // hide everything
+        tv_Translation.setVisibility(View.INVISIBLE);
+        ib_Camera.setVisibility(View.INVISIBLE);
+        iv_Image.setVisibility(View.INVISIBLE);
+        b_AddCard.setVisibility(View.INVISIBLE);
+        tv_TakeAPic.setVisibility(View.INVISIBLE);
     }
     
     // TODO: override on switch from vertical to horizontal
     
     public void translateWord(View view){
+    	if (!dialog){
+    		dialog = true;
+    		mDialog.setMessage("Translating... Please wait...");
+	        mDialog.show();
+    	}
     	new Thread(new Runnable() {
 			public void run(){
 	    		try{
 	    			Message msg =  Message.obtain();
 	    			Bundle bundle = new Bundle();
-
 	    			bundle.putString("Text", "Translating...");
 	    			msg.setData(bundle);
 	    			translationHandler.sendMessage(msg);
@@ -126,6 +142,18 @@ public class NewCard extends Activity {
     		Bundle bundle = msg.getData();
 
     		tv_Translation.setText(bundle.getString("Text"));
+    		
+    		// show everything
+    		if (!tookPic){
+                ib_Camera.setVisibility(View.VISIBLE);
+                tv_TakeAPic.setVisibility(View.VISIBLE);
+    		}
+    		tv_Translation.setVisibility(View.VISIBLE);
+            
+    		if (dialog) {
+    			dialog = false;
+    			mDialog.dismiss();
+    		}
     	}
     };
     
@@ -160,17 +188,18 @@ public class NewCard extends Activity {
                     pic.recycle();
                 }
                 
+                tookPic = true;
       			iv_Image.setImageBitmap(resizedBitmap);
-      			
+      			iv_Image.setVisibility(View.VISIBLE);
+                b_AddCard.setVisibility(View.VISIBLE);
       			// remove take picture button
       			ib_Camera.setVisibility(View.GONE);
+      			tv_TakeAPic.setVisibility(View.GONE);
             } catch (FileNotFoundException e) {
               e.printStackTrace();
             } catch (IOException e) {
               e.printStackTrace();
             }
-
-    		//pic = (Bitmap) data.getExtras().get("data");
     		
     	}
     }
@@ -192,14 +221,19 @@ public class NewCard extends Activity {
         	Toast toast = Toast.makeText(getApplicationContext(), text,  Toast.LENGTH_SHORT);
         	toast.show();
         	
-
+        	if (dialog) {
+    			dialog = false;
+    			mDialog.dismiss();
+    		}
 			// reset text translation, camera, and picture
+        	tookPic = false;
 			iv_Image.setImageDrawable(null);
     		tv_Translation.setText("");
 			if (resizedBitmap != null)
         		resizedBitmap.recycle();
-
-  			ib_Camera.setVisibility(View.VISIBLE);
+			iv_Image.setVisibility(View.INVISIBLE);
+			b_AddCard.setVisibility(View.INVISIBLE);
+  			//ib_Camera.setVisibility(View.VISIBLE);
     	}
     };
     
@@ -207,7 +241,11 @@ public class NewCard extends Activity {
     	// set everything up and send to web
     	original = ((EditText) findViewById(R.id.translate)).getText().toString();
     	translation = ((TextView) findViewById(R.id.translation)).getText().toString();
-    	
+    	if (!dialog){
+    		dialog = true;
+    		mDialog.setMessage("Adding your flashcard... Please wait...");
+	        mDialog.show();
+    	}
     	// new thread for posting
     	new Thread(new Runnable() {
     		public void run() {
