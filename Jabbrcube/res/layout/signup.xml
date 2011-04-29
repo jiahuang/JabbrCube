@@ -1,38 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@android:color/white"
-    >
-<ImageView android:id="@+id/image" 
-	android:layout_width="wrap_content" 
-	android:layout_height="wrap_content"
-	android:src="@drawable/logo_100"></ImageView>
-<TextView android:text="Username" android:textColor="#7A0000" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
-<EditText android:text="" 
-	android:id="@+id/username" 
-	android:width="300px"
-	android:layout_width="wrap_content" 
-	android:layout_gravity="center_horizontal|bottom"
-	android:layout_height="wrap_content">
-</EditText>
-<TextView android:text="Password" android:textColor="#7A0000" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
-<EditText android:text="" 
-	android:id="@+id/password" 
-	android:width="300px"
-	android:password= "true"
-	android:layout_width="wrap_content" 
-	android:layout_gravity="center_horizontal|bottom"
-	android:layout_height="wrap_content"></EditText>
-<Button android:text="Login" 
-	android:id="@+id/login" 
+    android:background="@android:color/white">
+    <TextView android:text=" jabbr" 
+		android:id="@+id/name" 
+		android:layout_width="fill_parent" 
+		android:layout_height="40dp"
+		android:textSize="22sp"
+		android:textStyle="bold"
+		android:background="#7A0000"
+	>
+	</TextView>
+	<LinearLayout
+		android:id="@+id/emailLayout"
+	      android:orientation="horizontal"
+	      android:layout_width="fill_parent"
+	      android:layout_height="wrap_content"
+	      android:layout_below="@+id/name"
+	      android:layout_marginTop="5dp"
+	      >
+		<TextView android:text="Email" 
+			android:textColor="#7A0000" 
+			android:textSize="16sp"
+			android:textStyle="bold"
+			android:layout_width="100dp" 
+			android:layout_height="wrap_content"></TextView>
+		<EditText android:text="" 
+			android:id="@+id/email" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content"
+			></EditText>
+	</LinearLayout>
+	<LinearLayout
+		android:id="@+id/usernameLayout"
+	      android:orientation="horizontal"
+	      android:layout_width="fill_parent"
+	      android:layout_height="wrap_content"
+	      android:layout_below="@+id/emailLayout"
+	      android:layout_marginTop="5dp"
+	      >
+		<TextView android:text="Username" 
+			android:textColor="#7A0000" 
+			android:textSize="16sp"
+			android:textStyle="bold"
+			android:layout_width="100dp" 
+			android:layout_height="wrap_content"></TextView>
+		<EditText android:text="" 
+			android:id="@+id/username" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content"
+			></EditText>
+	</LinearLayout>
+	<LinearLayout
+		android:id="@+id/passwordLayout"
+	      android:orientation="horizontal"
+	      android:layout_width="fill_parent"
+	      android:layout_height="wrap_content"
+	      android:layout_below="@+id/usernameLayout"
+	      android:layout_marginTop="5dp"
+	      >
+		<TextView android:text="Password" 
+			android:textColor="#7A0000" 
+			android:textSize="16sp"
+			android:textStyle="bold"
+			android:layout_width="100dp" 
+			android:layout_height="wrap_content"></TextView>
+		<EditText android:text="" 
+			android:id="@+id/password" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content"
+			></EditText>
+	</LinearLayout>
+	<LinearLayout
+		android:id="@+id/fluentLayout"
+	      android:orientation="horizontal"
+	      android:layout_width="fill_parent"
+	      android:layout_height="40dp"
+	      android:layout_below="@+id/passwordLayout"
+	      android:layout_marginTop="5dp"
+	      >
+		<TextView android:text="Fluent in" 
+			android:textColor="#7A0000" 
+			android:textSize="16sp"
+			android:textStyle="bold"
+			android:layout_width="100dp" 
+			android:layout_height="wrap_content"></TextView>
+		<Spinner android:id="@+id/fluentLanguages" 
+			android:layout_width="fill_parent" 
+			android:layout_height="fill_parent"></Spinner>
+</LinearLayout>
+	<LinearLayout
+		android:id="@+id/learningLayout"
+	      android:orientation="horizontal"
+	      android:layout_width="fill_parent"
+	      android:layout_height="40dp"
+	      android:layout_below="@+id/fluentLayout"
+	      android:layout_marginTop="5dp"
+	      >
+		<TextView android:text="Learning" 
+			android:textColor="#7A0000" 
+			android:textSize="16sp"
+			android:textStyle="bold"
+			android:layout_width="100dp" 
+			android:layout_height="wrap_content"></TextView>
+		<Spinner android:id="@+id/learningLanguages" 
+			android:layout_width="fill_parent" 
+			android:layout_height="fill_parent"></Spinner>
+	</LinearLayout>
+<Button android:text="Create Account" 
+	android:id="@+id/create" 
 	android:width="200px"
-	android:layout_width="wrap_content" 
-	android:gravity="center_horizontal"
+	android:layout_width="wrap_content"
+	android:layout_centerHorizontal="true"
 	android:layout_height="wrap_content"
 	android:layout_marginTop="20px"
-    android:layout_gravity="center_horizontal|bottom"
+	android:layout_below="@+id/learningLayout"
 	android:padding="12dip"
-	android:onClick="login"></Button>
-</LinearLayout>
+	android:textColor="@drawable/jabbr_buttontext"
+	android:background="@drawable/jabbr_button"
+	android:onClick="create"></Button>
+</RelativeLayout>

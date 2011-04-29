@@ -4,64 +4,103 @@
     android:layout_height="fill_parent"
     android:background="@android:color/white"
     >
+    
+    <TextView android:text=" jabbr" 
+		android:id="@+id/name" 
+		android:layout_width="fill_parent" 
+		android:layout_height="40dp"
+		android:textSize="22sp"
+		android:textStyle="bold"
+		android:background="#7A0000"
+	>
+	</TextView>
 	<LinearLayout
 		android:id="@+id/translateLayout"
 	      android:orientation="horizontal"
 	      android:layout_width="fill_parent"
 	      android:layout_height="wrap_content"
+	      android:layout_below="@+id/name"
+	      android:layout_marginTop="5dp"
 	      >
+	      <View android:layout_height="40dp" android:layout_width="2dp" android:background="#FFFFFF"/>
 		<EditText android:text="" 
 			android:id="@+id/translate" 
 			android:layout_width="fill_parent" 
 			android:layout_height="fill_parent"
 			android:layout_weight="1"
 			></EditText>
+			<View android:layout_height="40dp" android:layout_width="2dp" android:background="#FFFFFF"/>
 		<Button android:text="Translate"
 			android:id="@+id/translateButton" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"
 			android:layout_weight="0"
 			android:onClick="translateWord"
+			android:textSize="16sp"
+			android:textStyle="bold"
+			android:layout_width="wrap_content" 
+			android:layout_height="fill_parent"
+			android:textColor="@drawable/jabbr_buttontext"
+			android:background="@drawable/jabbr_button"
 			></Button>
+			<View android:layout_height="40dp" android:layout_width="2dp" android:background="#FFFFFF"/>
 	</LinearLayout>	
-	<LinearLayout
-		android:id="@+id/translationLayout"
-	      android:orientation="horizontal"
-	      android:layout_width="fill_parent"
-	      android:layout_height="wrap_content"
-	      android:layout_below="@+id/translateLayout"
-	      >
-		<TextView android:text="Translating..."
-				android:id="@+id/translation" 
-				android:layout_width="fill_parent" 
-				android:textColor="#7A0000"
-				android:paddingLeft="10px"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:textSize="16px"
-				android:textStyle="bold"
-				android:gravity="center_horizontal"></TextView>
-		<ImageButton android:id="@+id/Camera" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"
-			android:layout_weight="0"
-			android:src="@drawable/camera"
-			android:onClick="camera">
-		</ImageButton>	
-	</LinearLayout>
-	<ImageView android:id="@+id/image" 
-			android:layout_width="wrap_content" 
+	
+	<FrameLayout
+	android:id="@+id/imageLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/translateLayout"
+    android:layout_marginTop="10dp"
+    >
+	    <ImageView android:id="@+id/image" 
+			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content"
 			android:background="@drawable/icon"
-			android:layout_below="@+id/translationLayout"
 			android:layout_centerInParent="true"
-	></ImageView>
-				
+		></ImageView>
+	    <TextView android:text="Translating..."
+	   		android:shadowColor="@android:color/white"
+		    android:shadowRadius="1"
+			android:id="@+id/translation" 
+			android:layout_width="fill_parent" 
+			android:textColor="#7A0000"
+			android:paddingLeft="10px"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="10px"
+			android:layout_weight="1"
+			android:textSize="20sp"
+			android:textStyle="bold"
+			android:gravity="center_horizontal"></TextView>
+	</FrameLayout>
+	<TextView android:text="Make a flashcard for this word by taking a picture!"
+	android:layout_below="@+id/imageLayout"
+			android:id="@+id/takePicText" 
+			android:layout_width="fill_parent"
+			android:layout_marginTop="90px" 
+			android:textColor="#7A0000"
+			android:paddingLeft="10px"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:textSize="20px"
+			android:textStyle="bold"
+			android:gravity="center_horizontal"></TextView>	
+	<ImageButton android:id="@+id/Camera" 
+			android:layout_below="@+id/takePicText"
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10px"
+			android:layout_weight="0"
+			android:layout_centerInParent="true"
+			android:src="@drawable/camera"
+			android:background="@drawable/jabbr_button"
+			android:onClick="camera">
+	</ImageButton>				
 	<Button android:text="Add Flash Card" 
 		android:id="@+id/addCard" 
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content"
 		android:onClick="addCard"
+		android:textColor="@drawable/jabbr_buttontext"
+		android:background="@drawable/jabbr_button"
 		android:layout_centerInParent="true"
 		android:layout_alignParentBottom="true"
 		></Button>		

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="jyellow1">#FFD000</color>
+	<color name="jyellow2">#D1AB00</color>
+    <color name="jgrey1">#CCCCCC</color>
+    <color name="jgrey2">#7A7A7A</color>
+    <color name="jred1">#A30000</color>
+    <color name="jred2">#700000</color>
+</resources>	

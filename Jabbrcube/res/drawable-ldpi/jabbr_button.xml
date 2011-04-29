@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- 
+    <item android:state_pressed="true" android:drawable="@color/jyellow"/> 
+    <item android:state_focused="true" android:drawable="@color/jyellow"/> 
+    <item android:drawable="@color/jred"/> 
+     -->
+    
+    <item android:state_pressed="true" >
+        <shape>
+            <gradient
+                android:startColor="@color/jyellow1"
+                android:endColor="@color/jyellow2"
+                android:angle="270" />
+            <stroke
+                android:width="3dp"
+                android:color="@color/jgrey2" />
+            <corners
+                android:radius="3dp" />
+            <padding
+                android:left="10dp"
+                android:top="10dp"
+                android:right="10dp"
+                android:bottom="10dp" />
+        </shape>
+    </item>
+
+    <item android:state_focused="true" >
+        <shape>
+            <gradient
+                android:endColor="@color/jyellow1"
+                android:startColor="@color/jyellow2"
+                android:angle="270" />
+            <stroke
+                android:width="3dp"
+                android:color="@color/jgrey2" />
+            <corners
+                android:radius="3dp" />
+            <padding
+                android:left="10dp"
+                android:top="10dp"
+                android:right="10dp"
+                android:bottom="10dp" />
+        </shape>
+    </item>
+
+    <item>        
+        <shape>
+            <gradient
+                android:endColor="@color/jred1"
+                android:startColor="@color/jred2"
+                android:angle="270" />
+            <stroke
+                android:width="3dp"
+                android:color="@color/jgrey1" />
+            <corners
+                android:radius="3dp" />
+            <padding
+                android:left="10dp"
+                android:top="10dp"
+                android:right="10dp"
+                android:bottom="10dp" />
+        </shape>
+    </item>
+    
+</selector>

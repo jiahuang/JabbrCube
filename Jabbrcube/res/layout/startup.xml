@@ -3,17 +3,18 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@android:color/white">
-	 <TextView android:text="" 
+       
+
+    <TextView android:text=" jabbr" 
 		android:id="@+id/name" 
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content"
-		android:textSize="20px"
+		android:layout_width="fill_parent" 
+		android:layout_height="40dp"
+		android:textSize="22sp"
 		android:textStyle="bold"
-		android:layout_marginLeft="5dip"
-		android:layout_marginRight="5dip"
+		android:background="#7A0000"
 	>
 	</TextView>
-	
+    
 	<LinearLayout
 	      android:orientation="horizontal"
 	      android:layout_width="wrap_content"
@@ -24,14 +25,14 @@
 	      android:layout_marginLeft="5dip"
 	      android:layout_marginRight="5dip">
 	      <TextView android:text="Currently at " 
-		      	android:textSize="16px"
+		      	android:textSize="16sp"
 				android:textStyle="bold"
 				android:id="@+id/text" 
 				android:layout_width="wrap_content" 
 				android:layout_height="wrap_content">
 			</TextView>
 			<TextView android:text="" 
-				android:textSize="16px"
+				android:textSize="16sp"
 				android:textStyle="bold"
 				android:id="@+id/location" 
 				android:layout_width="fill_parent"
@@ -40,17 +41,17 @@
 				android:onClick="changeLoc" 
 				android:layout_height="wrap_content">
 			</TextView>
-		</LinearLayout>
-		 			 
+		
+</LinearLayout>
 		<GridView xmlns:android="http://schemas.android.com/apk/res/android" 
 		    android:id="@+id/currentCards"
 			android:layout_below="@+id/locationLayout"
 		    android:layout_width="fill_parent" 
-		    android:layout_height="fill_parent"
+		    android:layout_height="360dp"
 		    android:columnWidth="90dp"
 		    android:numColumns="auto_fit"
-		    android:verticalSpacing="10dp"
-		    android:horizontalSpacing="10dp"
+		    android:verticalSpacing="0dp"
+		    android:horizontalSpacing="0dp"
 		    android:stretchMode="columnWidth"
 		    android:gravity="center"
 		/>	
@@ -61,23 +62,35 @@
 		      android:layout_height="wrap_content"
 		      android:layout_weight="1"
 		      android:layout_alignParentBottom="true"
-		      
 		      >
+		      <View android:layout_height="fill_parent" android:layout_width="2dp" android:background="#FFFFFF"/>
 			<Button android:text="Test Your Knowledge!"
 				android:id="@+id/camera" 
 				android:layout_width="wrap_content" 
-				android:layout_height="wrap_content"
+				android:layout_height="60dp"
 				android:onClick="game"
-				android:layout_weight="1">
+				android:textSize="16sp"
+				android:textStyle="bold"
+				android:layout_weight="1"
+				
+				android:textColor="@drawable/jabbr_buttontext"
+				android:background="@drawable/jabbr_button"
+				>
 			</Button>
+			<View android:layout_height="fill_parent" android:layout_width="2dp" android:background="#FFFFFF"/>
+			
 			<Button android:text="Add Flash Cards"
 				android:id="@+id/camera" 
+				android:textSize="16sp"
+				android:textStyle="bold"
 				android:layout_width="wrap_content" 
-				android:layout_height="wrap_content"
+				android:layout_height="60dp"
 				android:onClick="newCard"
+				android:textColor="@drawable/jabbr_buttontext"
+				android:background="@drawable/jabbr_button"
 				android:layout_weight="1">
 			</Button>
-
+			<View android:layout_height="fill_parent" android:layout_width="2dp" android:background="#FFFFFF"/>
 		</LinearLayout>
 				 
 </RelativeLayout>

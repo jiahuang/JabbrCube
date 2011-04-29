@@ -2,7 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    >
+    <TextView android:text=" jabbr" 
+		android:id="@+id/name" 
+		android:layout_width="fill_parent" 
+		android:layout_height="40dp"
+		android:textSize="22sp"
+		android:textStyle="bold"
+		android:background="#7A0000"
+	>
+	</TextView>
     <ViewFlipper android:id="@+id/viewflipper"
 	android:layout_width="fill_parent" android:layout_height="fill_parent">
 	<RelativeLayout
@@ -19,9 +30,12 @@
 		    android:layout_height="wrap_content" 
 		    android:id="@+id/wordZero"
 		    android:text=""
-		    android:shadowColor="@android:color/black"
+		    android:shadowColor="@android:color/white"
+		    android:shadowRadius="1"
+		    android:textSize="20sp"
+			android:textStyle="bold"
+			android:textColor="#7A0000"
 		    android:layout_weight="1"
-		    android:shadowRadius="9"
 		    />
 		    <TextView  
 		    android:layout_width="wrap_content" 
@@ -36,6 +50,10 @@
 		    android:id="@+id/foreignZero" 
 		    android:text=""
 		    android:layout_weight="1"
+		    android:shadowRadius="1"
+		    android:textSize="20sp"
+			android:textStyle="bold"
+			android:textColor="#7A0000"
 		    android:layout_gravity="center_horizontal"
 		    />
 	    </LinearLayout>
@@ -58,9 +76,12 @@
 		    android:layout_height="wrap_content" 
 		    android:id="@+id/wordOne"
 		    android:text="Bird"
-		    android:shadowColor="@android:color/black"
 		    android:layout_weight="1"
-		    android:shadowRadius="9"
+		    android:shadowColor="@android:color/white"
+		    android:shadowRadius="1"
+		    android:textSize="20sp"
+			android:textStyle="bold"
+			android:textColor="#7A0000"
 		    />
 		    <TextView  
 		    android:layout_width="wrap_content" 
@@ -71,11 +92,15 @@
 		    <TextView  
 		    android:layout_width="wrap_content" 
 		    android:layout_height="wrap_content"
-		    android:shadowColor="@android:color/white"
 		    android:id="@+id/foreignOne" 
 		    android:text="Ave"
 		    android:layout_weight="1"
 		    android:layout_gravity="center_horizontal"
+		    android:shadowColor="@android:color/white"
+		    android:shadowRadius="1"
+		    android:textSize="20sp"
+			android:textStyle="bold"
+			android:textColor="#7A0000"
 		    />
 	    </LinearLayout>
 		<ImageView android:id="@+id/imageOne" 
@@ -97,9 +122,12 @@
 		    android:layout_height="wrap_content" 
 		    android:id="@+id/wordTwo"
 		    android:text="Bird"
-		    android:shadowColor="@android:color/black"
 		    android:layout_weight="1"
-		    android:shadowRadius="9"
+		    android:shadowColor="@android:color/white"
+		    android:shadowRadius="1"
+		    android:textSize="20sp"
+			android:textStyle="bold"
+			android:textColor="#7A0000"
 		    />
 		    <TextView  
 		    android:layout_width="wrap_content" 
@@ -110,11 +138,15 @@
 		    <TextView  
 		    android:layout_width="wrap_content" 
 		    android:layout_height="wrap_content"
-		    android:shadowColor="@android:color/white"
 		    android:id="@+id/foreignTwo" 
 		    android:text="Ave"
 		    android:layout_weight="1"
 		    android:layout_gravity="center_horizontal"
+		    android:shadowColor="@android:color/white"
+		    android:shadowRadius="1"
+		    android:textSize="20sp"
+			android:textStyle="bold"
+			android:textColor="#7A0000"
 		    />
 	    </LinearLayout>
 		<ImageView android:id="@+id/imageTwo" 

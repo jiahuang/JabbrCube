@@ -34,5 +34,19 @@
 	android:layout_marginTop="20px"
     android:layout_gravity="center_horizontal|bottom"
 	android:padding="12dip"
+	android:textColor="@drawable/jabbr_buttontext"
+	android:background="@drawable/jabbr_button"
 	android:onClick="login"></Button>
+<Button android:text="Signup" 
+	android:id="@+id/signup" 
+	android:width="200px"
+	android:layout_width="wrap_content" 
+	android:gravity="center_horizontal"
+	android:layout_height="wrap_content"
+	android:layout_marginTop="20px"
+    android:layout_gravity="center_horizontal|bottom"
+	android:padding="12dip"
+	android:textColor="@drawable/jabbr_buttontext"
+	android:background="@drawable/jabbr_button"
+	android:onClick="signup"></Button>
 </LinearLayout>
