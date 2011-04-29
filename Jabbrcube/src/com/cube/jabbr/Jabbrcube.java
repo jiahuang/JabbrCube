@@ -46,4 +46,11 @@ public class Jabbrcube extends Activity {
     	startActivity(intent);
     	
     }
+    
+    public void signup(View view){
+    	
+    	Intent intent = new Intent().setClass(this, SignUp.class);
+    	startActivity(intent);
+    	
+    }
 }
