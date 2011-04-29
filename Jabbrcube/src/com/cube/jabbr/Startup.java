@@ -20,9 +20,12 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +39,7 @@ public class Startup extends Activity {
 	float lon = 0;
 	float lat = 0;
 	boolean dialog = false;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +65,6 @@ public class Startup extends Activity {
         mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,onLocationChange);
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,onLocationChange);
         
-        
         new Thread(new Runnable() {
 			public void run(){
 				ThumbnailObtainer tbo = new ThumbnailObtainer();
@@ -71,13 +74,10 @@ public class Startup extends Activity {
     			bundle.putStringArray("foreign", tbo.listOfForeign);
     			bundle.putStringArray("images", tbo.listOfImageUrls);
     			bundle.putInt("numOfCards", tbo.numOfCards);
-    			//bundle.putString("Text", "Translating...");
     			msg.setData(bundle);
     			thumbnailHandler.sendMessage(msg);
 			}
         }).start();
-        
-        
 	}
     
     Handler thumbnailHandler=new Handler() {
@@ -141,7 +141,6 @@ public class Startup extends Activity {
 	        	mDialog.dismiss();
 	        	changeLoc();
 	        }
-	        
 		}
     };
 

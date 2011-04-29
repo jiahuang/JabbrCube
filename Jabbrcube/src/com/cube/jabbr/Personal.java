@@ -8,6 +8,8 @@ public class Personal extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.game);
+        setContentView(R.layout.personal);
+        // TODO: pull personal information
+        
     }
 }

@@ -8,6 +8,7 @@ import com.cube.jabbr.utils.GridviewThread.GridviewThreadListener;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.View;
@@ -51,7 +52,7 @@ public class ThumbnailAdapter extends BaseAdapter implements GridviewThreadListe
 	}
     
     public int getCount() {
-        return mUrls.length;
+        return mUrls.length -1;
     }
 
     public String getItem(int position) {
@@ -110,20 +111,25 @@ public class ThumbnailAdapter extends BaseAdapter implements GridviewThreadListe
 	}
     
 	@Override
-	public void handleImageLoaded(final ViewSwitcher vs, final ImageView iv, final Drawable draw) {
+	public void handleImageLoaded(final ViewSwitcher vs, final ImageView iv, final Bitmap draw) {
 		// The enqueue the following in the UI thread
 		mHandler.post(new Runnable() {
 			public void run() {
 				
 				// set the bitmap in the ImageView
 				//aImageView.setImageBitmap(aBitmap);
-				iv.setImageDrawable(draw);
+				//iv.setImageDrawable(draw);
+				Bitmap resizedBitmap = Bitmap.createScaledBitmap(draw, 85, 85, true);
+				draw.recycle();
+                
+				iv.setImageBitmap(resizedBitmap);
 				// explicitly tell the view switcher to show the second view
 				vs.setDisplayedChild(1);
 			}
 		});
 		
 	}
+
 }
 
 class ViewTagInformation {

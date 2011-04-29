@@ -100,33 +100,58 @@ public class NewCard extends Activity {
     	new Thread(new Runnable() {
 			public void run(){
 	    		try{
-	    			Message msg =  Message.obtain();
-	    			Bundle bundle = new Bundle();
-	    			bundle.putString("Text", "Translating...");
-	    			msg.setData(bundle);
-	    			translationHandler.sendMessage(msg);
-	    			
-	    			DefaultHttpClient client = new DefaultHttpClient();
-			    	
-		        	HttpPost post=new HttpPost("http://jabbrcube.heroku.com/api/words");
-		        	post.addHeader(BasicScheme.authenticate(
-		        			 new UsernamePasswordCredentials("poorva", "password"),
-		        			 "UTF-8", false));
-
-		        	List<NameValuePair> form=new ArrayList<NameValuePair>();
-		        	form.add(new BasicNameValuePair("word[word]", et_Original.getText().toString()));
-		        	
-		        	post.setEntity(new UrlEncodedFormEntity(form, HTTP.UTF_8));
-		        	ResponseHandler<String> responseHandler=new BasicResponseHandler();
-		        	
-		        	String responseBody=client.execute(post, responseHandler);
-		        	JSONObject word = new JSONObject(responseBody);
-		        	String translated_word = word.getString("translation");
-		        	
-		        	Message msg_translated =  Message.obtain();
-		        	bundle.putString("Text", translated_word);
-		        	msg_translated.setData(bundle);
-	    			translationHandler.sendMessage(msg_translated);
+	    			original = et_Original.getText().toString();
+		        	if (original.endsWith(" ")){
+		        		original = original.substring(0, original.length() - 1);
+		        	}
+		        	else if (original.contains(" ")){ // can't translate more than one word
+		        		Message msg =  Message.obtain();
+		    			Bundle bundle = new Bundle();
+		    			bundle.putString("Text", "Sorry, we can make flashcards for only individual words, not phrases or sentences");
+		    			bundle.putInt("Error", 1);
+		    			msg.setData(bundle);
+		    			translationHandler.sendMessage(msg);
+		        	}
+		        	else if(original.compareTo("") == 0){
+		        		Message msg =  Message.obtain();
+		    			Bundle bundle = new Bundle();
+		    			bundle.putString("Text", "Please type in something to translate");
+		    			bundle.putInt("Error", 1);
+		    			msg.setData(bundle);
+		    			translationHandler.sendMessage(msg);
+		        	}
+		        	else {
+		    			Message msg =  Message.obtain();
+		    			Bundle bundle = new Bundle();
+		    			bundle.putString("Text", "Translating...");
+		    			bundle.putInt("Error", 0);
+		    			msg.setData(bundle);
+		    			translationHandler.sendMessage(msg);
+		    			
+		    			DefaultHttpClient client = new DefaultHttpClient();
+				    	
+			        	HttpPost post=new HttpPost("http://jabbrcube.heroku.com/api/words");
+			        	post.addHeader(BasicScheme.authenticate(
+			        			 new UsernamePasswordCredentials("poorva", "password"),
+			        			 "UTF-8", false));
+	
+			        	List<NameValuePair> form=new ArrayList<NameValuePair>();
+			        	
+			        	form.add(new BasicNameValuePair("word[word]", original));
+			        	
+			        	post.setEntity(new UrlEncodedFormEntity(form, HTTP.UTF_8));
+			        	ResponseHandler<String> responseHandler=new BasicResponseHandler();
+			        	
+			        	String responseBody=client.execute(post, responseHandler);
+			        	JSONObject word = new JSONObject(responseBody);
+			        	String translated_word = word.getString("translation");
+			        	
+			        	Message msg_translated =  Message.obtain();
+			        	bundle.putString("Text", translated_word);
+			        	bundle.putInt("Error", 0);
+			        	msg_translated.setData(bundle);
+		    			translationHandler.sendMessage(msg_translated);
+		        	}
 	    			
 	    		}
 	    		catch(Exception t){
@@ -142,14 +167,20 @@ public class NewCard extends Activity {
     		Bundle bundle = msg.getData();
 
     		tv_Translation.setText(bundle.getString("Text"));
-    		
-    		// show everything
-    		if (!tookPic){
-                ib_Camera.setVisibility(View.VISIBLE);
-                tv_TakeAPic.setVisibility(View.VISIBLE);
-    		}
     		tv_Translation.setVisibility(View.VISIBLE);
-            
+    		if (bundle.getInt("Error") != 1){
+    		// show everything
+	    		if (!tookPic){
+	                ib_Camera.setVisibility(View.VISIBLE);
+	                tv_TakeAPic.setVisibility(View.VISIBLE);
+	    		}
+	    	}
+    		else{
+    			tv_TakeAPic.setVisibility(View.INVISIBLE);
+    			ib_Camera.setVisibility(View.INVISIBLE);
+    	        iv_Image.setVisibility(View.INVISIBLE);
+    	        b_AddCard.setVisibility(View.INVISIBLE);
+    		}
     		if (dialog) {
     			dialog = false;
     			mDialog.dismiss();
@@ -189,6 +220,7 @@ public class NewCard extends Activity {
                 }
                 
                 tookPic = true;
+                et_Original.setText(original);
       			iv_Image.setImageBitmap(resizedBitmap);
       			iv_Image.setVisibility(View.VISIBLE);
                 b_AddCard.setVisibility(View.VISIBLE);
@@ -239,8 +271,8 @@ public class NewCard extends Activity {
     
     public void addCard(View view){
     	// set everything up and send to web
-    	original = ((EditText) findViewById(R.id.translate)).getText().toString();
-    	translation = ((TextView) findViewById(R.id.translation)).getText().toString();
+    	//original = ((EditText) findViewById(R.id.translate)).getText().toString();
+    	translation = tv_Translation.getText().toString();
     	if (!dialog){
     		dialog = true;
     		mDialog.setMessage("Adding your flashcard... Please wait...");

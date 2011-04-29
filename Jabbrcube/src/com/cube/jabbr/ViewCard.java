@@ -8,6 +8,7 @@ import com.cube.jabbr.utils.Utils;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -82,9 +83,11 @@ public class ViewCard extends Activity {
         
         tv_wordZero.setText(word);
         tv_foreignZero.setText(foreign);
-        Drawable pic = Utils.loadDrawable(listOfImageUrls[pos]);
+        //Drawable pic = Utils.loadDrawable(listOfImageUrls[pos]);
         
-        iv_imageZero.setBackgroundDrawable(pic);
+        Bitmap pic = Utils.getBitmapFromURL(listOfImageUrls[pos]);
+        Bitmap resizedBitmap = resize(pic);
+        iv_imageZero.setImageBitmap(resizedBitmap);
        
         gestureDetector = new GestureDetector(new MyGestureDetector());
         gestureListener = new View.OnTouchListener() {
@@ -102,6 +105,30 @@ public class ViewCard extends Activity {
 
     }
     
+
+    private Bitmap resize(Bitmap pic){
+    	Bitmap resizedBitmap = null;
+        // resize picture so it doesnt get out of hand
+       // Bitmap resizedBitmap = Bitmap.createScaledBitmap(((BitmapDrawable) pic).getBitmap(), 200, 85, true);
+        int srcWidth = pic.getWidth();
+        int srcHeight = pic.getHeight();
+        int desiredWidth = 350;
+        int desiredHeight = 450;
+			// do whatever you want with the bitmap (Resize, Rename, Add To Gallery, etc)
+        if (srcWidth > srcHeight && srcWidth > desiredWidth){
+        	float scaleRatio = (float)srcWidth/(float)desiredWidth;
+            float newHeight = (float)srcHeight / scaleRatio;
+            resizedBitmap = Bitmap.createScaledBitmap(pic, desiredWidth, (int)newHeight, true);
+            pic.recycle();
+        }
+        else if (srcHeight > desiredHeight){
+        	float scaleRatio = (float)srcHeight/(float)desiredWidth;
+            float newWidth = (float)srcWidth/scaleRatio;
+            resizedBitmap = Bitmap.createScaledBitmap(pic, (int)newWidth, desiredHeight, true);
+            pic.recycle();
+        }
+        return resizedBitmap;
+    }
     
     private class MyGestureDetector extends SimpleOnGestureListener {
         @Override
@@ -119,22 +146,24 @@ public class ViewCard extends Activity {
                     	pos = 0;
 					else 
 						pos++;
-                    Drawable pic = Utils.loadDrawable(listOfImageUrls[pos]);
+                    //Drawable pic = Utils.loadDrawable(listOfImageUrls[pos]);
+                    Bitmap pic = Utils.getBitmapFromURL(listOfImageUrls[pos]);
+                    Bitmap resizedBitmap = resize(pic);
                     if (currentView == 0) {
 						currentView = 1;
 						tv_wordOne.setText(listOfWords[pos]);
 				        tv_foreignOne.setText(listOfForeign[pos]);
-				        iv_imageOne.setBackgroundDrawable(pic);
+				        iv_imageOne.setImageBitmap(resizedBitmap);
 				    } else if (currentView == 1) {
 						currentView = 2;
 						tv_wordTwo.setText(listOfWords[pos]);
 				        tv_foreignTwo.setText(listOfForeign[pos]);
-				        iv_imageTwo.setBackgroundDrawable(pic);
+				        iv_imageTwo.setImageBitmap(resizedBitmap);
 					} else {
 						currentView = 0;
 						tv_wordZero.setText(listOfWords[pos]);
 				        tv_foreignZero.setText(listOfForeign[pos]);
-				        iv_imageZero.setBackgroundDrawable(pic);
+				        iv_imageZero.setImageBitmap(resizedBitmap);
 					}
                     
                     vf_flipper.showNext();
@@ -150,22 +179,24 @@ public class ViewCard extends Activity {
                     	pos = (num-1);
 					else 
 						pos--;
-                    Drawable pic = Utils.loadDrawable(listOfImageUrls[pos]);
+                    //Drawable pic = Utils.loadDrawable(listOfImageUrls[pos]);
+                    Bitmap pic = Utils.getBitmapFromURL(listOfImageUrls[pos]);
+                    Bitmap resizedBitmap = resize(pic);
                     if (currentView == 0) {
 						currentView = 2;
 						tv_wordTwo.setText(listOfWords[pos]);
 				        tv_foreignTwo.setText(listOfForeign[pos]);
-				        iv_imageTwo.setBackgroundDrawable(pic);
+				        iv_imageTwo.setImageBitmap(resizedBitmap);
 				    } else if (currentView == 2) {
 						currentView = 1;
 						tv_wordOne.setText(listOfWords[pos]);
 				        tv_foreignOne.setText(listOfForeign[pos]);
-				        iv_imageOne.setBackgroundDrawable(pic);
+				        iv_imageOne.setImageBitmap(resizedBitmap);
 					} else {
 						currentView = 0;
 						tv_wordZero.setText(listOfWords[pos]);
 				        tv_foreignZero.setText(listOfForeign[pos]);
-				        iv_imageZero.setBackgroundDrawable(pic);
+				        iv_imageZero.setImageBitmap(resizedBitmap);
 					}
                     
                     vf_flipper.showPrevious();
@@ -175,7 +206,6 @@ public class ViewCard extends Activity {
             }
             return true;
         }
-        
 
         @Override
         public boolean onDown(MotionEvent e) {

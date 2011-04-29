@@ -1,5 +1,7 @@
 package com.cube.jabbr.utils;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
@@ -8,10 +10,10 @@ import android.widget.ViewSwitcher;
 
 public class GridviewThread extends Thread {
 	public interface GridviewThreadListener {
-		void handleImageLoaded(ViewSwitcher vs, ImageView iv, Drawable draw);
+		void handleImageLoaded(ViewSwitcher vs, ImageView iv, Bitmap draw);
 	}
 	GridviewThreadListener mListener = null;
-	private Handler mHandler;
+	private Handler mHandler = new Handler(); // Sometimes handler isnt created on run...
 	
 	public GridviewThread(GridviewThreadListener lListener){
 		mListener = lListener;
@@ -58,20 +60,11 @@ public class GridviewThread extends Thread {
 		mHandler.post(new Runnable() {
 			public void run() {
 				try {
-					
 					synchronized (iv){
-						// make sure this thread is the only one performing activities on
-						// this imageview
-						//BitmapFactory.Options lOptions = new BitmapFactory.Options();
-						//lOptions.inSampleSize = 1;
-						//Bitmap lBitmap = BitmapFactory.decodeFile(aPath, lOptions);
-						//aImage.setImageBitmap(lBitmap);
 						Drawable image = Utils.loadDrawable(url);
 						// Load the image here
 						if(mListener != null){
-							// we have an object that implements ImageLoadListener
-							
-							mListener.handleImageLoaded(vs, iv, image);
+							mListener.handleImageLoaded(vs, iv, ((BitmapDrawable) image).getBitmap());
 						}
 					}
 				} 
