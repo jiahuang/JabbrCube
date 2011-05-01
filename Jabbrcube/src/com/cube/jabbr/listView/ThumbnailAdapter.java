@@ -56,7 +56,8 @@ public class ThumbnailAdapter extends BaseAdapter implements GridviewThreadListe
     }
 
     public String getItem(int position) {
-        return mUrls[position];
+    	String image_url = mUrls[position].substring(mUrls[position].lastIndexOf("http"));
+        return image_url;//mUrls[position];
     }
 
     public long getItemId(int id) {
@@ -116,9 +117,6 @@ public class ThumbnailAdapter extends BaseAdapter implements GridviewThreadListe
 		mHandler.post(new Runnable() {
 			public void run() {
 				
-				// set the bitmap in the ImageView
-				//aImageView.setImageBitmap(aBitmap);
-				//iv.setImageDrawable(draw);
 				Bitmap resizedBitmap = Bitmap.createScaledBitmap(draw, 85, 85, true);
 				draw.recycle();
                 

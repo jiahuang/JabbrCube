@@ -89,8 +89,6 @@ public class NewCard extends Activity {
         tv_TakeAPic.setVisibility(View.INVISIBLE);
     }
     
-    // TODO: override on switch from vertical to horizontal
-    
     public void translateWord(View view){
     	if (!dialog){
     		dialog = true;
@@ -100,27 +98,30 @@ public class NewCard extends Activity {
     	new Thread(new Runnable() {
 			public void run(){
 	    		try{
+	    			int flag = 0;
 	    			original = et_Original.getText().toString();
 		        	if (original.endsWith(" ")){
 		        		original = original.substring(0, original.length() - 1);
 		        	}
-		        	else if (original.contains(" ")){ // can't translate more than one word
+		        	if (original.contains(" ")){ // can't translate more than one word
 		        		Message msg =  Message.obtain();
 		    			Bundle bundle = new Bundle();
 		    			bundle.putString("Text", "Sorry, we can make flashcards for only individual words, not phrases or sentences");
 		    			bundle.putInt("Error", 1);
 		    			msg.setData(bundle);
 		    			translationHandler.sendMessage(msg);
+		    			flag = 1;
 		        	}
-		        	else if(original.compareTo("") == 0){
+		        	if(original.compareTo("") == 0){
 		        		Message msg =  Message.obtain();
 		    			Bundle bundle = new Bundle();
 		    			bundle.putString("Text", "Please type in something to translate");
 		    			bundle.putInt("Error", 1);
 		    			msg.setData(bundle);
 		    			translationHandler.sendMessage(msg);
+		    			flag = 1;
 		        	}
-		        	else {
+		        	if (flag == 0) {
 		    			Message msg =  Message.obtain();
 		    			Bundle bundle = new Bundle();
 		    			bundle.putString("Text", "Translating...");

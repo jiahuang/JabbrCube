@@ -54,7 +54,8 @@ public class ThumbnailObtainer {
 				String flashcard_id = item.getString("flashcard_id");
 				listOfWords[i] = word;
 				listOfForeign[i] = answer;
-				listOfImageUrls[i] = "http://www.nullamatix.com/images/I-dunno-lol.jpg"; //TODO: real image urls
+				image_url = image_url.substring(image_url.lastIndexOf("http"));
+				listOfImageUrls[i] = image_url;//"http://www.nullamatix.com/images/I-dunno-lol.jpg";  //TODO: real image urls
 			}
 		}
 

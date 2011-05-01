@@ -11,13 +11,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Game" android:theme="@android:style/Theme.NoTitleBar"/>
-        <activity android:name=".NewCard" android:theme="@android:style/Theme.NoTitleBar"/>
-        <activity android:name=".Startup" android:theme="@android:style/Theme.NoTitleBar"/>
-        <activity android:name=".Personal" android:theme="@android:style/Theme.NoTitleBar"/>
-        <activity android:name=".ViewCard" android:theme="@android:style/Theme.NoTitleBar"/>
-        <activity android:name=".SignUp" android:theme="@android:style/Theme.NoTitleBar"/>
-        <activity android:name=".ChangeLoc" android:theme="@android:style/Theme.Dialog" android:label="Select your location"/>
+        <activity android:name=".Game" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"/>
+        <activity android:name=".NewCard" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"/>
+        <activity android:name=".Startup" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"/>
+        <activity android:name=".Personal" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"/>
+        <activity android:name=".ViewCard" android:theme="@android:style/Theme.NoTitleBar" />
+        <activity android:name=".SignUp" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"/>
+        <activity android:name=".ChangeLoc" android:theme="@android:style/Theme.Dialog" android:label="Select your location" android:screenOrientation="portrait"/>
 		<uses-feature android:name="android.hardware.camera"></uses-feature>>
     </application>
     <uses-sdk android:minSdkVersion="3" />

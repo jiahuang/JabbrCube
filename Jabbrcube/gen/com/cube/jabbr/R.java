@@ -10,59 +10,80 @@ package com.cube.jabbr;
 public final class R {
     public static final class attr {
     }
+    public static final class color {
+        public static final int jgrey1=0x7f040002;
+        public static final int jgrey2=0x7f040003;
+        public static final int jred1=0x7f040004;
+        public static final int jred2=0x7f040005;
+        public static final int jyellow1=0x7f040000;
+        public static final int jyellow2=0x7f040001;
+    }
     public static final class drawable {
         public static final int camera=0x7f020000;
         public static final int icon=0x7f020001;
-        public static final int loadinfo=0x7f020002;
-        public static final int logo_100=0x7f020003;
-        public static final int no_image=0x7f020004;
+        public static final int jabbr_button=0x7f020002;
+        public static final int jabbr_buttontext=0x7f020003;
+        public static final int loadinfo=0x7f020004;
+        public static final int logo_100=0x7f020005;
+        public static final int no_image=0x7f020006;
     }
     public static final class id {
-        public static final int Button0=0x7f060007;
-        public static final int Button1=0x7f060008;
-        public static final int Button2=0x7f060009;
-        public static final int Button3=0x7f06000a;
-        public static final int Camera=0x7f060016;
-        public static final int CardsLeft=0x7f060005;
-        public static final int Popup=0x7f060006;
-        public static final int Timer=0x7f060003;
-        public static final int Title=0x7f060004;
-        public static final int addCard=0x7f060017;
-        public static final int buttonLayout=0x7f060002;
-        public static final int camera=0x7f06001d;
-        public static final int context=0x7f06000c;
-        public static final int currentCards=0x7f06001c;
-        public static final int foreignOne=0x7f060025;
-        public static final int foreignTwo=0x7f060029;
-        public static final int foreignZero=0x7f060021;
-        public static final int icon=0x7f06002b;
-        public static final int icontext=0x7f06002c;
-        public static final int image=0x7f06000d;
-        public static final int imageOne=0x7f060026;
-        public static final int imageTwo=0x7f06002a;
-        public static final int imageZero=0x7f060022;
-        public static final int list=0x7f060001;
-        public static final int location=0x7f06001b;
-        public static final int locationLayout=0x7f060019;
-        public static final int login=0x7f060010;
-        public static final int name=0x7f060018;
-        public static final int password=0x7f06000f;
-        public static final int tblayout=0x7f060000;
-        public static final int text=0x7f06001a;
-        public static final int textLayoutOne=0x7f060023;
-        public static final int textLayoutTwo=0x7f060027;
-        public static final int textLayoutZero=0x7f06001f;
-        public static final int translate=0x7f060012;
-        public static final int translateButton=0x7f060013;
-        public static final int translateLayout=0x7f060011;
-        public static final int translation=0x7f060015;
-        public static final int translationLayout=0x7f060014;
-        public static final int username=0x7f06000e;
-        public static final int viewflipper=0x7f06001e;
-        public static final int widget32=0x7f06000b;
-        public static final int wordOne=0x7f060024;
-        public static final int wordTwo=0x7f060028;
-        public static final int wordZero=0x7f060020;
+        public static final int Button0=0x7f080007;
+        public static final int Button1=0x7f080008;
+        public static final int Button2=0x7f080009;
+        public static final int Button3=0x7f08000a;
+        public static final int Camera=0x7f080019;
+        public static final int CardsLeft=0x7f080005;
+        public static final int Popup=0x7f080006;
+        public static final int Timer=0x7f080003;
+        public static final int Title=0x7f080004;
+        public static final int addCard=0x7f08001a;
+        public static final int buttonLayout=0x7f080002;
+        public static final int camera=0x7f080028;
+        public static final int context=0x7f08000c;
+        public static final int create=0x7f080023;
+        public static final int currentCards=0x7f080027;
+        public static final int email=0x7f08001c;
+        public static final int emailLayout=0x7f08001b;
+        public static final int fluentLanguages=0x7f080020;
+        public static final int fluentLayout=0x7f08001f;
+        public static final int foreignOne=0x7f080030;
+        public static final int foreignTwo=0x7f080034;
+        public static final int foreignZero=0x7f08002c;
+        public static final int icon=0x7f080036;
+        public static final int icontext=0x7f080037;
+        public static final int image=0x7f08000d;
+        public static final int imageLayout=0x7f080016;
+        public static final int imageOne=0x7f080031;
+        public static final int imageTwo=0x7f080035;
+        public static final int imageZero=0x7f08002d;
+        public static final int learningLanguages=0x7f080022;
+        public static final int learningLayout=0x7f080021;
+        public static final int list=0x7f080001;
+        public static final int location=0x7f080026;
+        public static final int locationLayout=0x7f080024;
+        public static final int login=0x7f080010;
+        public static final int name=0x7f080012;
+        public static final int password=0x7f08000f;
+        public static final int passwordLayout=0x7f08001e;
+        public static final int signup=0x7f080011;
+        public static final int takePicText=0x7f080018;
+        public static final int tblayout=0x7f080000;
+        public static final int text=0x7f080025;
+        public static final int textLayoutOne=0x7f08002e;
+        public static final int textLayoutTwo=0x7f080032;
+        public static final int textLayoutZero=0x7f08002a;
+        public static final int translate=0x7f080014;
+        public static final int translateButton=0x7f080015;
+        public static final int translateLayout=0x7f080013;
+        public static final int translation=0x7f080017;
+        public static final int username=0x7f08000e;
+        public static final int usernameLayout=0x7f08001d;
+        public static final int viewflipper=0x7f080029;
+        public static final int widget32=0x7f08000b;
+        public static final int wordOne=0x7f08002f;
+        public static final int wordTwo=0x7f080033;
+        public static final int wordZero=0x7f08002b;
     }
     public static final class layout {
         public static final int changeloc=0x7f030000;
@@ -77,14 +98,17 @@ public final class R {
         public static final int viewcard=0x7f030009;
     }
     public static final class menu {
-        public static final int menu=0x7f050000;
+        public static final int menu=0x7f070000;
     }
     public static final class string {
-        public static final int app_name=0x7f040001;
-        public static final int choice1=0x7f040002;
-        public static final int choice2=0x7f040003;
-        public static final int choice3=0x7f040004;
-        public static final int choice4=0x7f040005;
-        public static final int hello=0x7f040000;
+        public static final int app_name=0x7f050001;
+        public static final int choice1=0x7f050002;
+        public static final int choice2=0x7f050003;
+        public static final int choice3=0x7f050004;
+        public static final int choice4=0x7f050005;
+        public static final int hello=0x7f050000;
+    }
+    public static final class style {
+        public static final int NoBackgroundDialog=0x7f060000;
     }
 }

@@ -67,6 +67,7 @@ public class Startup extends Activity {
         
         new Thread(new Runnable() {
 			public void run(){
+				try{
 				ThumbnailObtainer tbo = new ThumbnailObtainer();
 				Message msg =  Message.obtain();
     			Bundle bundle = new Bundle();
@@ -76,6 +77,10 @@ public class Startup extends Activity {
     			bundle.putInt("numOfCards", tbo.numOfCards);
     			msg.setData(bundle);
     			thumbnailHandler.sendMessage(msg);
+				}
+				catch(Exception e){
+					System.out.println(e.toString());
+				}
 			}
         }).start();
 	}
