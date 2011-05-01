@@ -23,9 +23,12 @@ import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cube.jabbr.utils.Utils;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -63,7 +66,7 @@ public class Game extends Activity {
 	Handler timerHandler;
 	Runnable timerUpdateRunnable;
 	long timerEndTime;
-	final long ROUNDTIME = 13*1000;
+	final long ROUNDTIME = 30*1000;
 
 	Vibrator vibrator;
 
@@ -77,11 +80,11 @@ public class Game extends Activity {
 		choices[2] = (Button) findViewById(R.id.Button2);
 		choices[3] = (Button) findViewById(R.id.Button3);
 		tableLayout = (TableLayout) findViewById(R.id.buttonLayout);
-		title = (TextView) findViewById(R.id.Title);
+		//title = (TextView) findViewById(R.id.Title);
 		popup = (Button) findViewById(R.id.Popup);
 		vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-		timerText = (TextView) findViewById(R.id.Timer);
-		cardsText = (TextView) findViewById(R.id.CardsLeft);
+		//timerText = (TextView) findViewById(R.id.Timer);
+		//cardsText = (TextView) findViewById(R.id.CardsLeft);
 		timerHandler = new Handler();
 		timerUpdateRunnable = new Runnable() {
 			public void run() {
@@ -104,7 +107,7 @@ public class Game extends Activity {
 		
 		// put this in a seperate thread
 		try{
-			//getCardsFromWebsite();
+			getCardsFromWebsite();
 		} catch(Exception e) {
 			Log.e("jabbr", "Problem getting cards from website:" +e.toString());
 		}
@@ -140,7 +143,7 @@ public class Game extends Activity {
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpGet httpGet = new HttpGet("http://jabbrcube.heroku.com/api/getdeck/1");
 			httpGet.addHeader(BasicScheme.authenticate(
-					new UsernamePasswordCredentials("jialiya", "password"),
+					new UsernamePasswordCredentials("poorva", "password"),
 					"UTF-8", false));
 			ResponseHandler<String> responseHandler = new BasicResponseHandler();
 			String response = httpClient.execute(httpGet, responseHandler);
@@ -198,6 +201,7 @@ public class Game extends Activity {
 					choices[si] = flashcard.getString("wrong"+(si+1));
 					translatedChoices[si] = flashcard.getString("wrong"+(si+1)+"_native");
 					Log.i("jabbr", "got flashcard wrong"+(si+1)+":"+choices[si]);
+					Log.i("jabbr", "got flashcard translated"+(si+1)+":"+translatedChoices[si]);
 				}
 				choices[3] = flashcard.getString("answer");
 				Log.i("jabbr", "got flashcard answer");
@@ -208,11 +212,13 @@ public class Game extends Activity {
 
 				Drawable drawable;
 				try {
-					drawable= loadDrawable(image_url);
+					drawable= Utils.loadDrawable(image_url);
+					drawable.setBounds(0, 0, 350, 350);
 					Log.i("jabbr", "got flashcard drawable by loading:"+image_url);
 				} catch (Exception e) {
-					//drawable = getResources().getDrawable(R.drawable.no_image);
-					drawable = loadDrawable("http://catsinsinks.com/images/cats/rotator.php");
+					drawable = getResources().getDrawable(R.drawable.no_image);
+					drawable.setBounds(0, 0, 350, 350);
+					//drawable = Utils.loadDrawable("http://catsinsinks.com/images/cats/rotator.php");
 					Log.i("jabbr", "CATS!!!! IN F*CKING SINKS Y'ALL.");
 				}
 				FlashCard flashCardObject = new FlashCard(drawable, title, choices, translatedChoices,
@@ -233,24 +239,6 @@ public class Game extends Activity {
 		return true;
 	}
 
-	public Drawable loadDrawable(String image_url) {
-
-
-		URL url = null;
-		InputStream inputStream = null;
-		try {
-			url = new URL(image_url);
-			inputStream = (InputStream) url.getContent();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Drawable drawable = Drawable.createFromStream(inputStream, "src");
-		//Toast.makeText(this.getApplicationContext(), "url:"+url.toString(), Toast.LENGTH_SHORT).show();
-		//tableLayout.setBackgroundDrawable(drawable);
-		return drawable;
-	}
-
 	public void loadCurrentFlashCard() {
 		this.wrong = false;
 		FlashCard flashcard;
@@ -258,10 +246,11 @@ public class Game extends Activity {
 			Toast.makeText(getApplicationContext(), "Uh oh. we didn't load the flashcards.", Toast.LENGTH_SHORT).show();
 			flashcard = new FlashCard();
 			flashcard.drawable = getResources().getDrawable(R.drawable.no_image);
-		} else {http://jabbrcube.heroku.com/api/results
+		} else {//http://jabbrcube.heroku.com/api/results
 		Log.i("jabbr", ""+this.currentFlashcardIndex +"/"+ this.flashcards.length);
 		//Toast.makeText(this.getApplicationContext(), "loading current flash:"+this.currentFlashcardIndex, Toast.LENGTH_SHORT).show();
 		flashcard = this.flashcards[this.currentFlashcardIndex];
+		translatedChoices = flashcard.translatedChoices;
 		}
 		if (flashcard != null){
 			tableLayout.setBackgroundDrawable(flashcard.drawable);
@@ -304,27 +293,11 @@ public class Game extends Activity {
 			view.performHapticFeedback( HapticFeedbackConstants.VIRTUAL_KEY,
 					HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING );
 
-
 			popup.setText("Correct!\n" + title.getText().toString() + " = " + button.getText());
 			popup.setBackgroundColor(0xaa00ff00);
 			popup.setVisibility(View.VISIBLE);
 		} else {
 			Log.i("jabbrCube","Touched a choice in the game! "+button.getText().toString());
-			/*int dot = 20;      // Length of a Morse Code "dot" in milliseconds
-			int dash = 50;     // Length of a Morse Code "dash" in milliseconds
-			int short_gap = 20;    // Length of Gap Between dots/dashes
-			int medium_gap = 50;   // Length of Gap Between Letters
-			int long_gap = 100;    // Length of Gap Between Words
-			long[] pattern = {
-			    0,  // Start immediately
-			    dot, short_gap, dot, short_gap, dot,    // s
-			    medium_gap,
-			    dash, short_gap, dash, short_gap, dash, // o
-			    medium_gap,
-			    dot, short_gap, dot, short_gap, dot,    // s
-			    long_gap
-			};
-			vibrator.vibrate(pattern, -1);*/
 			this.wrong = true;
 			button.setVisibility(View.INVISIBLE);
 			int i;
