@@ -6,8 +6,7 @@
 
 	<RelativeLayout
     android:layout_width="fill_parent"
-    android:layout_height="60dip"
-    android:background="#66005500">	
+    android:layout_height="100dip">	
 		<TextView android:gravity="center"
 	android:layout_width="wrap_content" 
 	android:layout_marginTop="20dip" android:layout_height="wrap_content"
