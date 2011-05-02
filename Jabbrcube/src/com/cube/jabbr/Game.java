@@ -27,6 +27,7 @@ import com.cube.jabbr.utils.Utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ScaleDrawable;
 import android.os.Bundle;
@@ -67,6 +68,8 @@ public class Game extends Activity {
 	Runnable timerUpdateRunnable;
 	long timerEndTime;
 	final long ROUNDTIME = 30*1000;
+	
+	String[] image_urls;
 
 	Vibrator vibrator;
 
@@ -113,7 +116,7 @@ public class Game extends Activity {
 		}
 		currentFlashcardIndex = 0;
 		try{
-			Log.i("jabbr", "current: "+this.currentFlashcardIndex);
+			//Log.i("jabbr", "current: "+this.currentFlashcardIndex);
 
 			loadCurrentFlashCard();
 		} catch (Exception e) {
@@ -147,7 +150,7 @@ public class Game extends Activity {
 					"UTF-8", false));
 			ResponseHandler<String> responseHandler = new BasicResponseHandler();
 			String response = httpClient.execute(httpGet, responseHandler);
-			Log.i("jabbr", "response: " +response);
+			//Log.i("jabbr", "response: " +response);
 			/*
 			in = new BufferedReader
 			(new InputStreamReader(response.getEntity().getContent()));
@@ -182,50 +185,52 @@ public class Game extends Activity {
 		try {
 			JSONObject deck = new JSONObject(responseBody);
 			JSONArray flashcards = deck.getJSONArray("flashcards");
-			Log.i("jabbr", "got flashcards array");
+			//Log.i("jabbr", "got flashcards array");
 			this.flashcards = new FlashCard[flashcards.length()];
+			this.image_urls = new String[flashcards.length()];
 			for( int i = 0; i < flashcards.length(); i++) {
 				JSONObject flashcard = flashcards.getJSONObject(i);
 				//				Log.i("jabbr", "got flashcard object");
 				String image_url = flashcard.getString("image_url");
+				this.image_urls[i] = image_url;
 				//until the stuff goes to amazon s3, every link is broken. Get the last url
 				image_url = image_url.substring(image_url.lastIndexOf("http"));
-				Log.i("jabbr", "got flashcard image_url:"+image_url);
+				//Log.i("jabbr", "got flashcard image_url:"+image_url);
 				String title = flashcard.getString("word");
-				Log.i("jabbr", "got flashcard word: "+title);
+				//Log.i("jabbr", "got flashcard word: "+title);
 				int flashcardID = flashcard.getInt("flashcard_id");
-				Log.i("jabbr", "got flashcard id:"+flashcardID);
+				//Log.i("jabbr", "got flashcard id:"+flashcardID);
 				String[] choices = new String[4];
 				String[] translatedChoices = new String[4];
 				for ( int si = 0; si < 3 ; si++) {
 					choices[si] = flashcard.getString("wrong"+(si+1));
 					translatedChoices[si] = flashcard.getString("wrong"+(si+1)+"_native");
-					Log.i("jabbr", "got flashcard wrong"+(si+1)+":"+choices[si]);
-					Log.i("jabbr", "got flashcard translated"+(si+1)+":"+translatedChoices[si]);
+					//Log.i("jabbr", "got flashcard wrong"+(si+1)+":"+choices[si]);
+					//Log.i("jabbr", "got flashcard translated"+(si+1)+":"+translatedChoices[si]);
 				}
 				choices[3] = flashcard.getString("answer");
-				Log.i("jabbr", "got flashcard answer");
+				//Log.i("jabbr", "got flashcard answer");
 				if (choices[3] == null)
 					choices[3] = "THE ANSWER";
 				int correctChoice = 3;
-				Log.i("jabbr","now to load: "+image_url);
+				//Log.i("jabbr","now to load: "+image_url);
 
 				Drawable drawable;
 				try {
 					drawable= Utils.loadDrawable(image_url);
 					drawable.setBounds(0, 0, 350, 350);
-					Log.i("jabbr", "got flashcard drawable by loading:"+image_url);
+					//Log.i("jabbr", "got flashcard drawable by loading:"+image_url);
 				} catch (Exception e) {
 					drawable = getResources().getDrawable(R.drawable.no_image);
 					drawable.setBounds(0, 0, 350, 350);
 					//drawable = Utils.loadDrawable("http://catsinsinks.com/images/cats/rotator.php");
-					Log.i("jabbr", "CATS!!!! IN F*CKING SINKS Y'ALL.");
+					//Log.i("jabbr", "CATS!!!! IN F*CKING SINKS Y'ALL.");
 				}
 				FlashCard flashCardObject = new FlashCard(drawable, title, choices, translatedChoices,
 						correctChoice, flashcardID);
 				flashCardObject.randomizeChoices();
 				this.flashcards[i] = flashCardObject;
-				Log.i("jabbr", "Got card #"+i);
+				//Log.i("jabbr", "Got card #"+i);
 			}
 			numFlashcardsLeft = flashcards.length();
 			updateCardText();
@@ -247,7 +252,7 @@ public class Game extends Activity {
 			flashcard = new FlashCard();
 			flashcard.drawable = getResources().getDrawable(R.drawable.no_image);
 		} else {//http://jabbrcube.heroku.com/api/results
-		Log.i("jabbr", ""+this.currentFlashcardIndex +"/"+ this.flashcards.length);
+		//Log.i("jabbr", ""+this.currentFlashcardIndex +"/"+ this.flashcards.length);
 		//Toast.makeText(this.getApplicationContext(), "loading current flash:"+this.currentFlashcardIndex, Toast.LENGTH_SHORT).show();
 		flashcard = this.flashcards[this.currentFlashcardIndex];
 		translatedChoices = flashcard.translatedChoices;
@@ -257,12 +262,12 @@ public class Game extends Activity {
 			for (int i = 0; i < 4; i++) {
 				choices[i].setText(flashcard.choices[i]);
 				choices[i].setVisibility(View.VISIBLE);
-				Log.i("jabbr", "setting text for choice "+i+" to "+flashcard.choices[i]);
+				//Log.i("jabbr", "setting text for choice "+i+" to "+flashcard.choices[i]);
 			}
 
 			title.setText(flashcard.title);
 			this.correctChoice = flashcard.correctChoice;
-			Log.i("jabbr", "setting correct choice to " + flashcard.correctChoice);
+			//Log.i("jabbr", "setting correct choice to " + flashcard.correctChoice);
 			popup.setVisibility(View.INVISIBLE);
 		}
 		else
@@ -297,7 +302,7 @@ public class Game extends Activity {
 			popup.setBackgroundColor(0xaa00ff00);
 			popup.setVisibility(View.VISIBLE);
 		} else {
-			Log.i("jabbrCube","Touched a choice in the game! "+button.getText().toString());
+			//Log.i("jabbrCube","Touched a choice in the game! "+button.getText().toString());
 			this.wrong = true;
 			button.setVisibility(View.INVISIBLE);
 			int i;
@@ -323,7 +328,7 @@ public class Game extends Activity {
 		if (this.currentFlashcardIndex < (this.flashcards.length-1)) {
 			this.currentFlashcardIndex++;
 			loadCurrentFlashCard();
-			Toast.makeText(this.getApplicationContext(), "index, length: "+this.currentFlashcardIndex +" "+ this.flashcards.length, Toast.LENGTH_SHORT).show();
+			//Toast.makeText(this.getApplicationContext(), "index, length: "+this.currentFlashcardIndex +" "+ this.flashcards.length, Toast.LENGTH_SHORT).show();
 		}
 		else {
 			Toast.makeText(this.getApplicationContext(), "Picked "+correctPicks+" right on first try", Toast.LENGTH_SHORT).show();
@@ -336,9 +341,23 @@ public class Game extends Activity {
 	}
 	public void gameOver() {
 		postResults();
+		Log.i("jabbr", "Launching activity from game!");
+		launchActivity();
 		//TODO: go to stat page
 	}
-	
+	public void launchActivity()
+    {
+		Intent i = new Intent(this, ResultsPage.class);
+		i.putExtra("num", this.flashcards.length);
+		for(int it=0; it<this.flashcards.length; it++){
+        	i.putExtra("words"+it, this.flashcards[it].title);
+        	i.putExtra("foreign"+it, this.flashcards[it].choices[this.flashcards[it].correctChoice]);
+        	i.putExtra("image_urls"+it, this.image_urls[it]);
+        	i.putExtra("user_got_right"+it, this.flashcards[it].userGotCorrect);
+        }
+		i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(i);
+    }
 	//Send results to website
 	public void postResults() {
     	new Thread(new Runnable() {

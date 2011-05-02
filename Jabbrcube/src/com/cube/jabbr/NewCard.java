@@ -313,7 +313,7 @@ public class NewCard extends Activity {
     				
     				httpPost.setEntity(entity);
     	
-    		        HttpResponse response = httpClient.execute(httpPost, localContext);
+    		        //HttpResponse response = httpClient.execute(httpPost, localContext);
     		        ResponseHandler<String> responseHandler=new BasicResponseHandler();
     				String s_response = httpClient.execute(httpPost, responseHandler);
     				submissionHandler.sendMessage(Message.obtain());

@@ -34,11 +34,11 @@ public class FlashCard {
 	
 	public void randomizeChoices() {
 		Random random = new Random();
-		Log.i("jabbr", "before choices");
-		logChoices();
+		//Log.i("jabbr", "before choices");
+		//logChoices();
 		for(int i = 0; i < choices.length; i++) {
 			int j = random.nextInt(choices.length);
-			Log.i("jabbr","switching "+i+ " with "+j+":"+choices[i]+"<->"+choices[j]);
+			//Log.i("jabbr","switching "+i+ " with "+j+":"+choices[i]+"<->"+choices[j]);
 			
 			String ctemp = choices[i];
 			choices[i] = choices[j];
@@ -51,11 +51,11 @@ public class FlashCard {
 				correctChoice = j;
 			else if (j == correctChoice)
 				correctChoice = i;
-			Log.i("jabbr", "i:"+choices[i] + " j:"+choices[j] + " temp:"+ctemp+ " repeat");
-			logChoices();
+			//Log.i("jabbr", "i:"+choices[i] + " j:"+choices[j] + " temp:"+ctemp+ " repeat");
+			//logChoices();
 		}
-		Log.i("jabbr", "after choices");
-		logChoices();
+		//Log.i("jabbr", "after choices");
+		//logChoices();
 	}
 	
 	public void logChoices() {
