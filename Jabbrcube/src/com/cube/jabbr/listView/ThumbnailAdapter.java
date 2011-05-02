@@ -52,7 +52,7 @@ public class ThumbnailAdapter extends BaseAdapter implements GridviewThreadListe
 	}
     
     public int getCount() {
-        return mUrls.length -1;
+        return mUrls.length;
     }
 
     public String getItem(int position) {

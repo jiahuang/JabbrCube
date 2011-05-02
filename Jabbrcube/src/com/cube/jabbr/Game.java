@@ -80,11 +80,11 @@ public class Game extends Activity {
 		choices[2] = (Button) findViewById(R.id.Button2);
 		choices[3] = (Button) findViewById(R.id.Button3);
 		tableLayout = (TableLayout) findViewById(R.id.buttonLayout);
-		//title = (TextView) findViewById(R.id.Title);
+		title = (TextView) findViewById(R.id.Title);
 		popup = (Button) findViewById(R.id.Popup);
 		vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-		//timerText = (TextView) findViewById(R.id.Timer);
-		//cardsText = (TextView) findViewById(R.id.CardsLeft);
+		timerText = (TextView) findViewById(R.id.Timer);
+		cardsText = (TextView) findViewById(R.id.CardsLeft);
 		timerHandler = new Handler();
 		timerUpdateRunnable = new Runnable() {
 			public void run() {

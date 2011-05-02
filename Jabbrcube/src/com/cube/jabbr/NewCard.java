@@ -249,7 +249,6 @@ public class NewCard extends Activity {
     Handler submissionHandler=new Handler() {
     	@Override
     	public void handleMessage(Message msg) {
-        	
         	CharSequence text = "Your Flashcard has been sucessfully added!";
         	Toast toast = Toast.makeText(getApplicationContext(), text,  Toast.LENGTH_SHORT);
         	toast.show();
@@ -267,13 +266,18 @@ public class NewCard extends Activity {
 			iv_Image.setVisibility(View.INVISIBLE);
 			b_AddCard.setVisibility(View.INVISIBLE);
   			//ib_Camera.setVisibility(View.VISIBLE);
+
+    		addingCard = false;
     	}
     };
-    
+    boolean addingCard = false;
     public void addCard(View view){
     	// set everything up and send to web
     	//original = ((EditText) findViewById(R.id.translate)).getText().toString();
+    	if (!addingCard){
+    		addingCard = true;
     	translation = tv_Translation.getText().toString();
+    	System.out.println("Adding Card");
     	if (!dialog){
     		dialog = true;
     		mDialog.setMessage("Adding your flashcard... Please wait...");
@@ -315,6 +319,6 @@ public class NewCard extends Activity {
     			
     		}
     	}).start();
-
+    	}
     }
 }

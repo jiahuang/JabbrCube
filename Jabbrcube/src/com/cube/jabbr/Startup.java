@@ -74,6 +74,7 @@ public class Startup extends Activity {
     			bundle.putStringArray("words", tbo.listOfWords);
     			bundle.putStringArray("foreign", tbo.listOfForeign);
     			bundle.putStringArray("images", tbo.listOfImageUrls);
+    			bundle.putStringArray("thumbnails", tbo.listOfThumbnailUrls);
     			bundle.putInt("numOfCards", tbo.numOfCards);
     			msg.setData(bundle);
     			thumbnailHandler.sendMessage(msg);
@@ -92,12 +93,13 @@ public class Startup extends Activity {
     		final int numOfCards = bundle.getInt("numOfCards");
             final String[] listOfWords = bundle.getStringArray("words");
             final String[] listOfForeign = bundle.getStringArray("foreign");
+            final String[] listOfThumbnailUrls = bundle.getStringArray("thumbnails");
             final String[] listOfImageUrls = bundle.getStringArray("images");
 
             final GridView gridview = (GridView) findViewById(R.id.currentCards);
-            
+            if (numOfCards >0){
             ThumbnailAdapter gridAdapter = new ThumbnailAdapter(Startup.this.getApplicationContext(),
-    				listOfImageUrls, listOfWords, listOfForeign, numOfCards);
+            		listOfThumbnailUrls, listOfWords, listOfForeign, numOfCards);
             gridview.setAdapter(gridAdapter);
             
             gridview.setOnItemClickListener(new OnItemClickListener() {
@@ -115,6 +117,7 @@ public class Startup extends Activity {
                     startActivityForResult(myIntent, 0);
                 }
             });
+            }
     	}
     };
     
