@@ -23,9 +23,12 @@ import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cube.jabbr.listView.ThumbnailAdapter;
+import com.cube.jabbr.listView.ThumbnailObtainer;
 import com.cube.jabbr.utils.Utils;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -39,10 +42,13 @@ import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class Game extends Activity {
 	/** Called when the activity is first created. */
@@ -52,13 +58,14 @@ public class Game extends Activity {
 	TextView title;
 	Button popup;
 	int correctChoice = 3;
+	ProgressDialog mDialog = null;
 
 	int correctPicks = 0, numFlashcardsLeft = 0;
 	boolean wrong = false;
 
 	int currentFlashcardIndex = 0;
 	FlashCard[] flashcards;
-	boolean questionCorrect = false;
+	boolean questionCorrect = false, dialog = false;
 
 	TextView timerText, cardsText;
 
@@ -78,7 +85,14 @@ public class Game extends Activity {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.game);
-		choices[0] = (Button) findViewById(R.id.Button0);
+		
+		dialog = true;
+        mDialog = new ProgressDialog(Game.this);
+        mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mDialog.setMessage("Loading Game. Please wait...");
+        mDialog.show();
+		
+        choices[0] = (Button) findViewById(R.id.Button0);
 		choices[1] = (Button) findViewById(R.id.Button1);
 		choices[2] = (Button) findViewById(R.id.Button2);
 		choices[3] = (Button) findViewById(R.id.Button3);
@@ -104,30 +118,55 @@ public class Game extends Activity {
 			}
 		};
 		initializeGame();
+        
+		
+		
+		
 	}
+	Handler gameHandler=new Handler() {
+    	@Override
+    	public void handleMessage(Message msg) {
+    		
+    		if (dialog) {
+				mDialog.dismiss();
+				try{
+					//Log.i("jabbr", "current: "+this.currentFlashcardIndex);
 
+					loadCurrentFlashCard();
+				} catch (Exception e) {
+					Log.e("jabbr", "load current flashcard error:"+e.toString());
+				}
+				timerEndTime = System.currentTimeMillis() + ROUNDTIME;
+				timerHandler.removeCallbacks(timerUpdateRunnable);
+				timerHandler.post(timerUpdateRunnable);
+				
+				updateCardText();
+				timerText.setText("Time:\n"+ROUNDTIME/1000);
+			}
+    	}
+    };
 	public void initializeGame() {
 		
 		// put this in a seperate thread
 		try{
-			getCardsFromWebsite();
+			new Thread(new Runnable() {
+				public void run(){
+					try{
+						getCardsFromWebsite();
+						Message msg =  Message.obtain();
+						gameHandler.sendMessage(msg);
+					}
+					catch(Exception e){
+						System.out.println(e.toString());
+					}
+				}
+	        }).start();
+			
 		} catch(Exception e) {
 			Log.e("jabbr", "Problem getting cards from website:" +e.toString());
 		}
 		currentFlashcardIndex = 0;
-		try{
-			//Log.i("jabbr", "current: "+this.currentFlashcardIndex);
-
-			loadCurrentFlashCard();
-		} catch (Exception e) {
-			Log.e("jabbr", "load current flashcard error:"+e.toString());
-		}
-		timerEndTime = System.currentTimeMillis() + ROUNDTIME;
-		timerHandler.removeCallbacks(timerUpdateRunnable);
-		timerHandler.post(timerUpdateRunnable);
 		
-		updateCardText();
-		timerText.setText("Time:\n"+ROUNDTIME/1000);
 	}
 
 	public void getCardsFromWebsite() {
@@ -233,7 +272,7 @@ public class Game extends Activity {
 				//Log.i("jabbr", "Got card #"+i);
 			}
 			numFlashcardsLeft = flashcards.length();
-			updateCardText();
+			
 
 		} catch (Exception e) {
 			Log.e("jabbr", "Problem loading deck:" + e.toString());

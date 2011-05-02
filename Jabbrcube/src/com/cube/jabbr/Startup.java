@@ -167,6 +167,7 @@ public class Startup extends Activity {
     }
 
     public void game(View view){
+    	//Toast.makeText(getApplicationContext(), "Loading Flashcards. Please wait...", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent().setClass(this, Game.class);
     	startActivity(intent);
     }
