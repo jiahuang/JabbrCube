@@ -73,12 +73,13 @@ public class ResultsPage extends ListActivity {
 		i.putExtra("pos_start", pos_start);
 		i.putExtra("num", num);
 		for(int it=0; it<num; it++){
-			Log.i("jabbr", "respagesend:"+listOfWords[it]);
-        	i.putExtra("words"+i, listOfWords[it]);
-        	i.putExtra("foreign"+i, listOfForeign[it]);
-        	i.putExtra("image_urls"+i, listOfImageUrls[it]);
+			//Log.i("jabbr", "respagesend:"+listOfWords[it]);
+        	i.putExtra("words"+it, listOfWords[it]);
+        	i.putExtra("foreign"+it, listOfForeign[it]);
+        	i.putExtra("image_urls"+it, listOfImageUrls[it]);
+        	Log.i("jabbr","send:"+i.getStringExtra("words"+it));
         }
-		i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		//i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(i);
     }
 }

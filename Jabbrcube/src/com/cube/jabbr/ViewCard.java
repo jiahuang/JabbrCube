@@ -65,6 +65,7 @@ public class ViewCard extends Activity {
         	listOfWords[i] = extras.getString("words"+i);
         	listOfForeign[i] = extras.getString("foreign"+i);
         	listOfImageUrls[i] = extras.getString("image_urls"+i);
+        	
         }
         String foreign = listOfForeign[pos];
         String word = listOfWords[pos];
