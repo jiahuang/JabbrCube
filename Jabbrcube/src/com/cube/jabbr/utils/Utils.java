@@ -19,6 +19,7 @@ public class Utils {
 	public static String PREF_PLACEID = "placeId";
 	public static String PREF_NAME = "username";
 	public static String PREF_PASSWORD = "password";
+	public static String PREF_CATEGORIES = "categories";
 	
 	public static Drawable loadDrawable(String image_url) {
 		URL url = null;

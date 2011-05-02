@@ -38,8 +38,14 @@ public class FoursquareWrapper {
 				double item_lon = item.getJSONObject("location").getDouble("lng");
 				Log.d("lat", Double.toString(item_lat));
 				JSONArray categories = item.getJSONArray("categories");
-				
-				places.add(new Place(name, id, item_lat, item_lon, categories));
+				//String[] categoryIds = new String[categories.length()];
+				String categoryIds = "";
+				for (int a = 0; a<categories.length(); a++){
+					JSONObject cat = categories.getJSONObject(a);
+					categoryIds = categoryIds + cat.getString("id") + ",";
+					//System.out.println("category id "+a+": "+ categoryIds[a]);
+				}
+				places.add(new Place(name, id, item_lat, item_lon, categoryIds));
 			}
 		}
 

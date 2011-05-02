@@ -27,6 +27,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.net.Uri;
@@ -48,6 +49,7 @@ import com.cube.jabbr.MIME.HttpMultipartMode;
 import com.cube.jabbr.MIME.MultipartEntity;
 import com.cube.jabbr.content.ByteArrayBody;
 import com.cube.jabbr.content.StringBody;
+import com.cube.jabbr.utils.Utils;
 
 public class NewCard extends Activity {
 	final int CAMERA_PIC_REQUEST = 1;
@@ -304,6 +306,10 @@ public class NewCard extends Activity {
     				entity.addPart("flashcard[photo]", new ByteArrayBody(data, original+".jpg"));
     				entity.addPart("flashcard[word_str]", new StringBody(original));
     				entity.addPart("flashcard[place_id]", new StringBody("1"));
+    				//SharedPreferences sharedPreferences = getSharedPreferences(Utils.PREF, MODE_PRIVATE);
+    		        //String categories= sharedPreferences.getString(Utils.PREF_CATEGORIES, "");
+    		        //System.out.println("categories: "+categories);
+    				//entity.addPart("flashcard[categories]", new StringBody(categories));
     				
     				httpPost.setEntity(entity);
     	

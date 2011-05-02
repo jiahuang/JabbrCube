@@ -83,13 +83,13 @@ public class ViewCard extends Activity {
         
         tv_wordZero.setText(word);
         tv_foreignZero.setText(foreign);
-        //Drawable pic = Utils.loadDrawable(listOfImageUrls[pos]);
-        
-        Bitmap pic = Utils.getBitmapFromURL(listOfImageUrls[pos]);
-        Bitmap resizedBitmap = resize(pic);
-        pic.recycle();
-        iv_imageZero.setImageBitmap(resizedBitmap);
-       
+        Drawable pic = Utils.loadDrawable(listOfImageUrls[pos]);
+        //System.out.println(listOfImageUrls[pos]);
+        //Bitmap pic = Utils.getBitmapFromURL(listOfImageUrls[pos]);
+        //Bitmap resizedBitmap = resize(pic);
+        //pic.recycle();
+        //iv_imageZero.setImageBitmap(resizedBitmap);
+        iv_imageZero.setImageDrawable(pic);
         gestureDetector = new GestureDetector(new MyGestureDetector());
         gestureListener = new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
@@ -147,24 +147,25 @@ public class ViewCard extends Activity {
                     	pos = 0;
 					else 
 						pos++;
-                    //Drawable pic = Utils.loadDrawable(listOfImageUrls[pos]);
-                    Bitmap pic = Utils.getBitmapFromURL(listOfImageUrls[pos]);
-                    Bitmap resizedBitmap = resize(pic);
+                    Drawable pic = Utils.loadDrawable(listOfImageUrls[pos]);
+                    //Bitmap pic = Utils.getBitmapFromURL(listOfImageUrls[pos]);
+                    
+                    //Bitmap resizedBitmap = resize(pic);
                     if (currentView == 0) {
 						currentView = 1;
 						tv_wordOne.setText(listOfWords[pos]);
 				        tv_foreignOne.setText(listOfForeign[pos]);
-				        iv_imageOne.setImageBitmap(resizedBitmap);
+				        iv_imageOne.setImageDrawable(pic);
 				    } else if (currentView == 1) {
 						currentView = 2;
 						tv_wordTwo.setText(listOfWords[pos]);
 				        tv_foreignTwo.setText(listOfForeign[pos]);
-				        iv_imageTwo.setImageBitmap(resizedBitmap);
+				        iv_imageTwo.setImageDrawable(pic);
 					} else {
 						currentView = 0;
 						tv_wordZero.setText(listOfWords[pos]);
 				        tv_foreignZero.setText(listOfForeign[pos]);
-				        iv_imageZero.setImageBitmap(resizedBitmap);
+				        iv_imageZero.setImageDrawable(pic);
 					}
                     
                     vf_flipper.showNext();
@@ -180,24 +181,24 @@ public class ViewCard extends Activity {
                     	pos = (num-1);
 					else 
 						pos--;
-                    //Drawable pic = Utils.loadDrawable(listOfImageUrls[pos]);
-                    Bitmap pic = Utils.getBitmapFromURL(listOfImageUrls[pos]);
-                    Bitmap resizedBitmap = resize(pic);
+                    Drawable pic = Utils.loadDrawable(listOfImageUrls[pos]);
+                    //Bitmap pic = Utils.getBitmapFromURL(listOfImageUrls[pos]);
+                    //Bitmap resizedBitmap = resize(pic);
                     if (currentView == 0) {
 						currentView = 2;
 						tv_wordTwo.setText(listOfWords[pos]);
 				        tv_foreignTwo.setText(listOfForeign[pos]);
-				        iv_imageTwo.setImageBitmap(resizedBitmap);
+				        iv_imageTwo.setImageDrawable(pic);
 				    } else if (currentView == 2) {
 						currentView = 1;
 						tv_wordOne.setText(listOfWords[pos]);
 				        tv_foreignOne.setText(listOfForeign[pos]);
-				        iv_imageOne.setImageBitmap(resizedBitmap);
+				        iv_imageOne.setImageDrawable(pic);
 					} else {
 						currentView = 0;
 						tv_wordZero.setText(listOfWords[pos]);
 				        tv_foreignZero.setText(listOfForeign[pos]);
-				        iv_imageZero.setImageBitmap(resizedBitmap);
+				        iv_imageZero.setImageDrawable(pic);
 					}
                     
                     vf_flipper.showPrevious();

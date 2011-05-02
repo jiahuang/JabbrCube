@@ -58,6 +58,7 @@ public class ChangeLoc extends Activity {
 	    		SharedPreferences.Editor editor = sharedPreferences.edit();
 	            editor.putString(Utils.PREF_PLACEID, contextId);
 	            editor.putString(Utils.PREF_PLACENAME, item.name);
+	            editor.putString(Utils.PREF_CATEGORIES, item.categories);
 	            editor.putFloat(Utils.PREF_LATITUDE, (float) item.lat);
 	            editor.putFloat(Utils.PREF_LONGITUDE, (float) item.lon);
 	            editor.commit();
