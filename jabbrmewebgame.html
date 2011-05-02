@@ -1,0 +1,62 @@
+
+<!DOCTYPE html> 
+ 
+<html lang="en"> 
+<head> 
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+  <!--
+     Jabbr.me web game by team JabbrCube. Based on Time Test by Alex Cruikshank.
+  
+  Time Test is
+  Copyright (c) 2010, Alex Cruikshank
+  All rights reserved.
+ 
+  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ 
+  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+  Neither the name of Alex Cruikshank nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    --> 
+	<title>Jabbr.me Game</title> 
+	<style type="text/css" media="screen"> 
+			#game { display:block; margin: 0px auto; }
+			#answers button {
+			  border: 1px solid #999; background-color: #fff; font-family: Helvetica,Arial;
+			  font-size: 16pt; padding: 8px 0px 4px 0px; margin: 0px 10px; width: 100px; color: #000;
+			}
+			#answers button:hover { background-color: #ffd; color: #330; border: 1px solid #330; }
+			#answers button:active { background-color: #ff9; }
+			
+			#answers { width: 500px; margin: 0px auto; margin-top: 10px; }
+			
+			#stats { width: 400px; margin: 0px auto; margin-top: 30px; 
+				font-family: Helvetica,Arial; color: #666; }
+ 
+			#stats label, #stats span { display: block; float: left; }
+			#stats label { margin: 0px 5px 0px 15px; }
+			#correct { width: 40px; margin-right: 37px; }
+			#time-remaining { width: 100px; text-align: center; margin-right: 49px; }
+			#missed { width: 25px; }
+			#title { margin: 0px auto; margin-top: 30px;
+			font-family: Helvetica,Arial; color: #005;
+			text-align: center; font-size:250%}
+	</style> 
+	<script type="text/javascript" charset="utf-8" src="jabbrmewebgame.js"> 
+	</script> 
+</head> 
+<body onload="init()"> 
+<div id="title">correctAnswer</div>
+<canvas id="game" width="420" height="420"></canvas> 
+<div id="answers"></div> 
+<div id="stats"> 
+	<label for="correct">correct:</label> 
+	<span id="correct">0</span> 
+	<span id="time-remaining">&nbsp;</span> 
+	<label for="missed">missed:</label> 
+	<span id="missed">0</span> 
+</div> 
+ 
+<div class="copyright"><a href="http://jabbrcube.heroku.com/">Jabbr.me</a></div>
+</body> 
+</html> 
