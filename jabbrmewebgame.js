@@ -210,8 +210,9 @@ function message( text, fillStyle, delay , size) {
 	//console.log(text);
 	var metrics = ctx.measureText(text);
 	var start = (ctx.canvas.width - metrics.width)/2.0;
-	ctx.fillText(text, start, (ctx.canvas.height - totalHeight) / 2 + size * i);
 	ctx.strokeText(text, start, (ctx.canvas.height - totalHeight) / 2 + size * i);
+	ctx.fillText(text, start, (ctx.canvas.height - totalHeight) / 2 + size * i);
+
     }
     //ctx.fillText(text, start, 240 );
     if ( delay )
