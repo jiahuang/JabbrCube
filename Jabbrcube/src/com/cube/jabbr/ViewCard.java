@@ -56,9 +56,9 @@ public class ViewCard extends Activity {
         pos = (Integer) extras.get("pos_start");
         num = (Integer) extras.get("num");
         
-        listOfWords = new String[num+1];
-        listOfForeign = new String[num+1];
-        listOfImageUrls = new String[num+1];
+        listOfWords = new String[num];
+        listOfForeign = new String[num];
+        listOfImageUrls = new String[num];
         
         // grab rest of bundle
         for(int i =0; i<num; i++){
@@ -87,6 +87,7 @@ public class ViewCard extends Activity {
         
         Bitmap pic = Utils.getBitmapFromURL(listOfImageUrls[pos]);
         Bitmap resizedBitmap = resize(pic);
+        pic.recycle();
         iv_imageZero.setImageBitmap(resizedBitmap);
        
         gestureDetector = new GestureDetector(new MyGestureDetector());

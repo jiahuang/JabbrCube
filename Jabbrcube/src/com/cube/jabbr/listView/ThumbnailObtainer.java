@@ -25,6 +25,7 @@ public class ThumbnailObtainer {
 	public String[] listOfWords;
 	public String[] listOfForeign;
 	public String[] listOfImageUrls;
+	public String[] listOfThumbnailUrls;
 	public int numOfCards = 0;
 	
 	public ThumbnailObtainer(){
@@ -40,22 +41,27 @@ public class ThumbnailObtainer {
 			System.out.println(responseBody);
 			JSONObject jObject = new JSONObject(responseBody);
 			JSONArray items = jObject.getJSONArray("flashcards");
-			listOfWords = new String[items.length()+1];
-			listOfForeign = new String[items.length()+1];
-			listOfImageUrls = new String[items.length()+1];
+			listOfWords = new String[items.length()];
+			listOfForeign = new String[items.length()];
+			listOfImageUrls = new String[items.length()];
+			listOfThumbnailUrls = new String[items.length()];
 			//JSONArray items = ((JSONObject) groups.get(0)).getJSONArray("items");
 			for (int i = 0; i < items.length(); i++)
 			{
 				numOfCards++;
 				JSONObject item = items.getJSONObject(i);
 				String image_url = item.getString("image_url");
+				String thumbnail_url = item.getString("thumbnail_url");
 				String word = item.getString("word");
 				String answer = item.getString("answer");
 				String flashcard_id = item.getString("flashcard_id");
 				listOfWords[i] = word;
 				listOfForeign[i] = answer;
 				image_url = image_url.substring(image_url.lastIndexOf("http"));
+				thumbnail_url = thumbnail_url.substring(thumbnail_url.lastIndexOf("http"));
+				//System.out.println("image url: "+image_url);
 				listOfImageUrls[i] = image_url;//"http://www.nullamatix.com/images/I-dunno-lol.jpg";  //TODO: real image urls
+				listOfThumbnailUrls[i] = thumbnail_url;
 			}
 		}
 
