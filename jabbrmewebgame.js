@@ -6,7 +6,7 @@ CENTER_Y = 210,
 MISS_DELAY = 800,
 CORRECT_DELAY = 500,
 EASY=/\#easy$/.exec(window.location);
-var correctAnswer = ["correctAnswer", "translatedAnswer"];//[0,0];
+var correctAnswer = ["jabbr.me Good", "translatedAnswer"];//[0,0];
 var messageTimer = null, gameTimeTimer = null;
 var correct = 0, missed = 0;
 var feedback = false;
@@ -18,8 +18,17 @@ var imgurl = "http://catsinsinks.com/images/cats/rotator.php",
 wordImage = new Image();
 
 function loadCard() {
+    $.getJSON('http://jabbrcube.heroku.com/api/getrandom/',
+	      {'from_lang_id': 1,
+	       'to_lang_id': 23},
+	      function(data){
+		  correctAnswer = [data.question, data.correct];
+		  for (var i = 0; i < data.wrong_possibilities; i++) {
+		      choices[i] = [data.wrong_possibilities[i], data.wrong_translations[i]];
+		  }
+	      });
     //TODO: grab from the website
-    imgurl = "http://catsinsinks.com/images/cats/rotator.php?" +Math.random();
+    imgurl = data.image;//"http://catsinsinks.com/images/cats/rotator.php?" +Math.random();
     wordImage = new Image();
     wordImage.src = imgurl;
     wordImage.onload =
@@ -29,8 +38,8 @@ function loadCard() {
 	    ctx.drawImage(wordImage,0,0,
 		      ctx.canvas.width, ctx.canvas.height);
     };
-    correctAnswer = ["correct", "translatedAnswer"];
-    choices = [["choice1", "translatedChoice1"], ["choice2","translatedChoice2"], ["choice3", "translatedChoice3"]];
+    //correctAnswer = ["correct", "translatedAnswer"];
+    //choices = [["choice1", "translatedChoice1"], ["choice2","translatedChoice2"], ["choice3", "translatedChoice3"]];
 
 }
 
@@ -210,8 +219,9 @@ function message( text, fillStyle, delay , size) {
 	//console.log(text);
 	var metrics = ctx.measureText(text);
 	var start = (ctx.canvas.width - metrics.width)/2.0;
-	ctx.fillText(text, start, (ctx.canvas.height - totalHeight) / 2 + size * i);
 	ctx.strokeText(text, start, (ctx.canvas.height - totalHeight) / 2 + size * i);
+	ctx.fillText(text, start, (ctx.canvas.height - totalHeight) / 2 + size * i);
+
     }
     //ctx.fillText(text, start, 240 );
     if ( delay )
