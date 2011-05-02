@@ -69,8 +69,8 @@ public class ViewCard extends Activity {
         }
         String foreign = listOfForeign[pos];
         String word = listOfWords[pos];
-        Toast.makeText(ViewCard.this, "pos:"+((Integer) pos).toString()+" num:"+((Integer) num).toString(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(ViewCard.this, word + " = " + foreign, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(ViewCard.this, "pos:"+((Integer) pos).toString()+" num:"+((Integer) num).toString(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ViewCard.this, word + " = " + foreign, Toast.LENGTH_SHORT).show();
 
         tv_wordZero = (TextView) findViewById(R.id.wordZero);
         tv_foreignZero = (TextView) findViewById(R.id.foreignZero);

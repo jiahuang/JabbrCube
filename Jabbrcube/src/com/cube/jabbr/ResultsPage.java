@@ -32,8 +32,9 @@ public class ResultsPage extends ListActivity {
 		listOfWords = new String[num];
         listOfForeign = new String[num];
         listOfImageUrls = new String[num];
-        listOfResults = new String[num];
-        listOfRight = new Integer[num];
+        
+        listOfResults = new String[num+1];
+        listOfRight = new Integer[num+1];
         
         // grab rest of bundle
         for(int i =0; i<num; i++){
@@ -46,7 +47,9 @@ public class ResultsPage extends ListActivity {
         	Log.i("jabbr",listOfWords[i] );
         	Log.i("jabbr",listOfImageUrls[i] );*/
         }
-
+        
+        listOfResults[num] = "Exit";
+        listOfRight[num] = 0;
 		ResultsAdapter ra = new ResultsAdapter(this, Arrays.asList(listOfResults));
 		ra.setUserGotRight(Arrays.asList(listOfRight));
 		listview.setAdapter(ra);
@@ -55,12 +58,12 @@ public class ResultsPage extends ListActivity {
                 int position, long id) {
         		pos_start = position;
         		
-        		String item = (String)listview.getItemAtPosition(position);
+        		/*String item = (String)listview.getItemAtPosition(position);
         		Context context = getApplicationContext();
 	        	CharSequence text = ""+item;
 	        	int duration = Toast.LENGTH_SHORT;
 	        	Toast toast = Toast.makeText(context, text, duration);
-	        	toast.show();
+	        	toast.show();*/
 	        	launchActivity();
         	}
 		});
@@ -69,17 +72,25 @@ public class ResultsPage extends ListActivity {
 	
 	public void launchActivity()
     {
+		if (pos_start >= num) {
+			Intent i = new Intent(this, Startup.class);
+			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(i);
+			//Toast.makeText(getApplicationContext(), "EXIT", Toast.LENGTH_SHORT).show();
+		} else {
 		Intent i = new Intent(this, ViewCard.class);
 		i.putExtra("pos_start", pos_start);
 		i.putExtra("num", num);
 		for(int it=0; it<num; it++){
+			
 			//Log.i("jabbr", "respagesend:"+listOfWords[it]);
         	i.putExtra("words"+it, listOfWords[it]);
         	i.putExtra("foreign"+it, listOfForeign[it]);
         	i.putExtra("image_urls"+it, listOfImageUrls[it]);
-        	Log.i("jabbr","send:"+i.getStringExtra("words"+it));
+        	//Log.i("jabbr","send:"+i.getStringExtra("words"+it));
         }
-		//i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(i);
+		}
     }
 }
