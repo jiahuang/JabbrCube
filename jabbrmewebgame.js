@@ -18,6 +18,7 @@ var imgurl = "http://catsinsinks.com/images/cats/rotator.php",
 wordImage = new Image();
 
 function loadCard() {
+    //TODO: grab from the website
     imgurl = "http://catsinsinks.com/images/cats/rotator.php?" +Math.random();
     wordImage = new Image();
     wordImage.src = imgurl;
@@ -28,7 +29,7 @@ function loadCard() {
 	    ctx.drawImage(wordImage,0,0,
 		      ctx.canvas.width, ctx.canvas.height);
     };
-    correctAnswer = ["correctAnswer", "translatedAnswer"];
+    correctAnswer = ["correct", "translatedAnswer"];
     choices = [["choice1", "translatedChoice1"], ["choice2","translatedChoice2"], ["choice3", "translatedChoice3"]];
 
 }
