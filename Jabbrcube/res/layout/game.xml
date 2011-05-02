@@ -21,7 +21,7 @@
 	android:layout_width="wrap_content" 
 	android:layout_centerHorizontal="true"   
 	android:layout_marginTop="20dip" android:layout_height="wrap_content"
-	android:id="@+id/Title" android:text="Word Title" 
+	android:id="@+id/Title" android:text="Jabbr.me" 
 	android:textColor="#7A0000"
 	android:shadowColor="@android:color/white"
 	android:shadowRadius="2"

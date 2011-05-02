@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World, Jabbrcube!</string>
-    <string name="app_name">Jabbrcube</string>
-<string name="choice1">hola</string>
-<string name="choice2">hello</string>
-<string name="choice3">le hallo</string>
-<string name="choice4">ze holo</string>
+    <string name="app_name">Jabbr.me</string>
+<string name="choice1">Jabbr.me</string>
+<string name="choice2">helps you</string>
+<string name="choice3">learn languages.</string>
+<string name="choice4">Awesome!</string>
 </resources>
